@@ -338,6 +338,31 @@
       }
       [data-magnetic] { transform: none !important; }
       section[data-hero] [data-hero-bg] { transform: none !important; opacity: 1 !important; }
+      .petal-field .petal { animation: none !important; opacity: 0.15 !important; }
+    }
+
+    /* === Flower petal background (replaces laggy video) === */
+    .petal-field { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .petal-field .petal {
+      position: absolute;
+      width: 70px; height: 70px;
+      background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.85), rgba(255,170,200,0.45) 35%, rgba(180,120,200,0.2) 60%, transparent 75%);
+      border-radius: 50% 0 50% 50%;
+      filter: blur(3px);
+      mix-blend-mode: screen;
+      opacity: 0;
+      will-change: transform, opacity;
+      animation: petalFloat 14s ease-in-out infinite;
+      transform-origin: center;
+    }
+    @keyframes petalFloat {
+      0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(0.6); opacity: 0; }
+      10%  { opacity: 0.55; }
+      25%  { transform: translate3d(40px, -60px, 0) rotate(90deg) scale(1.05); opacity: 0.65; }
+      50%  { transform: translate3d(-25px, -130px, 0) rotate(200deg) scale(0.95); opacity: 0.45; }
+      75%  { transform: translate3d(-55px, -70px, 0) rotate(300deg) scale(1.1); opacity: 0.55; }
+      90%  { opacity: 0.4; }
+      100% { transform: translate3d(0, 0, 0) rotate(360deg) scale(0.6); opacity: 0; }
     }
 
     @keyframes bootFadeOut {
@@ -1442,6 +1467,42 @@
       return (<span ref={ref} className={p.className || ''}>{count}{suffix}</span>);
     }
 
+    function PetalField(props) {
+      var cn = props.className || '';
+      var petals = [
+        { left: '8%',  top: '12%', w: 90, d: 16, del: -1 },
+        { left: '22%', top: '55%', w: 60, d: 13, del: -3 },
+        { left: '40%', top: '20%', w: 110, d: 18, del: -5 },
+        { left: '58%', top: '65%', w: 70, d: 14, del: -7 },
+        { left: '74%', top: '30%', w: 95, d: 17, del: -2 },
+        { left: '88%', top: '70%', w: 55, d: 12, del: -9 },
+        { left: '14%', top: '78%', w: 75, d: 15, del: -11 },
+        { left: '65%', top: '8%',  w: 85, d: 16, del: -4 },
+        { left: '32%', top: '85%', w: 50, d: 12, del: -6 },
+        { left: '82%', top: '48%', w: 100, d: 19, del: -8 }
+      ];
+      return (
+        <div className={'petal-field ' + cn} aria-hidden="true">
+          {petals.map(function (p, i) {
+            return (
+              <span
+                key={i}
+                className="petal"
+                style={{
+                  left: p.left,
+                  top: p.top,
+                  width: p.w + 'px',
+                  height: p.w + 'px',
+                  animationDuration: p.d + 's',
+                  animationDelay: p.del + 's'
+                }}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+
     function FadingVideo(props) {
       var src = props.src, cn = props.className || '', style = props.style || {};
       var ref = useRef(null), raf = useRef(null), out = useRef(false);
@@ -1718,8 +1779,8 @@
         { iconPath: 'M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1Zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7Z', title: 'Smart Strategy', tags: ['SEO Ready', 'Analytics', 'Lead Capture', 'Growth Loops'], body: "We don't just build pretty websites — we engineer funnels. Every section is mapped to turn visitors into paying customers." }
       ];
       return (<section id="services" className="min-h-screen relative overflow-hidden bg-black">
-        <FadingVideo src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_094631_d30ab262-45ee-4b7d-99f3-5d5848c8ef13.mp4" className="absolute inset-0 w-full h-full object-cover z-0" />
-        <div className="absolute inset-0 bg-black/30 z-[1] pointer-events-none" />
+        <PetalField className="absolute inset-0 z-0" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 z-[1] pointer-events-none" />
         <div className="relative z-10 px-8 md:px-16 lg:px-20 pt-24 pb-20 flex flex-col">
           <div className="mb-auto text-center"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white inline-block mb-6 pulse-glow">Capabilities</span><BlurText as="h2" text="Pro features. Zero complexity." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] leading-[0.95] tracking-[-2px]" /></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
