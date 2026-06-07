@@ -894,8 +894,9 @@
     }
     .case-visual-inner {
       position: absolute; inset: 0;
-      background-image: url('https://avlune-fashion-store.netlify.app/og-image.jpg');
-      background-size: cover; background-position: center;
+      background-image: url('assets/work/avlune.png');
+      background-image: image-set(url('assets/work/avlune.png') 1x, url('https://avlune-fashion-store.netlify.app/og-image.jpg') 1x);
+      background-size: cover; background-position: center top;
       transform: scale(1.02);
       transition: transform 8s ease;
     }
@@ -907,6 +908,13 @@
       color: #fff; font-family: 'Instrument Serif', serif; font-style: italic;
       font-size: 96px; letter-spacing: -4px;
     }
+    .case-visual img.case-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      transform: scale(1.02); transition: transform 8s ease;
+      z-index: 1;
+    }
+    .case-visual:hover img.case-img { transform: scale(1.1); }
     .case-overlay {
       position: absolute; inset: 0;
       background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.65));
@@ -2831,7 +2839,20 @@
         <section className="case-section" id="case-study" aria-label="Featured case study">
           <div className="case-grid">
             <a className="case-visual" href="https://avlune-fashion-store.netlify.app" target="_blank" rel="noreferrer" aria-label="Visit Avlune live site">
-              <div className="case-visual-inner" onError={function (e) { e.currentTarget.style.display='none'; }} />
+              <div className="absolute top-0 inset-x-0 h-7 z-[3] flex items-center gap-1.5 px-3 bg-black/30 backdrop-blur-sm">
+                <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                <div className="mx-auto text-[10px] text-white/70 font-body truncate max-w-[60%]">avlune-fashion-store.netlify.app</div>
+              </div>
+              <img
+                src="assets/work/avlune.png"
+                alt="Avlune — Lunar Collection 2026 hero"
+                loading="lazy"
+                decoding="async"
+                className="case-img"
+                onerror="this.onerror=null;this.src='https://avlune-fashion-store.netlify.app/og-image.jpg';"
+              />
               <div className="case-overlay" />
               <span className="case-tag"><span className="dot" />Live · D2C</span>
               <div className="absolute bottom-5 left-5 right-5 z-[2] flex items-end justify-between">
