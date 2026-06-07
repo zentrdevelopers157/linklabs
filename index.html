@@ -1282,6 +1282,8 @@
       var status = statusState[0]; var setStatus = statusState[1];
       var shakeState = useState(false);
       var shake = shakeState[0]; var setShake = shakeState[1];
+      var TO_EMAIL = 'linklabs.studio@gmail.com';
+
       function submit(e) {
         e.preventDefault();
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -1289,18 +1291,15 @@
           setStatus('err'); return;
         }
         setStatus('loading');
-        try {
-          var fd = new FormData();
-          fd.append('email', email);
-          fd.append('_subject', 'New newsletter subscriber — LinkLabs');
-          fd.append('_template', 'table');
-          fd.append('_captcha', 'true');
-          fd.append('source', 'Newsletter — Stay in the loop');
-          fetch('https://formsubmit.co/ajax/linklabs.studio@gmail.com', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
-            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-            .then(function () { setStatus('done'); setEmail(''); })
-            .catch(function () { setStatus('err'); });
-        } catch (_) { setStatus('err'); }
+        setTimeout(function () {
+          var subject = 'Newsletter subscribe — ' + email;
+          var body = 'Please add ' + email + ' to the LinkLabs monthly newsletter list.\n\n— Sent from linklabs-three.vercel.app';
+          var href = 'mailto:' + TO_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+          var a = document.createElement('a');
+          a.href = href; a.style.display = 'none'; document.body.appendChild(a); a.click();
+          setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 0);
+          setStatus('done'); setEmail('');
+        }, 250);
       }
       return (
         <form onSubmit={submit} noValidate className="w-full max-w-md">
@@ -1308,7 +1307,7 @@
             <div className="form-success">
               <div className="check-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg></div>
               <div className="text-white text-lg font-heading italic tracking-tight">You're on the list.</div>
-              <div className="text-white/55 text-sm font-body mt-1.5">We'll send studio notes once a month. No spam, ever.</div>
+              <div className="text-white/55 text-sm font-body mt-1.5">Your mail app opened — hit send to confirm. We'll add you to the monthly notes.</div>
               <button type="button" onClick={function () { setStatus('idle'); }} className="mt-5 text-white/60 hover:text-white text-xs font-body underline underline-offset-4 transition">Subscribe another email</button>
             </div>
           ) : (
@@ -1342,13 +1341,17 @@
     }
 
     function ContactForm() {
-      var formRef = useRef(null);
       var dataState = useState({ name: '', email: '', service: '', budget: '', message: '' });
       var data = dataState[0]; var setData = dataState[1];
       var statusState = useState('idle');
       var status = statusState[0]; var setStatus = statusState[1];
       var shakeState = useState({});
       var shake = shakeState[0]; var setShake = shakeState[1];
+      var payloadState = useState(null);
+      var payload = payloadState[0]; var setPayload = payloadState[1];
+      var copiedState = useState(false);
+      var copied = copiedState[0]; var setCopied = copiedState[1];
+      var TO_EMAIL = 'linklabs.studio@gmail.com';
 
       function set(field) {
         return function (e) {
@@ -1369,6 +1372,43 @@
         return errs;
       }
 
+      function buildPayload() {
+        var subject = 'New project inquiry from ' + data.name + ' — ' + data.service;
+        var lines = [
+          'Hi LinkLabs team,',
+          '',
+          'I just filled out the project form on your website. Here are the details:',
+          '',
+          '— — — — — — — — — — — — — — — — — — — —',
+          'Name:    ' + data.name,
+          'Email:   ' + data.email,
+          'Service: ' + data.service,
+          'Budget:  ' + data.budget,
+          '— — — — — — — — — — — — — — — — — — — —',
+          '',
+          'Message:',
+          data.message,
+          '',
+          '— — —',
+          'Sent from linklabs-three.vercel.app'
+        ];
+        return { to: TO_EMAIL, subject: subject, body: lines.join('\n') };
+      }
+
+      function mailtoHref(p) {
+        return 'mailto:' + p.to + '?subject=' + encodeURIComponent(p.subject) + '&body=' + encodeURIComponent(p.body);
+      }
+
+      function openMailClient(p) {
+        var a = document.createElement('a');
+        a.href = mailtoHref(p);
+        a.rel = 'noopener';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 0);
+      }
+
       function submit(e) {
         e.preventDefault();
         var errs = validate();
@@ -1378,42 +1418,74 @@
           setTimeout(function () { setShake({}); }, 600);
           return;
         }
-        setStatus('loading');
+        var p = buildPayload();
+        setPayload(p);
+        setStatus('sending');
+        setCopied(false);
+        // Open the user's email client with a pre-filled message to linklabs.studio@gmail.com
+        openMailClient(p);
+        setTimeout(function () { setStatus('sent'); }, 350);
+      }
+
+      function copyMessage() {
+        if (!payload) return;
+        var text = 'To: ' + payload.to + '\nSubject: ' + payload.subject + '\n\n' + payload.body;
+        var done = function () { setCopied(true); setTimeout(function () { setCopied(false); }, 2200); };
         try {
-          var fd = new FormData();
-          fd.append('Name', data.name);
-          fd.append('Email', data.email);
-          fd.append('Service', data.service);
-          fd.append('Budget', data.budget);
-          fd.append('Message', data.message);
-          fd.append('_subject', 'New project inquiry from ' + data.name + ' — ' + data.service);
-          fd.append('_template', 'table');
-          fd.append('_captcha', 'true');
-          fd.append('source', 'Contact form — Start a project');
-          fetch('https://formsubmit.co/ajax/linklabs.studio@gmail.com', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
-            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-            .then(function () { setStatus('success'); })
-            .catch(function () { setStatus('err'); });
-        } catch (_) { setStatus('err'); }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done).catch(function () {
+              fallbackCopy(text); done();
+            });
+          } else { fallbackCopy(text); done(); }
+        } catch (_) { fallbackCopy(text); done(); }
+      }
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (_) {}
+        document.body.removeChild(ta);
       }
 
       function reset() {
         setData({ name: '', email: '', service: '', budget: '', message: '' });
         setStatus('idle');
+        setPayload(null);
+        setCopied(false);
       }
 
       var services = ['Custom Design', 'Fast Development', 'Smart Strategy', 'Full Package (Design + Dev + Strategy)', 'Not sure yet'];
       var budgets = ['Under ₹50,000', '₹50,000 – ₹2,00,000', '₹2,00,000 – ₹5,00,000', '₹5,00,000+'];
 
-      if (status === 'success') {
+      if ((status === 'sent' || status === 'sending') && payload) {
+        var IconCheck = <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg>;
+        var IconMailSmall = <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg>;
+        var IconCopy = <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>;
+        var IconRefresh = <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>;
         return (
           <div className="form-success">
-            <div className="check-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg></div>
-            <div className="text-white text-2xl md:text-3xl font-heading italic tracking-tight">Got it. We'll be in touch.</div>
-            <div className="text-white/60 text-sm md:text-[15px] font-body mt-2 max-w-sm leading-relaxed">Your inquiry landed directly in our inbox. Expect a reply within <span className="text-white">24 hours</span> — usually faster.</div>
-            <button type="button" onClick={reset} className="mt-7 liquid-glass rounded-full px-5 py-2.5 text-white/85 hover:text-white text-sm font-body transition inline-flex items-center gap-2">
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
-              Send another inquiry
+            <div className="check-ring">{IconCheck}</div>
+            <div className="text-white text-2xl md:text-3xl font-heading italic tracking-tight">Almost there — just hit send.</div>
+            <div className="text-white/65 text-sm md:text-[15px] font-body mt-2 max-w-md leading-relaxed">
+              Your email app should have opened with a pre-filled message to <span className="text-white">{TO_EMAIL}</span>. Click <span className="text-white">Send</span> in your mail app to deliver it.
+            </div>
+            <div className="mt-6 flex flex-col sm:flex-row gap-2.5 w-full max-w-md">
+              <button type="button" onClick={function () { openMailClient(payload); }} className="submit-btn group" style={{ flex: 1 }}>
+                {IconMailSmall}<span>Open mail app again</span>
+              </button>
+              <button type="button" onClick={copyMessage} className="submit-btn" style={{ flex: 1, background: 'rgba(255,255,255,0.08)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)' }}>
+                {copied ? (<><svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7"/></svg>Copied!</>) : (<>{IconCopy}<span>Copy message</span></>)}
+              </button>
+            </div>
+            <details className="mt-5 w-full max-w-md text-left">
+              <summary className="text-[11px] text-white/45 font-body cursor-pointer hover:text-white/70 transition select-none">Show full message</summary>
+              <pre className="mt-2 text-[11px] text-white/55 font-body whitespace-pre-wrap break-words bg-white/5 rounded-lg p-3 border border-white/10 max-h-40 overflow-y-auto">{payload.body}</pre>
+            </details>
+            <div className="text-[11px] text-white/40 font-body mt-4">
+              Didn't open? Email us directly at <a href={mailtoHref(payload)} className="text-white/70 hover:text-white underline underline-offset-4">{TO_EMAIL}</a>
+            </div>
+            <button type="button" onClick={reset} className="mt-5 liquid-glass rounded-full px-5 py-2.5 text-white/85 hover:text-white text-sm font-body transition inline-flex items-center gap-2">
+              {IconRefresh}Send another inquiry
             </button>
           </div>
         );
@@ -1427,7 +1499,7 @@
       var IconArrow = <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>;
 
       return (
-        <form onSubmit={submit} ref={formRef} noValidate className="w-full space-y-4">
+        <form onSubmit={submit} noValidate className="w-full space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="form-label" htmlFor="cf-name">Your name</label>
@@ -1473,11 +1545,8 @@
               <textarea id="cf-message" name="message" value={data.message} onChange={set('message')} placeholder="A few lines about your goals, timeline, or anything you'd like us to know…" aria-invalid={!!shake.message} required />
             </div>
           </div>
-          <div className="form-honeypot" aria-hidden="true">
-            <label>Don't fill this out<input type="text" name="_honey" tabIndex={-1} autoComplete="off" /></label>
-          </div>
-          <button type="submit" disabled={status === 'loading'} className="submit-btn group">
-            {status === 'loading' ? (<><span className="spinner" />Sending…</>) : status === 'err' ? (<>Try again</>) : (<>Send inquiry{IconArrow}</>)}
+          <button type="submit" disabled={status === 'sending'} className="submit-btn group">
+            {status === 'sending' ? (<><span className="spinner" />Opening your mail app…</>) : status === 'err' ? (<>Try again</>) : (<>Send inquiry{IconArrow}</>)}
           </button>
           <div className="flex items-center justify-between flex-wrap gap-3 pt-1">
             <div className="text-[11px] text-white/40 font-body tracking-wide inline-flex items-center gap-1.5">
