@@ -1,0 +1,59 @@
+/* LinkLabs — Print Stylesheet */
+@page { margin: 1.5cm; size: A4; }
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  html, body { background: #fff !important; color: #111 !important; font-size: 11pt; line-height: 1.5; }
+  /* Hide non-content */
+  nav, #scroll-progress, #scroll-dots, #back-to-top, #particle-canvas,
+  .floating-cta, .cookie-banner, [data-magnetic], .scroll-dot-btn,
+  .cookie-banner, #boot-loader, .floating-cta { display: none !important; }
+  /* Layout fixes */
+  main, section { page-break-inside: avoid; break-inside: avoid; }
+  section { min-height: auto !important; padding: 2rem 0 !important; }
+  .liquid-glass, .liquid-glass-strong {
+    background: #f9f9f9 !important; border: 1px solid #e5e5e5 !important;
+    box-shadow: none !important; backdrop-filter: none !important;
+  }
+  .bg-white, .bg-white\/5, .bg-white\/10, .bg-white\/15, .bg-white\/20,
+  .bg-white\/30, .bg-white\/40, .bg-white\/50, .bg-white\/60, .bg-white\/70,
+  .bg-white\/80, .bg-white\/90 { background: transparent !important; }
+  .text-white, .text-white\/90, .text-white\/80, .text-white\/70, .text-white\/60,
+  .text-white\/50, .text-white\/40, .text-white\/30 { color: #111 !important; }
+  .text-black { color: #000 !important; }
+  .bg-black, .bg-black\/20, .bg-black\/30, .bg-black\/40, .bg-black\/50 { background: #fff !important; }
+  .border-white\/5, .border-white\/10, .border-white\/15, .border-white\/20,
+  .border-white\/30, .border-white\/40, .border-white\/50 { border-color: #e5e5e5 !important; }
+  .bg-emerald-400, .bg-emerald-300, .bg-orange-400, .bg-orange-300,
+  .bg-amber-400, .bg-amber-300 { background: #2563eb !important; color: #fff !important; }
+  .text-emerald-300, .text-emerald-400, .text-orange-300, .text-orange-400,
+  .text-amber-300, .text-amber-400 { color: #2563eb !important; }
+  .bg-white.text-black { background: #2563eb !important; color: #fff !important; }
+  .hover\:bg-white:hover { background: #dbeafe !important; }
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 { color: #111 !important; }
+  .font-heading { font-family: Georgia, serif !important; }
+  /* Links */
+  a { text-decoration: underline; color: #2563eb !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+  /* Buttons */
+  button, .btn, .submit-btn { border: 1px solid #2563eb; background: #fff; color: #2563eb; }
+  /* Cards */
+  [data-spotlight] { break-inside: avoid; page-break-inside: avoid; margin-bottom: 1.5rem; }
+  /* Hide decorative */
+  .pulse-glow, .marquee, .scroll-dot, .compass, .bg-grain, .case-overlay,
+  .case-tag, .case-click-hint, .case-visual-inner, .case-visual::before,
+  .case-visual::after, .petal-field { display: none !important; }
+  /* Hero */
+  section[data-hero] { min-height: auto !important; padding: 2rem 0 !important; }
+  /* Team */
+  .team-card { break-inside: avoid; }
+  /* Footer */
+  footer { border-top: 1px solid #e5e5e5; padding-top: 1rem; }
+  /* Ensure content fits */
+  .max-w-xl, .max-w-2xl, .max-w-3xl, .max-w-4xl, .max-w-5xl, .max-w-6xl { max-width: 100% !important; }
+  /* Page breaks */
+  h2, h3 { page-break-after: avoid; }
+  section { page-break-inside: avoid; }
+  /* Links: show URLs */
+  a[href^="#"]::after { content: ""; }
+}

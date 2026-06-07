@@ -44,6 +44,7 @@
 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" media="print" href="/print.css" />
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -83,8 +84,21 @@
 
   <style>
     html { scroll-behavior: smooth; }
+    :root {
+      --bg: #000000; --fg: #ffffff; --muted: rgba(255,255,255,0.6);
+      --card: rgba(255,255,255,0.02); --border: rgba(255,255,255,0.08);
+      --accent: #10b981; --accent-glow: rgba(16,185,129,0.4);
+      --glass: rgba(255,255,255,0.04); --glass-strong: rgba(255,255,255,0.08);
+    }
+    [data-theme="light"] {
+      --bg: #fafafa; --fg: #111827; --muted: rgba(17,24,39,0.6);
+      --card: rgba(17,24,39,0.03); --border: rgba(17,24,39,0.1);
+      --accent: #059669; --accent-glow: rgba(5,150,105,0.3);
+      --glass: rgba(17,24,39,0.05); --glass-strong: rgba(17,24,39,0.1);
+    }
+    html { scroll-behavior: smooth; }
     body {
-      background: #000; color: #fff; margin: 0;
+      background: var(--bg); color: var(--fg); margin: 0;
       font-family: 'Barlow', sans-serif;
       -webkit-font-smoothing: antialiased;
     }
@@ -155,6 +169,27 @@
       z-index: 9997; width: 0%;
       transition: width 0.05s linear;
     }
+    #scroll-dots {
+      position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+      z-index: 9996; display: flex; flex-direction: column; gap: 12px;
+    }
+    .scroll-dot-btn {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.3);
+      cursor: pointer; transition: all 0.2s ease;
+      position: relative;
+    }
+    .scroll-dot-btn::after {
+      content: attr(data-label);
+      position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+      white-space: nowrap; font-size: 11px; color: var(--fg);
+      opacity: 0; visibility: hidden; transition: all 0.2s ease;
+      padding: 4px 8px; background: var(--glass); border: 1px solid var(--border);
+      border-radius: 6px; font-family: 'Barlow', sans-serif; font-size: 11px;
+    }
+    .scroll-dot-btn:hover::after { opacity: 1; visibility: visible; right: 14px; }
+    .scroll-dot-btn.active { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+    .scroll-dot-btn.active::after { opacity: 1; visibility: visible; right: 14px; }
     #particle-canvas {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       will-change: transform;
@@ -1187,11 +1222,68 @@
       transition: transform 0.2s ease;
     }
     .skip-link:focus { transform: translateY(0); }
+
+    /* === Portfolio Lightbox === */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.92); backdrop-filter: blur(8px);
+      padding: 24px;
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .lightbox-content {
+      width: 100%; max-width: 960px; max-height: 90vh;
+      display: flex; flex-direction: column;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+      animation: slideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .lightbox-close {
+      position: absolute; top: 12px; right: 12px; z-index: 10;
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); color: #fff;
+      font-size: 18px; font-weight: 300; line-height: 1;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.1); transform: scale(1.05); }
+    .lightbox-media { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+    .lightbox-browser { position: absolute; top: 0; left: 0; right: 0; height: 40px; z-index: 2;
+      display: flex; align-items: center; gap: 6px; padding: 0 12px;
+      background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); }
+    .lightbox-browser-dots { display: flex; gap: 6px; }
+    .lightbox-browser-dots span { width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); }
+    .lightbox-browser-dots span:nth-child(2) { background: rgba(255,180,0,0.5); }
+    .lightbox-browser-dots span:nth-child(3) { background: rgba(40,200,100,0.5); }
+    .lightbox-browser-url { flex: 1; text-align: center; font-size: 11px; color: rgba(255,255,255,0.5); font-family: 'Barlow', sans-serif; }
+    .lightbox-preview { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .lightbox-info { padding: 24px 28px 28px; display: flex; flex-direction: column; gap: 12px; }
+    .lightbox-category { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+    .lightbox-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 28px; font-weight: 400; color: var(--fg); line-height: 1.1; }
+    .lightbox-desc { color: var(--muted); font-size: 15px; line-height: 1.6; }
+    .lightbox-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lightbox-tag { padding: 5px 12px; background: var(--glass); border: 1px solid var(--border); border-radius: 999px; font-size: 11px; color: var(--fg); }
+    .lightbox-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px;
+      padding: 12px 20px; background: #fff; color: #000; border-radius: 999px;
+      font-size: 13px; font-weight: 500; font-family: 'Barlow', sans-serif;
+      text-decoration: none; transition: all 0.2s ease; }
+    .lightbox-cta:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+    @media (max-width: 600px) {
+      .lightbox-content { max-height: 95vh; border-radius: 16px; }
+      .lightbox-info { padding: 20px; }
+      .lightbox-title { font-size: 22px; }
+    }
   </style>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
   <div id="scroll-progress"></div>
+  <nav id="scroll-dots" aria-label="Section navigation" class="hidden lg:block"></nav>
   <button id="back-to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5" /><path d="M5 12l7-7 7 7" /></svg></button>
   <canvas id="particle-canvas"></canvas>
   <div id="root">
@@ -1419,6 +1511,26 @@
           }
         }
 
+        var dotsNav = document.getElementById('scroll-dots');
+        if (dotsNav) {
+          var scrollMid = scrollTop + window.innerHeight / 2;
+          var best = null, bestDist = Infinity;
+          var sections = ['home','services','work','process','pricing','faq','contact-section'];
+          for (var i = 0; i < sections.length; i++) {
+            var el = document.getElementById(sections[i]);
+            if (!el) continue;
+            var top = el.offsetTop, bottom = top + el.offsetHeight;
+            var dist = Math.abs(scrollMid - (top + el.offsetHeight / 2));
+            if (dist < bestDist) { bestDist = dist; best = sections[i]; }
+          }
+          var buttons = dotsNav.querySelectorAll('.scroll-dot-btn');
+          for (var j = 0; j < buttons.length; j++) {
+            var btn = buttons[j];
+            var isActive = btn.getAttribute('data-label').toLowerCase() === (best === 'contact-section' ? 'contact' : best);
+            btn.classList.toggle('active', isActive);
+          }
+        }
+
         ticking = false;
       }
       function onScroll() { if (!ticking) { requestAnimationFrame(loop); ticking = true; } }
@@ -1431,6 +1543,29 @@
         if (btt) {
           btt.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+        var dotsNav = document.getElementById('scroll-dots');
+        if (dotsNav) {
+          var sections = [
+            { id: 'home', label: 'Home' },
+            { id: 'services', label: 'Services' },
+            { id: 'work', label: 'Work' },
+            { id: 'process', label: 'Process' },
+            { id: 'pricing', label: 'Pricing' },
+            { id: 'faq', label: 'FAQ' },
+            { id: 'contact-section', label: 'Contact' }
+          ];
+          sections.forEach(function(s) {
+            var btn = document.createElement('button');
+            btn.className = 'scroll-dot-btn';
+            btn.setAttribute('data-label', s.label);
+            btn.setAttribute('aria-label', 'Scroll to ' + s.label);
+            btn.addEventListener('click', function() {
+              var el = document.getElementById(s.id);
+              if (el) window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+            });
+            dotsNav.appendChild(btn);
           });
         }
         loop();
@@ -1509,6 +1644,8 @@
     function IconInstagram(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={c}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" /></svg>); }
     function IconTwitter(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M18.244 2H21l-6.55 7.49L22 22h-6.81l-4.78-6.27L4.8 22H2l7.02-8.03L2 2h6.91l4.3 5.7L18.24 2zm-1.19 18h1.65L7.04 4H5.3l11.75 16z" /></svg>); }
     function IconLinkedIn(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.04 0 4.78 2.66 4.78 6.12V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4V9z" /></svg>); }
+
+    function ThemeIcon(p) { var t = p.theme || 'dark', s = p.size || 20; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={p.className}><g style={{display: t === 'light' ? 'block' : 'none'}}><circle cx="12" cy="12" r="5" /><path d="M12 3v1M12 20v1M3 12H2M21 12h1M4.22 4.22l.71.71M19.07 19.07l.71.71M2 12h1M20 12h1" /></g><g style={{display: t === 'dark' ? 'block' : 'none'}}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></g></svg>); }
 
     function LogoMark(p) {
       var size = p.size || 32;
@@ -1752,6 +1889,11 @@
 
     function Navbar() {
       var open = useState(false), menuOpen = open[0], setMenuOpen = open[1];
+      var themeState = useState(function () { try { return localStorage.getItem('ll-theme') || 'dark'; } catch (_) { return 'dark'; } });
+      var theme = themeState[0]; var setTheme = themeState[1];
+      useEffect(function () { try { localStorage.setItem('ll-theme', theme); document.documentElement.setAttribute('data-theme', theme); } catch (_) {} }, [theme]);
+      function toggleTheme() { setTheme(function (t) { return t === 'dark' ? 'light' : 'dark'; }); }
+      var open = useState(false), menuOpen = open[0], setMenuOpen = open[1];
       var overlayRef = useRef(null);
       var navRef = useRef(null);
       var linkRefs = useRef([]);
@@ -1843,6 +1985,8 @@
             })}
             <a href="#pricing" data-magnetic="0.2" className="relative z-10 ml-1 bg-white text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1 whitespace-nowrap hover:scale-[1.03] active:scale-95 transition-transform duration-200">Get Started <IconArrowUpRight size={16} strokeWidth={2} /></a>
           </div>
+          <button onClick={toggleTheme} className="hidden md:flex liquid-glass w-11 h-11 rounded-full flex items-center justify-center text-white" aria-label="Toggle theme"><ThemeIcon theme={theme} /></button>
+          <button onClick={toggleTheme} className="md:hidden liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white" aria-label="Toggle theme"><ThemeIcon theme={theme} /></button>
           <button onClick={function () { setMenuOpen(true); }} className="md:hidden liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white"><IconMenu /></button>
           <div className="hidden md:block w-12 h-12" />
         </nav>
@@ -1898,6 +2042,34 @@
                 <span className="inline-block">Orbit</span><span className="inline-block opacity-30">·</span>
               </div>
             </div>
+            <div className="mt-8 w-full max-w-5xl flex flex-wrap items-center justify-center gap-3 md:gap-5 opacity-80 transition-opacity duration-300" style={{ maskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)' }}>
+              <span className="text-white/30 text-[10px] font-body tracking-widest uppercase">Our clients</span>
+              <a href="https://zentr.onrender.com/" target="_blank" rel="noreferrer" className="flex items-center gap-2 liquid-glass px-3 py-1.5 rounded-full hover:bg-white/10 transition" aria-label="Zentr">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span className="font-body text-[11px] font-medium text-white">Zentr</span>
+                <span className="text-white/40 text-[10px] font-body">SaaS</span>
+              </a>
+              <a href="https://avlune-fashion-store.netlify.app/" target="_blank" rel="noreferrer" className="flex items-center gap-2 liquid-glass px-3 py-1.5 rounded-full hover:bg-white/10 transition" aria-label="Avlune">
+                <span className="w-2 h-2 rounded-full bg-white" />
+                <span className="font-body text-[11px] font-medium text-white">Avlune</span>
+                <span className="text-white/40 text-[10px] font-body">Fashion</span>
+              </a>
+              <a href="https://senjrai.vercel.app/" target="_blank" rel="noreferrer" className="flex items-center gap-2 liquid-glass px-3 py-1.5 rounded-full hover:bg-white/10 transition" aria-label="Senjr">
+                <span className="w-2 h-2 rounded-full bg-orange-400" />
+                <span className="font-body text-[11px] font-medium text-white">Senjr</span>
+                <span className="text-white/40 text-[10px] font-body">EdTech</span>
+              </a>
+              <a href="https://roamie-three.vercel.app/" target="_blank" rel="noreferrer" className="flex items-center gap-2 liquid-glass px-3 py-1.5 rounded-full hover:bg-white/10 transition" aria-label="Roamie">
+                <span className="w-2 h-2 rounded-full bg-orange-500" />
+                <span className="font-body text-[11px] font-medium text-white">Roamie</span>
+                <span className="text-white/40 text-[10px] font-body">Travel</span>
+              </a>
+              <a href="https://timely-elf-a1ca9e.netlify.app/" target="_blank" rel="noreferrer" className="flex items-center gap-2 liquid-glass px-3 py-1.5 rounded-full hover:bg-white/10 transition" aria-label="Velvet Crumbs">
+                <span className="w-2 h-2 rounded-full bg-amber-400" />
+                <span className="font-body text-[11px] font-medium text-white">Velvet Crumbs</span>
+                <span className="text-white/40 text-[10px] font-body">F&B</span>
+              </a>
+            </div>
           </FadeIn>
           <a href="#services" aria-label="Scroll down" className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 text-white/50 hover:text-white/90 transition-colors group">
             <span className="text-[10px] font-body uppercase tracking-[0.25em]">Scroll</span>
@@ -1932,7 +2104,7 @@
       var href = p.url;
       var urlLabel = href ? href.replace('https://','').replace('http://','').replace(/\/$/, '') : '';
       return (
-        <div data-spotlight data-contain className="liquid-glass-strong rounded-[1.5rem] p-3 md:p-4 group relative">
+        <div data-spotlight data-contain className="liquid-glass-strong rounded-[1.5rem] p-3 md:p-4 group relative" data-magnetic="0.12">
           <a href={href} target="_blank" rel="noreferrer" className="block rounded-[1.1rem] overflow-hidden relative" style={p.bg} aria-label={"Visit " + p.title + " live"}>
             <div className="absolute top-0 inset-x-0 h-7 flex items-center gap-1.5 px-3 z-20 bg-black/40 backdrop-blur-sm">
               <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
@@ -1988,7 +2160,7 @@
       var live = props.live;
       var href = p.url && p.url !== '#' ? p.url : null;
       var urlLabel = href ? href.replace('https://','').replace('http://','').replace(/\/$/, '') : 'Coming soon';
-      return (<div data-spotlight data-contain className="liquid-glass rounded-[1.5rem] p-4 flex flex-col group cursor-pointer"><a href={href || '#'} target="_blank" rel="noreferrer" className="block" aria-label={"Visit " + p.title + " live"}><div className="rounded-[1rem] overflow-hidden aspect-[16/10] relative" style={p.bg}><div className="absolute top-0 inset-x-0 h-7 flex items-center gap-1.5 px-3 z-20 bg-black/30 backdrop-blur-sm"><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><div className="mx-auto text-[10px] text-white/70 font-body truncate max-w-[60%]">{urlLabel}</div></div>{live ? (<div className="absolute top-10 right-3 z-20 liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white font-semibold tracking-wide flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />LIVE</div>) : null}<div className="absolute inset-0 pt-7 flex flex-col items-center justify-center p-5 text-center">{p.preview}</div></div></a><div className="flex items-end justify-between mt-4 px-2 pb-2"><div className="min-w-0 flex-1"><div className="font-heading italic text-white text-2xl tracking-[-1px]">{p.title}</div><div className="text-xs text-white/60 font-body mt-1 truncate">{p.tagline}</div><div className="flex flex-wrap gap-1.5 mt-2">{p.tags.map(function (t, j) { return <span key={j} className="liquid-glass rounded-full px-2 py-0.5 text-[10px] text-white/75 font-body tracking-wide">{t}</span>; })}</div></div>{href ? (<a href={href} target="_blank" rel="noreferrer" aria-label={"Open " + p.title} className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition shrink-0 ml-3"><svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>) : null}</div></div>);
+              return (<div data-spotlight data-contain className="liquid-glass rounded-[1.5rem] p-4 flex flex-col group cursor-pointer" data-magnetic="0.1"><a href={href || '#'} target="_blank" rel="noreferrer" className="block" aria-label={"Visit " + p.title + " live"}><div className="rounded-[1rem] overflow-hidden aspect-[16/10] relative" style={p.bg}><div className="absolute top-0 inset-x-0 h-7 flex items-center gap-1.5 px-3 z-20 bg-black/30 backdrop-blur-sm"><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><div className="mx-auto text-[10px] text-white/70 font-body truncate max-w-[60%]">{urlLabel}</div></div>{live ? (<div className="absolute top-10 right-3 z-20 liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white font-semibold tracking-wide flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />LIVE</div>) : null}<div className="absolute inset-0 pt-7 flex flex-col items-center justify-center p-5 text-center">{p.preview}</div></div></a><div className="flex items-end justify-between mt-4 px-2 pb-2"><div className="min-w-0 flex-1"><div className="font-heading italic text-white text-2xl tracking-[-1px]">{p.title}</div><div className="text-xs text-white/60 font-body mt-1 truncate">{p.tagline}</div><div className="flex flex-wrap gap-1.5 mt-2">{p.tags.map(function (t, j) { return <span key={j} className="liquid-glass rounded-full px-2 py-0.5 text-[10px] text-white/75 font-body tracking-wide">{t}</span>; })}</div></div>{href ? (<a href={href} target="_blank" rel="noreferrer" aria-label={"Open " + p.title} className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition shrink-0 ml-3"><svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>) : null}</div></div>);
     }
 
     function Portfolio() {
@@ -2126,7 +2298,7 @@
     function TeamCard(props) {
       var photo = props.photo;
       return (
-        <div data-spotlight className="team-card liquid-glass rounded-[1.25rem] p-6 flex flex-col items-center text-center min-h-[300px] group">
+        <div data-spotlight className="team-card liquid-glass rounded-[1.25rem] p-6 flex flex-col items-center text-center min-h-[300px] group" data-magnetic="0.08">
           <div className="relative">
             <div className="w-28 h-28 rounded-full p-[2px] liquid-glass-strong transition-transform duration-300 group-hover:scale-[1.04]">
               <div className="w-full h-full rounded-full overflow-hidden bg-white/[0.04] flex items-center justify-center">
@@ -3098,13 +3270,48 @@
       );
     }
 
+    function Lightbox() {
+      var state = useState(null), project = state[0], setProject = state[1];
+      useEffect(function () {
+        function handler(e) { setProject(e.detail); }
+        window.addEventListener('portfolio:open', handler);
+        return function () { window.removeEventListener('portfolio:open', handler); };
+      }, []);
+      if (!project) return null;
+      var p = project;
+      var href = p.url;
+      return (
+        <div className="lightbox-overlay" onClick={function () { setProject(null); }} role="dialog" aria-modal="true" aria-label="Project preview">
+          <div className="lightbox-content" onClick={function (e) { e.stopPropagation(); }}>
+            <button className="lightbox-close" onClick={function () { setProject(null); }} aria-label="Close">✕</button>
+            <div className="lightbox-media">
+              <div className="lightbox-browser">
+                <div className="lightbox-browser-dots"><span /><span /><span /></div>
+                <div className="lightbox-browser-url">{p.url.replace('https://','').replace('http://','').replace(/\/$/, '')}</div>
+              </div>
+              <div className="lightbox-preview" style={p.bg}>
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">{p.preview}</div>
+              </div>
+            </div>
+            <div className="lightbox-info">
+              <span className="lightbox-category">{p.category}</span>
+              <h2 className="lightbox-title">{p.title}.</h2>
+              <p className="lightbox-desc">{p.desc}</p>
+              <div className="lightbox-tags">{p.tags.map(function (t, i) { return <span key={i} className="lightbox-tag">{t}</span>; })}</div>
+              <a href={p.url} target="_blank" rel="noreferrer" className="lightbox-cta">Visit live site <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     function App() {
       useEffect(function () {
         var t1 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 30);
         var t2 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 250);
         return function () { clearTimeout(t1); clearTimeout(t2); };
       }, []);
-      return (<React.Fragment><Navbar /><main id="main"><Hero /><Stats /><TechStack /><Capabilities /><CaseStudy /><Industries /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /><ContactSection /></main><Footer /><FloatingCTA /><CookieBanner /></React.Fragment>);
+      return (<React.Fragment><Navbar /><main id="main"><Hero /><Stats /><TechStack /><Capabilities /><CaseStudy /><Industries /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /><ContactSection /></main><Footer /><FloatingCTA /><CookieBanner /><Lightbox /></React.Fragment>);
     }
 
     window.addEventListener('error', function (e) {

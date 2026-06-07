@@ -30,6 +30,15 @@
       background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04) 0%, transparent 50%),
                         radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03) 0%, transparent 50%);
     }
+    .compass {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0.6;
+    }
+    .compass svg { width: 280px; height: 280px; animation: compassSpin 60s linear infinite; }
+    @keyframes compassSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .compass svg { animation: none; } }
+    @media (max-width: 640px) { .compass svg { width: 200px; height: 200px; } }
     .navbar {
       position: relative; z-index: 10;
       display: flex; align-items: center; justify-content: space-between;
@@ -150,6 +159,25 @@
 </head>
 <body>
   <div class="bg-grain"></div>
+
+  <div class="compass" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.03)" stroke-width="1.5" fill="none"/>
+      <circle cx="100" cy="100" r="70" stroke="rgba(255,255,255,0.02)" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="50" stroke="rgba(255,255,255,0.02)" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="100" r="30" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
+      <line x1="100" y1="10" x2="100" y2="30" stroke="rgba(255,255,255,0.05)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="100" y1="170" x2="100" y2="190" stroke="rgba(255,255,255,0.05)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="10" y1="100" x2="30" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="170" y1="100" x2="190" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="2" stroke-linecap="round"/>
+      <polygon points="100,10 105,20 95,20" fill="rgba(255,255,255,0.06)"/>
+      <polygon points="100,190 105,180 95,180" fill="rgba(255,255,255,0.06)"/>
+      <polygon points="10,100 20,105 20,95" fill="rgba(255,255,255,0.06)"/>
+      <polygon points="190,100 180,105 180,95" fill="rgba(255,255,255,0.06)"/>
+      <text x="100" y="105" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-size="14" font-style="italic" fill="rgba(255,255,255,0.04)" letter-spacing="2">L</text>
+      <text x="100" y="118" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-size="14" font-style="italic" fill="rgba(255,255,255,0.04)" letter-spacing="2">L</text>
+    </svg>
+  </div>
 
   <nav class="navbar">
     <a class="logo" href="/">
