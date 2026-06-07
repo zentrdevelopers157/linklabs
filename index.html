@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="LinkLabs Studio" />
+  <meta name="keywords" content="web design, web development, India, premium websites, studio, LinkLabs, cinematic websites, custom design" />
+  <link rel="canonical" href="https://linklabs.studio/" />
+
+  <title>LinkLabs — The Website Your Brand Deserves</title>
+  <meta name="description" content="LinkLabs is a premium web design & development studio from India. Cinematic websites, hand-crafted in days — not months." />
+  <meta name="theme-color" content="#000000" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="LinkLabs" />
+  <meta property="og:title" content="LinkLabs — The Website Your Brand Deserves" />
+  <meta property="og:description" content="Premium web design & development studio from India. Cinematic websites, hand-crafted in days." />
+  <meta property="og:url" content="https://linklabs.studio/" />
+  <meta property="og:image" content="https://linklabs.studio/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LinkLabs — Premium web design studio" />
+  <meta property="og:locale" content="en_IN" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LinkLabs — The Website Your Brand Deserves" />
+  <meta name="twitter:description" content="Premium web design & development studio from India. Cinematic websites, hand-crafted in days." />
+  <meta name="twitter:image" content="https://linklabs.studio/og-image.png" />
+  <meta name="twitter:image:alt" content="LinkLabs — Premium web design studio" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LinkLabs" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23fff'%3E%3Cline x1='22' y1='18' x2='22' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Cline x1='22' y1='82' x2='78' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='18' r='10'/%3E%3Ccircle cx='22' cy='82' r='10'/%3E%3Ccircle cx='78' cy='82' r='10'/%3E%3Ccircle cx='22' cy='50' r='3.5' fill='%23fff' opacity='0.55'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23fff'%3E%3Cline x1='22' y1='18' x2='22' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Cline x1='22' y1='82' x2='78' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='18' r='10'/%3E%3Ccircle cx='22' cy='82' r='10'/%3E%3Ccircle cx='78' cy='82' r='10'/%3E%3Ccircle cx='22' cy='50' r='3.5' fill='%23fff' opacity='0.55'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin>
+  <link rel="dns-prefetch" href="https://zentr.onrender.com">
+  <link rel="dns-prefetch" href="https://avlune-fashion-store.netlify.app">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['"Instrument Serif"', 'serif'],
+            body: ['Barlow', 'sans-serif'],
+          },
+          borderRadius: { DEFAULT: '9999px' },
+        },
+      },
+    };
+  </script>
+
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: #000; color: #fff; margin: 0;
+      font-family: 'Barlow', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(255,255,255,0.18); color: #fff; }
+
+    .liquid-glass {
+      background: rgba(255,255,255,0.01);
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: none;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .liquid-glass::before {
+      content: ""; position: absolute; inset: 0;
+      border-radius: inherit; padding: 1.4px;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+        rgba(255,255,255,0) 40%,    rgba(255,255,255,0) 60%,
+        rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+    .liquid-glass-strong {
+      background: rgba(255,255,255,0.01);
+      background-blend-mode: luminosity;
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: none;
+      box-shadow: 4px 4px 4px rgba(0,0,0,0.05), inset 0 1px 1px rgba(255,255,255,0.15);
+      position: relative; overflow: hidden;
+    }
+    .liquid-glass-strong::before {
+      content: ""; position: absolute; inset: 0;
+      border-radius: inherit; padding: 1.4px;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,0.5) 0%,  rgba(255,255,255,0.2) 20%,
+        rgba(255,255,255,0) 40%,   rgba(255,255,255,0) 60%,
+        rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.5) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
+    }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    #boot-loader {
+      position: fixed; inset: 0; display: flex;
+      align-items: center; justify-content: center;
+      background: #000; color: #fff;
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: 1.25rem; z-index: 9999;
+      gap: 0.75rem;
+    }
+    #boot-loader svg { animation: float 4s ease-in-out infinite; }
+
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.95));
+      box-shadow: 0 0 8px rgba(255,255,255,0.4);
+      z-index: 9997; width: 0%;
+      transition: width 0.05s linear;
+    }
+    #particle-canvas {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      will-change: transform;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-anim { animation: float 4s ease-in-out infinite; }
+
+    @keyframes logoNodePulse {
+      0%, 100% { transform: scale(1); opacity: 0.55; }
+      50% { transform: scale(1.4); opacity: 1; }
+    }
+    .logo-node { animation: logoNodePulse 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+
+    @keyframes logoDraw {
+      0% { stroke-dashoffset: 200; opacity: 0; }
+      20% { opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+    .logo-stroke { stroke-dasharray: 200; stroke-dashoffset: 200; animation: logoDraw 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards; }
+    .logo-stroke-late { animation-delay: 0.35s; }
+
+    @keyframes logoNodeIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .logo-end-node { animation: logoNodeIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; transform-origin: center; transform-box: fill-box; opacity: 0; }
+    .logo-end-node-1 { animation-delay: 0.5s; }
+    .logo-end-node-2 { animation-delay: 0.95s; }
+    .logo-end-node-3 { animation-delay: 1.4s; }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+    .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+    @keyframes blurReveal {
+      0% { filter: blur(10px); opacity: 0; transform: translateY(50px); }
+      50% { filter: blur(5px); opacity: 0.5; transform: translateY(-5px); }
+      100% { filter: blur(0px); opacity: 1; transform: translateY(0); }
+    }
+    .word-blur { display: inline-block; margin-right: 0.28em; opacity: 0; }
+    .word-blur.visible { animation: blurReveal 0.7s ease-out forwards; }
+
+    @keyframes fadeSlideUp {
+      0% { filter: blur(10px); opacity: 0; transform: translateY(20px); }
+      50% { filter: blur(5px); opacity: 0.5; transform: translateY(-5px); }
+      100% { filter: blur(0px); opacity: 1; transform: translateY(0); }
+    }
+    .fade-el { opacity: 0; }
+    .fade-el.visible { animation: fadeSlideUp 0.8s ease-out forwards; }
+
+    .reveal-el { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .reveal-el.visible { opacity: 1; transform: translateY(0); }
+
+    .overlay-enter { opacity: 0; }
+    .overlay-enter-active { opacity: 1; transition: opacity 0.3s ease-out; }
+    .overlay-exit { opacity: 1; }
+    .overlay-exit-active { opacity: 0; transition: opacity 0.3s ease-out; }
+
+    .nav-pill {
+      position: absolute; top: 4px; bottom: 4px; left: 0;
+      background: #fff; border-radius: 9999px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.12);
+      transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1), width 0.45s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.25s ease-out;
+      pointer-events: none; z-index: 0;
+    }
+
+    nav[data-nav] {
+      transition: padding 0.3s ease;
+    }
+    nav[data-nav].nav-scrolled { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    nav[data-nav].nav-scrolled [data-nav-shell] {
+      background: rgba(15,15,15,0.55);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    [data-nav-shell] {
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    section[data-hero] {
+      --py: 0px; --ps: 1; --po: 1;
+    }
+    section[data-hero] [data-hero-bg] {
+      transform: translate3d(0, var(--py), 0) scale(var(--ps));
+      opacity: var(--po);
+      will-change: transform, opacity;
+    }
+    section[data-hero] [data-hero-fg] {
+      transform: translate3d(0, calc(var(--py) * 0.4), 0);
+      will-change: transform;
+    }
+
+    [data-spotlight] {
+      position: relative;
+      isolation: isolate;
+    }
+    [data-spotlight]::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.08), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: screen;
+    }
+    [data-spotlight]:hover::after { opacity: 1; }
+
+    [data-magnetic] {
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform: translate3d(var(--tx, 0), var(--ty, 0), 0);
+      will-change: transform;
+    }
+
+    .marquee {
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .marquee-track {
+      display: flex; gap: 3rem; width: max-content;
+      animation: marquee 40s linear infinite;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translate3d(0,0,0); }
+      to { transform: translate3d(-50%,0,0); }
+    }
+
+    @keyframes scrollDot {
+      0% { transform: translateY(0); opacity: 1; }
+      60% { transform: translateY(8px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 0; }
+    }
+    .scroll-dot { animation: scrollDot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+
+    .reveal-mask {
+      display: inline-block; overflow: hidden; vertical-align: bottom;
+    }
+    .reveal-mask > span {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .reveal-mask.in > span { transform: translateY(0); }
+
+    .split-char { display: inline-block; transform: translateY(40%); opacity: 0; transition: transform 0.7s cubic-bezier(0.19,1,0.22,1), opacity 0.7s ease; }
+    .split-char.in { transform: translateY(0); opacity: 1; }
+
+    #back-to-top {
+      position: fixed; right: 1.5rem; bottom: 1.5rem; z-index: 50;
+      width: 44px; height: 44px; border-radius: 9999px;
+      background: rgba(20,20,20,0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(20px) scale(0.9);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2,0.8,0.2,1), background 0.2s ease;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+    #back-to-top.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    #back-to-top:hover { background: rgba(40,40,40,0.9); }
+    #back-to-top:active { transform: scale(0.92); }
+
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      [data-magnetic] { transform: none !important; }
+      section[data-hero] [data-hero-bg] { transform: none !important; opacity: 1 !important; }
+    }
+
+    @keyframes bootFadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+    #boot-loader.fade-out { animation: bootFadeOut 0.6s ease forwards; }
+
+    @keyframes appReveal {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    #root > * { animation: appReveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.1s both; }
+
+    a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+    :focus-visible {
+      outline: 2px solid rgba(255,255,255,0.6);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .liquid-glass:focus-visible { outline-offset: 5px; }
+
+    .skip-link {
+      position: fixed; top: -100px; left: 1rem; z-index: 99999;
+      background: #fff; color: #000; padding: 0.5rem 1rem;
+      border-radius: 0.5rem; font-family: 'Barlow', sans-serif; font-size: 0.875rem;
+      font-weight: 500; text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 1rem; outline: 2px solid #fff; outline-offset: 2px; }
+
+    [data-contain] {
+      contain: layout style paint;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="scroll-progress"></div>
+  <button id="back-to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5" /><path d="M5 12l7-7 7 7" /></svg></button>
+  <canvas id="particle-canvas"></canvas>
+  <div id="root">
+    <div id="boot-loader"><svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:#fff;"><line x1="22" y1="18" x2="22" y2="82" stroke="currentColor" stroke-width="8" stroke-linecap="round" /><line x1="22" y1="82" x2="78" y2="82" stroke="currentColor" stroke-width="8" stroke-linecap="round" /><circle cx="22" cy="18" r="10" fill="currentColor" /><circle cx="22" cy="82" r="10" fill="currentColor" /><circle cx="78" cy="82" r="10" fill="currentColor" /><circle cx="22" cy="50" r="3.5" fill="currentColor" style="opacity:0.55;" /></svg><span>LinkLabs — loading…</span></div>
+  </div>
+
+  <script>
+    (function() {
+      var canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) { canvas.style.display = 'none'; return; }
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var mouse = { x: -1000, y: -1000 };
+      var W, H;
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      document.addEventListener('mousemove', function(e) {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      var isVisible = true;
+      var animId = null;
+      var count = window.innerWidth < 768 ? 14 : 22;
+      for (var i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: (Math.random() - 0.5) * 0.2,
+          r: Math.random() * 1.2 + 0.5,
+          o: Math.random() * 0.3 + 0.1
+        });
+      }
+
+      function animate() {
+        if (!isVisible) { animId = null; return; }
+        ctx.clearRect(0, 0, W, H);
+        var len = particles.length;
+        for (var i = 0; i < len; i++) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = W;
+          if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H;
+          if (p.y > H) p.y = 0;
+
+          var dx = mouse.x - p.x;
+          var dy = mouse.y - p.y;
+          var distSq = dx * dx + dy * dy;
+          if (distSq < 22500) {
+            p.x -= dx * 0.005;
+            p.y -= dy * 0.005;
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,' + p.o + ')';
+          ctx.fill();
+
+          for (var j = i + 1; j < len; j++) {
+            var p2 = particles[j];
+            var dx2 = p.x - p2.x;
+            var dy2 = p.y - p2.y;
+            var d2 = dx2 * dx2 + dy2 * dy2;
+            if (d2 < 14400) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = 'rgba(255,255,255,' + (0.06 * (1 - Math.sqrt(d2) / 120)) + ')';
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        animId = requestAnimationFrame(animate);
+      }
+      animate();
+
+      if ('IntersectionObserver' in window) {
+        var visObs = new IntersectionObserver(function(entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) { isVisible = true; if (!animId) animate(); }
+            else { isVisible = false; if (animId) { cancelAnimationFrame(animId); animId = null; } }
+          }
+        }, { threshold: 0 });
+        visObs.observe(canvas);
+      }
+    })();
+  </script>
+
+  <script>
+    (function() {
+      var progress = document.getElementById('scroll-progress');
+      var navEl = null;
+      var heroEl = null;
+      var btt = null;
+      var ticking = false;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function loop() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (progress) progress.style.width = (scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0) + '%';
+
+        if (navEl) {
+          if (scrollTop > 24) navEl.classList.add('nav-scrolled');
+          else navEl.classList.remove('nav-scrolled');
+        }
+
+        if (btt) {
+          if (scrollTop > 600) btt.classList.add('visible');
+          else btt.classList.remove('visible');
+        }
+
+        if (heroEl && !reduceMotion) {
+          var heroH = heroEl.offsetHeight;
+          if (scrollTop < heroH) {
+            var p = scrollTop / heroH;
+            heroEl.style.setProperty('--py', (p * 80) + 'px');
+            heroEl.style.setProperty('--ps', (1 - p * 0.15));
+            heroEl.style.setProperty('--po', (1 - p * 1.2));
+          }
+        }
+
+        ticking = false;
+      }
+      function onScroll() { if (!ticking) { requestAnimationFrame(loop); ticking = true; } }
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      function init() {
+        navEl = document.querySelector('nav[data-nav]');
+        heroEl = document.querySelector('section[data-hero]');
+        btt = document.getElementById('back-to-top');
+        if (btt) {
+          btt.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
+        loop();
+      }
+
+      function setupSpotlight() {
+        var cards = document.querySelectorAll('[data-spotlight]');
+        for (var i = 0; i < cards.length; i++) {
+          (function(card) {
+            if (card.__spotlight) return;
+            card.__spotlight = true;
+            card.addEventListener('mousemove', function(e) {
+              var r = card.getBoundingClientRect();
+              card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+              card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            });
+            card.addEventListener('mouseleave', function() {
+              card.style.removeProperty('--mx');
+              card.style.removeProperty('--my');
+            });
+          })(cards[i]);
+        }
+      }
+
+      function setupMagnetic() {
+        var els = document.querySelectorAll('[data-magnetic]');
+        for (var i = 0; i < els.length; i++) {
+          (function(el) {
+            if (el.__magnetic) return;
+            el.__magnetic = true;
+            var strength = parseFloat(el.getAttribute('data-magnetic')) || 0.25;
+            el.addEventListener('mousemove', function(e) {
+              var r = el.getBoundingClientRect();
+              var x = (e.clientX - r.left - r.width / 2) * strength;
+              var y = (e.clientY - r.top - r.height / 2) * strength;
+              el.style.setProperty('--tx', x + 'px');
+              el.style.setProperty('--ty', y + 'px');
+            });
+            el.addEventListener('mouseleave', function() {
+              el.style.setProperty('--tx', '0px');
+              el.style.setProperty('--ty', '0px');
+            });
+          })(els[i]);
+        }
+      }
+
+      window.__initCardEffects = function() { setupSpotlight(); setupMagnetic(); };
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() { init(); setTimeout(setupSpotlight, 50); setTimeout(setupMagnetic, 50); });
+      } else {
+        init();
+        setTimeout(setupSpotlight, 50);
+        setTimeout(setupMagnetic, 50);
+      }
+    })();
+  </script>
+
+  <script type="text/babel" data-presets="react">
+    var useState    = React.useState;
+    var useEffect   = React.useEffect;
+    var useRef      = React.useRef;
+    var useMemo     = React.useMemo;
+    var useCallback = React.useCallback;
+    var createElement = React.createElement;
+
+    function IconArrowUpRight(p) { var s=p.size||24, w=p.strokeWidth||2, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" className={c}><path d="M7 17L17 7" /><path d="M7 7h10v10" /></svg>); }
+    function IconPlay(p) { var s=p.size||24, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" className={c}><polygon points="6 4 20 12 6 20 6 4" /></svg>); }
+    function IconCheck(p) { var s=p.size||24, w=p.strokeWidth||2.5, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" className={c}><path d="M20 6L9 17l-5-5" /></svg>); }
+    function IconArrowRight(p) { var s=p.size||24, w=p.strokeWidth||2, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" className={c}><path d="M5 12h14" /><path d="M13 5l7 7-7 7" /></svg>); }
+    function IconExternalLink(p) { var c=p.className||''; return (<svg viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7zM19 19H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7z"/></svg>); }
+    function IconClock(p) { var s=p.size||28, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={c}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>); }
+    function IconGlobe(p) { var s=p.size||28, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className={c}><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z" /></svg>); }
+    function IconMenu(p) { var s=p.size||22, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={c}><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></svg>); }
+    function IconClose(p) { var s=p.size||22, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={c}><path d="M6 6l12 12" /><path d="M18 6L6 18" /></svg>); }
+    function IconInstagram(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className={c}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" /></svg>); }
+    function IconTwitter(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M18.244 2H21l-6.55 7.49L22 22h-6.81l-4.78-6.27L4.8 22H2l7.02-8.03L2 2h6.91l4.3 5.7L18.24 2zm-1.19 18h1.65L7.04 4H5.3l11.75 16z" /></svg>); }
+    function IconLinkedIn(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.04 0 4.78 2.66 4.78 6.12V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4V9z" /></svg>); }
+
+    function LogoMark(p) {
+      var size = p.size || 32;
+      var animate = p.animate !== false;
+      return (
+        React.createElement('svg', {
+          width: size, height: size, viewBox: '0 0 100 100', fill: 'none',
+          xmlns: 'http://www.w3.org/2000/svg', 'aria-hidden': 'true'
+        },
+          React.createElement('line', { x1: '22', y1: '18', x2: '22', y2: '82', stroke: 'currentColor', strokeWidth: '8', strokeLinecap: 'round', className: animate ? 'logo-stroke' : '' }),
+          React.createElement('line', { x1: '22', y1: '82', x2: '78', y2: '82', stroke: 'currentColor', strokeWidth: '8', strokeLinecap: 'round', className: animate ? 'logo-stroke logo-stroke-late' : '' }),
+          React.createElement('circle', { cx: '22', cy: '18', r: '10', fill: 'currentColor', className: animate ? 'logo-end-node logo-end-node-1' : '' }),
+          React.createElement('circle', { cx: '22', cy: '82', r: '10', fill: 'currentColor', className: animate ? 'logo-end-node logo-end-node-2' : '' }),
+          React.createElement('circle', { cx: '78', cy: '82', r: '10', fill: 'currentColor', className: animate ? 'logo-end-node logo-end-node-3' : '' }),
+          React.createElement('circle', { cx: '22', cy: '50', r: '3.5', fill: 'currentColor', className: 'logo-node', style: { opacity: animate ? 1 : 0.55 } })
+        )
+      );
+    }
+
+    function Logo(p) {
+      var size = p.size || 32;
+      var markColor = p.markColor || 'text-white';
+      var withWordmark = p.withWordmark !== false;
+      var animate = p.animate !== false;
+      return (
+        React.createElement('span', { className: 'inline-flex items-center gap-3 ' + (p.className || '') },
+          React.createElement('span', { className: markColor + ' inline-flex items-center justify-center' },
+            React.createElement(LogoMark, { size: size, animate: animate })
+          ),
+          withWordmark ? React.createElement('span', { className: 'flex items-center gap-2.5' },
+            React.createElement('span', { className: 'text-white font-semibold text-[17px] tracking-[-0.01em] leading-none', style: { fontFamily: "'Inter', 'Barlow', system-ui, sans-serif", fontWeight: 600 } }, 'Link'),
+            React.createElement('span', { className: 'w-px h-4 bg-white/30' }),
+            React.createElement('span', { className: 'text-white/85 italic text-[17px] leading-none', style: { fontFamily: "'Inter', 'Barlow', system-ui, sans-serif", fontWeight: 400, fontStyle: 'italic' } }, 'Labs')
+          ) : null
+        )
+      );
+    }
+
+    var rafRef = { current: null };
+    function throttleRAF(fn) {
+      return function() {
+        var args = arguments;
+        var ctx = this;
+        if (!rafRef.current) {
+          rafRef.current = requestAnimationFrame(function() {
+            rafRef.current = null;
+            fn.apply(ctx, args);
+          });
+        }
+      };
+    }
+
+    function MagneticBtn(p) {
+      var ref = useRef(null);
+      function onMove(e) {
+        var el = ref.current;
+        if (!el) return;
+        var r = el.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width / 2;
+        var y = e.clientY - r.top - r.height / 2;
+        el.style.transform = 'translate(' + (x * 0.12) + 'px, ' + (y * 0.12) + 'px)';
+      }
+      function onLeave() { if (ref.current) ref.current.style.transform = ''; }
+      return (<span ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} className={'inline-block ' + (p.className || '')}>{p.children}</span>);
+    }
+
+    function AnimatedCounter(p) {
+      var val = useState(0), count = val[0], setCount = val[1];
+      var target = p.to || 0, suffix = p.suffix || '';
+      var ref = useRef(null);
+      useEffect(function () {
+        var el = ref.current;
+        if (!el) return;
+        var started = false;
+        var obs = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting && !started) {
+              started = true; obs.disconnect();
+              var startTime = performance.now(), duration = 1500;
+              function tick(now) {
+                var t = Math.min(1, (now - startTime) / duration);
+                setCount(Math.round((1 - Math.pow(1 - t, 3)) * target));
+                if (t < 1) requestAnimationFrame(tick); else setCount(target);
+              }
+              requestAnimationFrame(tick); break;
+            }
+          }
+        }, { threshold: 0.5 });
+        obs.observe(el);
+        return function () { obs.disconnect(); };
+      }, [target]);
+      return (<span ref={ref} className={p.className || ''}>{count}{suffix}</span>);
+    }
+
+    function FadingVideo(props) {
+      var src = props.src, cn = props.className || '', style = props.style || {};
+      var ref = useRef(null), raf = useRef(null), out = useRef(false);
+      function fade(target, dur) {
+        var v = ref.current;
+        if (!v) return;
+        if (raf.current) cancelAnimationFrame(raf.current);
+        var start = performance.now(), startO = parseFloat(v.style.opacity || '0') || 0;
+        function tick(now) {
+          var t = Math.min(1, (now - start) / dur);
+          v.style.opacity = String(startO + (target - startO) * (1 - Math.pow(1 - t, 3)));
+          if (t < 1) raf.current = requestAnimationFrame(tick); else { v.style.opacity = String(target); raf.current = null; }
+        }
+        raf.current = requestAnimationFrame(tick);
+      }
+      useEffect(function () {
+        var v = ref.current;
+        if (!v) return;
+        function loaded() {
+          v.style.opacity = '0'; out.current = false;
+          try { v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function(){}); } catch (e) {}
+          fade(1, 500);
+        }
+        function timeupdate() {
+          if (!v.duration || !isFinite(v.duration)) return;
+          var r = v.duration - v.currentTime;
+          if (!out.current && r <= 0.55 && r > 0) { out.current = true; fade(0, 500); }
+        }
+        function ended() {
+          v.style.opacity = '0';
+          setTimeout(function () {
+            try { v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function(){}); } catch (e) {}
+            out.current = false; fade(1, 500);
+          }, 100);
+        }
+        v.addEventListener('loadeddata', loaded);
+        v.addEventListener('timeupdate', timeupdate);
+        v.addEventListener('ended', ended);
+        var io = null;
+        if ('IntersectionObserver' in window) {
+          io = new IntersectionObserver(function(entries) {
+            var e = entries[0];
+            if (!e) return;
+            if (e.isIntersecting) { try { var p = v.play(); if (p && p.catch) p.catch(function(){}); } catch (err) {} }
+            else { try { v.pause(); } catch (err) {} }
+          }, { threshold: 0.05 });
+          io.observe(v);
+        }
+        return function () {
+          v.removeEventListener('loadeddata', loaded);
+          v.removeEventListener('timeupdate', timeupdate);
+          v.removeEventListener('ended', ended);
+          if (raf.current) cancelAnimationFrame(raf.current);
+          if (io) io.disconnect();
+        };
+      }, [src]);
+      return (<video ref={ref} src={src} autoPlay muted playsInline preload="metadata" className={cn} style={Object.assign({}, style, { opacity: 0 })} />);
+    }
+
+    function BlurText(props) {
+      var text = props.text, cn = props.className || '', As = props.as || 'p';
+      var ref = useRef(null);
+      var visible = useState(false), isVisible = visible[0], setVisible = visible[1];
+      var words = useMemo(function () { return text.split(' '); }, [text]);
+      useEffect(function () {
+        var el = ref.current;
+        if (!el) return;
+        var obs = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) { if (entries[i].isIntersecting) { setVisible(true); obs.disconnect(); break; } }
+        }, { threshold: 0.1 });
+        obs.observe(el);
+        return function () { obs.disconnect(); };
+      }, []);
+      var Tag = As;
+      return (<Tag ref={ref} className={cn} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', rowGap: '0.1em' }}>
+        {words.map(function (w, i) { return (<span key={i} className={'word-blur' + (isVisible ? ' visible' : '')} style={{ animationDelay: (i * 100) + 'ms' }}>{w}</span>); })}
+      </Tag>);
+    }
+
+    function FadeIn(props) {
+      var ref = useRef(null);
+      var visible = useState(false), isVisible = visible[0], setVisible = visible[1];
+      var delay = props.delay || 0;
+      useEffect(function () {
+        var el = ref.current;
+        if (!el) return;
+        var obs = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) { if (entries[i].isIntersecting) { setVisible(true); obs.disconnect(); break; } }
+        }, { threshold: 0.1 });
+        obs.observe(el);
+        return function () { obs.disconnect(); };
+      }, []);
+      return (<div ref={ref} className={'fade-el ' + (isVisible ? 'visible' : '') + ' ' + (props.className || '')} style={Object.assign({ animationDelay: delay + 's' }, props.style || {})}>{props.children}</div>);
+    }
+
+    function Reveal(p) {
+      var ref = useRef(null);
+      var visible = useState(false), isVisible = visible[0], setVisible = visible[1];
+      var delay = p.delay || 0;
+      useEffect(function () {
+        var el = ref.current;
+        if (!el) return;
+        var obs = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) { if (entries[i].isIntersecting) { setVisible(true); obs.disconnect(); break; } }
+        }, { threshold: 0.1 });
+        obs.observe(el);
+        return function () { obs.disconnect(); };
+      }, []);
+      return (<div ref={ref} className={'reveal-el ' + (isVisible ? 'visible' : '') + ' ' + (p.className || '')} style={{ transitionDelay: delay + 's' }}>{p.children}</div>);
+    }
+
+    function Navbar() {
+      var open = useState(false), menuOpen = open[0], setMenuOpen = open[1];
+      var overlayRef = useRef(null);
+      var navRef = useRef(null);
+      var linkRefs = useRef([]);
+      var links = [{ label: 'Home', href: '#home' }, { label: 'Services', href: '#services' }, { label: 'Work', href: '#work' }, { label: 'Process', href: '#process' }, { label: 'Pricing', href: '#pricing' }, { label: 'FAQ', href: '#faq' }];
+      var activeIdxState = useState(0);
+      var activeIdx = activeIdxState[0]; var setActiveIdx = activeIdxState[1];
+      var pillStyle = useState({ x: 0, w: 0, opacity: 0 });
+      var setPillStyle = pillStyle[1];
+      var hoverIdxRef = useRef(null);
+      var hideTimerRef = useRef(null);
+      var showPillRef = useRef(false);
+      var pillIdxState = useState(0);
+      var pillIdx = pillIdxState[0]; var setPillIdx = pillIdxState[1];
+      function close() { setMenuOpen(false); }
+      useEffect(function () {
+        var el = overlayRef.current;
+        if (!el) return;
+        if (menuOpen) { el.style.display = 'flex'; requestAnimationFrame(function () { el.classList.add('overlay-enter-active'); el.classList.remove('overlay-enter'); }); }
+        else {
+          el.classList.remove('overlay-enter-active'); el.classList.add('overlay-exit-active');
+          setTimeout(function () { el.style.display = 'none'; el.classList.remove('overlay-exit-active'); }, 300);
+        }
+      }, [menuOpen]);
+      function measurePill(idx) {
+        var nav = navRef.current, link = linkRefs.current[idx];
+        if (!nav || !link) return;
+        var navRect = nav.getBoundingClientRect();
+        var linkRect = link.getBoundingClientRect();
+        setPillStyle({ x: linkRect.left - navRect.left, w: linkRect.width, opacity: 1 });
+      }
+      function onLinkEnter(i) {
+        hoverIdxRef.current = i;
+        if (hideTimerRef.current) { clearTimeout(hideTimerRef.current); hideTimerRef.current = null; }
+        showPillRef.current = true;
+        setPillIdx(i);
+        measurePill(i);
+      }
+      function onNavLeave() {
+        hoverIdxRef.current = null;
+        showPillRef.current = false;
+        if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+        hideTimerRef.current = setTimeout(function () { setPillStyle(function (p) { return Object.assign({}, p, { opacity: 0 }); }); }, 300);
+        setTimeout(function () { measurePill(activeIdx); setPillIdx(activeIdx); }, 200);
+      }
+      function onLinkClick(i) {
+        setActiveIdx(i);
+        setPillIdx(i);
+        measurePill(i);
+      }
+      useEffect(function () {
+        function onScroll() {
+          if (showPillRef.current) return;
+          var scrollTop = window.scrollY + window.innerHeight * 0.4;
+          var best = 0, bestDist = Infinity;
+          for (var i = 0; i < links.length; i++) {
+            var sec = document.querySelector(links[i].href);
+            if (!sec) continue;
+            var top = sec.getBoundingClientRect().top + window.scrollY;
+            var dist = Math.abs(top - scrollTop);
+            if (dist < bestDist) { bestDist = dist; best = i; }
+          }
+          if (best !== activeIdx) {
+            setActiveIdx(best);
+            setPillIdx(best);
+            measurePill(best);
+          }
+        }
+        var raf = null;
+        function sched() { if (raf) return; raf = requestAnimationFrame(function () { onScroll(); raf = null; }); }
+        window.addEventListener('scroll', sched, { passive: true });
+        setTimeout(function () { onScroll(); }, 100);
+        return function () { window.removeEventListener('scroll', sched); if (raf) cancelAnimationFrame(raf); };
+      }, [activeIdx]);
+      return (<React.Fragment>
+        <nav data-nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-16 py-4 flex justify-between items-center transition-all">
+          <a href="#home" className="flex items-center gap-3">
+            <Logo size={30} withWordmark={true} animate={true} />
+          </a>
+          <div ref={navRef} onMouseLeave={onNavLeave} data-nav-shell className="relative hidden md:flex items-center rounded-full p-1.5">
+            <span aria-hidden="true" className="nav-pill" style={{ transform: 'translateX(' + pillStyle[0].x + 'px)', width: pillStyle[0].w + 'px', opacity: pillStyle[0].opacity }} />
+            {links.map(function (l, i) {
+              return (<a key={l.href} href={l.href}
+                ref={function (el) { linkRefs.current[i] = el; }}
+                onMouseEnter={function () { onLinkEnter(i); }}
+                onClick={function () { onLinkClick(i); }}
+                className={'relative z-10 px-4 py-2 text-sm font-medium font-body transition-colors duration-300 ' + (pillIdx === i ? 'text-black' : 'text-white/90')}>
+                {l.label}
+              </a>);
+            })}
+            <a href="#pricing" data-magnetic="0.2" className="relative z-10 ml-1 bg-white text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1 whitespace-nowrap hover:scale-[1.03] active:scale-95 transition-transform duration-200">Get Started <IconArrowUpRight size={16} strokeWidth={2} /></a>
+          </div>
+          <button onClick={function () { setMenuOpen(true); }} className="md:hidden liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white"><IconMenu /></button>
+          <div className="hidden md:block w-12 h-12" />
+        </nav>
+        <div ref={overlayRef} className="fixed inset-0 z-[60] liquid-glass-strong overlay-enter" style={{ display: 'none', flexDirection: 'column' }}>
+          <div className="flex items-center justify-between px-4 py-4 shrink-0">
+            <a href="#home" onClick={close} className="flex items-center gap-3"><Logo size={32} withWordmark={true} animate={false} /></a>
+            <button onClick={close} className="liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white"><IconClose /></button>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-6 flex-1 -mt-12">
+            {links.map(function (l) { return (<a key={l.href} href={l.href} onClick={close} className="font-heading italic text-white text-5xl hover:opacity-80 transition">{l.label}</a>); })}
+            <a href="#pricing" onClick={close} className="mt-8 bg-white text-black px-6 py-3 rounded-full text-base font-medium flex items-center gap-2">Get Started <IconArrowUpRight size={18} /></a>
+          </div>
+        </div>
+      </React.Fragment>);
+    }
+
+    function Hero() {
+      return (<section id="home" data-hero className="relative overflow-hidden bg-black min-h-screen">
+        <div data-hero-bg className="absolute inset-0 z-0">
+          <FadingVideo src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4" className="absolute left-1/2 top-0 -translate-x-1/2 object-cover object-top" style={{ width: '120%', height: '120%' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black pointer-events-none" />
+        </div>
+        <div data-hero-fg className="relative z-10 flex flex-col items-center justify-center min-h-screen pt-32 px-4 text-center">
+          <FadeIn delay={0.4}><div data-spotlight className="liquid-glass inline-flex items-center h-9 rounded-full pl-1 pr-4 gap-2"><span className="bg-white text-black h-7 px-3 inline-flex items-center rounded-full text-[11px] font-semibold tracking-wide pulse-glow">New</span><span className="text-sm text-white/90 font-body leading-none">Introducing AI-Accelerated Web Design</span></div></FadeIn>
+          <div className="mt-6 max-w-3xl"><BlurText as="h1" text="The Website Your Brand Deserves" className="text-6xl md:text-7xl lg:text-[5.5rem] font-heading italic text-white leading-[0.85] tracking-[-3px]" /></div>
+          <FadeIn delay={0.8} className="mt-5 text-sm md:text-base text-white/90 max-w-xl font-body font-light leading-relaxed">Stunning design. Blazing performance. Crafted by a focused team of four — designers, developers, and strategists who treat your brand like our own.</FadeIn>
+          <FadeIn delay={1.1} className="flex items-center gap-6 mt-8">
+            <a href="#pricing" data-magnetic="0.18" className="liquid-glass-strong rounded-full px-5 py-2.5 text-sm font-medium text-white flex items-center gap-2">Start Your Project <IconArrowUpRight size={18} /></a>
+            <a href="#work" className="text-white text-sm font-body flex items-center gap-2 hover:opacity-80 transition"><span className="liquid-glass rounded-full w-7 h-7 flex items-center justify-center"><IconPlay size={12} /></span> Watch the Reel</a>
+          </FadeIn>
+          <FadeIn delay={1.3} className="flex items-stretch gap-4 mt-10 flex-wrap justify-center">
+            <div data-spotlight className="liquid-glass p-5 w-[220px] rounded-[1.25rem] flex items-center gap-4"><div className="text-white/80"><IconClock /></div><div className="text-left"><div className="text-4xl font-heading italic text-white leading-none"><AnimatedCounter to={7} suffix=" Days" /></div><div className="text-xs text-white/70 font-body mt-1">Average Launch Time</div></div></div>
+            <div data-spotlight className="liquid-glass p-5 w-[220px] rounded-[1.25rem] flex items-center gap-4"><div className="text-white/80"><IconGlobe /></div><div className="text-left"><div className="text-4xl font-heading italic text-white leading-none"><AnimatedCounter to={50} suffix="+" /></div><div className="text-xs text-white/70 font-body mt-1">Brands Launched in India</div></div></div>
+          </FadeIn>
+          <FadeIn delay={1.4} className="flex flex-col items-center gap-4 pb-10 relative z-10 mt-16 w-full">
+            <span className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white">Trusted by founders, startups &amp; SMEs across India</span>
+            <div className="marquee w-full max-w-5xl mt-2">
+              <div className="marquee-track text-2xl md:text-3xl text-white tracking-tight font-heading italic">
+                <span className="inline-block">Zentr</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Avlune</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">SenJr</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Roamie</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Lumen</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Halo</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Orbit</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Zentr</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Avlune</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">SenJr</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Roamie</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Lumen</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Halo</span><span className="inline-block opacity-30">·</span>
+                <span className="inline-block">Orbit</span><span className="inline-block opacity-30">·</span>
+              </div>
+            </div>
+          </FadeIn>
+          <a href="#services" aria-label="Scroll down" className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 text-white/50 hover:text-white/90 transition-colors group">
+            <span className="text-[10px] font-body uppercase tracking-[0.25em]">Scroll</span>
+            <span className="w-5 h-8 rounded-full border border-white/30 flex items-start justify-center p-1">
+              <span className="w-1 h-2 rounded-full bg-white/60 scroll-dot" />
+            </span>
+          </a>
+        </div>
+      </section>);
+    }
+
+    function Capabilities() {
+      var cards = [
+        { iconPath: 'M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21H5Zm1-4h12l-3.75-5-3 4L9 13l-3 4Z', title: 'Custom Design', tags: ['Figma First', 'Brand-Driven', 'Pixel Perfect', 'Conversion-Focused'], body: 'Every layout is hand-crafted in Figma by Ashis. No templates, no shortcuts — just design that fits your brand like a tailored suit.' },
+        { iconPath: 'M4 6.47 5.76 10H20v8H4V6.47M22 4h-4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.89-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4Z', title: 'Fast Development', tags: ['Next.js', 'WordPress', 'Shopify', 'Lightning Speed'], body: 'Hitesh ships production-grade code that loads instantly, ranks on Google, and scales as your business grows.' },
+        { iconPath: 'M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1Zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7Z', title: 'Smart Strategy', tags: ['SEO Ready', 'Analytics', 'Lead Capture', 'Growth Loops'], body: "We don't just build pretty websites — we engineer funnels. Every section is mapped to turn visitors into paying customers." }
+      ];
+      return (<section id="services" className="min-h-screen relative overflow-hidden bg-black">
+        <FadingVideo src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_094631_d30ab262-45ee-4b7d-99f3-5d5848c8ef13.mp4" className="absolute inset-0 w-full h-full object-cover z-0" />
+        <div className="absolute inset-0 bg-black/30 z-[1] pointer-events-none" />
+        <div className="relative z-10 px-8 md:px-16 lg:px-20 pt-24 pb-20 flex flex-col">
+          <div className="mb-auto text-center"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white inline-block mb-6 pulse-glow">Capabilities</span><BlurText as="h2" text="Pro features. Zero complexity." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] leading-[0.95] tracking-[-2px]" /></div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+            {cards.map(function (c, i) { return (<Reveal key={i} delay={i * 0.1}><div data-spotlight className="liquid-glass rounded-[1.25rem] p-6 min-h-[360px] flex flex-col"><div className="flex items-start justify-between gap-4"><div className="liquid-glass rounded-[0.75rem] w-11 h-11 flex items-center justify-center"><svg viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6 text-white"><path d={c.iconPath} /></svg></div><div className="flex flex-wrap justify-end gap-1.5 max-w-[70%]">{c.tags.map(function (t, j) { return (<span key={j} className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 font-body whitespace-nowrap">{t}</span>); })}</div></div><h3 className="mt-6 font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-none">{c.title}</h3><p className="mt-3 text-sm text-white/90 font-body font-light leading-snug max-w-[32ch]">{c.body}</p></div></Reveal>); })}
+          </div>
+        </div>
+      </section>);
+    }
+
+    function PortfolioCard(props) {
+      var p = props.project;
+      var live = props.live;
+      var href = p.url && p.url !== '#' ? p.url : null;
+      var urlLabel = href ? href.replace('https://','').replace('http://','') : 'Coming soon';
+      return (<div data-spotlight data-contain className="liquid-glass rounded-[1.5rem] p-4 flex flex-col group cursor-pointer"><div className="liquid-glass rounded-[1rem] overflow-hidden aspect-[16/10] relative"><div className="absolute top-0 inset-x-0 h-7 flex items-center gap-1.5 px-3 z-10 bg-black/30 backdrop-blur-sm"><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><div className="mx-auto text-[10px] text-white/60 font-body truncate max-w-[60%]">{urlLabel}</div></div>{live ? (<div className="absolute top-9 right-3 z-10 liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white font-semibold tracking-wide flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />LIVE</div>) : (<div className="absolute top-9 right-3 z-10 liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/70 font-semibold tracking-wide flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-white/40" />SOON</div>)}<div className="absolute inset-0 pt-7 flex items-center justify-center bg-gradient-to-br from-white/5 to-transparent"><span className="font-heading italic text-white/20 text-5xl">{p.title}</span></div></div><div className="flex items-end justify-between mt-4 px-2 pb-2"><div><div className="font-heading italic text-white text-2xl tracking-[-1px]">{p.title}</div><div className="text-xs text-white/60 font-body mt-1">{p.category}</div></div>{href ? (<a href={href} target="_blank" rel="noreferrer" aria-label={"Open " + p.title} className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition"><IconExternalLink className="h-4 w-4" /></a>) : (<div aria-label="Coming soon" className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white/60 cursor-not-allowed"><IconExternalLink className="h-4 w-4" /></div>)}</div></div>);
+    }
+
+    function Portfolio() { var projects = [{ title: "Zentr", category: "SaaS / Dashboard", url: "https://zentr.onrender.com/" }, { title: "Avlune", category: "Fashion E-commerce", url: "https://avlune-fashion-store.netlify.app/" }, { title: "SenJr", category: "Community Platform", url: "#" }, { title: "Roamie", category: "Travel & Lifestyle", url: "#" }];
+      return (<section id="work" className="relative bg-black py-24 px-6 md:px-16 lg:px-20"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-white/[0.02] blur-3xl rounded-full pointer-events-none pulse-glow" /><div className="relative"><div className="text-center mb-16"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">Selected Work</span><BlurText as="h2" text="Built with care. Launched with pride." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" /><p className="mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto">A few of the brands we've helped go from idea to internet.</p></div><div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">{projects.map(function (p, i) { return (<Reveal key={i} delay={i * 0.08}><PortfolioCard project={p} live={!!p.url && p.url !== '#'} /></Reveal>); })}</div><div className="text-center mt-12"><a href="#contact" className="liquid-glass rounded-full px-5 py-2.5 text-sm text-white inline-flex items-center gap-2 hover:scale-105 transition">View All Work <IconArrowRight size={16} /></a></div></div></section>); }
+
+    function TeamCard(props) { return (<div data-spotlight className="liquid-glass rounded-[1.25rem] p-6 flex flex-col items-center text-center min-h-[280px]"><div className="liquid-glass rounded-full w-20 h-20 flex items-center justify-center"><span className="font-heading italic text-white text-4xl">{props.initial}</span></div><div className="mt-5 font-heading italic text-white text-2xl tracking-[-1px]">{props.name}</div><div className="mt-1 text-xs text-white/70 font-body uppercase tracking-[0.15em]">{props.role}</div><p className="mt-3 text-sm text-white/80 font-body font-light leading-snug">{props.tagline}</p></div>); }
+
+    function Team() { var members = [{ name: 'Ashis Bhakta', role: 'Designer', initial: 'A', tagline: 'Turns blank canvases into brand worlds.' }, { name: 'Hitesh Agrawal', role: 'Developer & Strategist', initial: 'H', tagline: 'Writes code the way poets write verse.' }, { name: 'Monish Bhakta', role: 'Manager', initial: 'M', tagline: 'Keeps the ship steady, the deadlines real.' }, { name: 'Rohan Mondal', role: 'Marketing Officer', initial: 'R', tagline: 'Makes sure the right people see your work.' }];
+      return (<section id="team" className="relative bg-black py-24 px-6 md:px-16 lg:px-20"><div className="text-center mb-16"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">The Team</span><BlurText as="h2" text="Four people. One obsession." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" /><p className="mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto">We're a small, senior team of teenage founders from India — close-knit, hands-on, and personally invested in every project.</p></div><div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-6xl mx-auto">{members.map(function (m, i) { return (<Reveal key={i} delay={i * 0.08}><TeamCard {...m} /></Reveal>); })}</div></section>); }
+
+    function PricingCard(props) {
+      var plan = props.plan, featured = !!props.featured;
+      var glassClass = 'liquid-glass rounded-[1.5rem] p-8 flex flex-col' + (featured ? ' liquid-glass-strong md:scale-[1.03] md:-translate-y-2 z-10' : '');
+      return (<div data-spotlight className={glassClass}>
+        <div className="flex items-center gap-3"><h3 className="font-heading italic text-white text-3xl tracking-[-1px]">{plan.name}</h3>{plan.badge ? (<span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 flex items-center gap-1.5">{plan.badgeDot ? <span className="w-1.5 h-1.5 rounded-full bg-white" /> : null}{plan.badge}</span>) : null}</div>
+        <p className="mt-2 text-sm text-white/70 font-body font-light">{plan.desc}</p>
+        <div className="mt-6 flex items-baseline gap-2"><span className="font-heading italic text-white text-5xl tracking-[-2px]">{plan.price}</span><span className="text-sm text-white/60 font-body">{plan.priceSuffix}</span></div>
+        <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 inline-block mt-3 w-fit">{plan.timeline}</span>
+        <div className="h-px bg-white/10 my-6" />
+        <ul className="flex flex-col gap-3 flex-1">{plan.features.map(function (f, i) { return (<li key={i} className="flex items-start gap-3 text-sm text-white/90 font-body font-light leading-snug"><span className="mt-0.5 w-5 h-5 rounded-full liquid-glass flex items-center justify-center shrink-0"><IconCheck size={12} strokeWidth={3} /></span><span>{f}</span></li>); })}</ul>
+        <a href="#contact" className={'mt-8 rounded-full py-3 text-sm font-medium text-center flex items-center justify-center gap-2 ' + (featured ? 'bg-white text-black' : 'liquid-glass text-white')}>{plan.cta} {featured ? <IconArrowUpRight size={16} /> : null}</a>
+      </div>);
+    }
+
+    function Pricing() {
+      var plans = [
+        { name: 'Starter', desc: 'For local businesses, portfolios & freshly-launched ideas.', price: '\u20B914,999', priceSuffix: 'starting', timeline: '7\u201310 Days', badge: null, features: ['Up to 4\u20135 pages (Home, About, Services, Contact)', 'Premium customized template design', '100% mobile & tablet responsive', 'Basic on-page SEO (5 keywords)', 'Contact form + Google Maps + social links', 'Floating WhatsApp chat widget', '2 rounds of revisions', '1 professional email setup (info@yourbrand.com)', '1 month free bug-fix support'], cta: 'Choose Starter' },
+        { name: 'Growth', featured: true, badge: 'Most Popular', badgeDot: true, desc: 'For SMEs, coaches, consultants & small online stores.', price: '\u20B939,999', priceSuffix: 'starting', timeline: '15\u201320 Days', features: ['Everything in Starter, plus:', 'Up to 8\u201310 pages or small store (up to 25 products)', 'Fully custom UI/UX (no template feel)', 'CMS backend (WordPress / Shopify) \u2014 edit it yourself', 'Blog setup with categories', 'Advanced SEO (10 keywords + schema + speed)', 'Payment gateway (Razorpay / PhonePe / Cashfree)', 'Newsletter & lead-capture forms', '4 rounds of revisions', '3 months priority support + 1hr Zoom training'], cta: 'Choose Growth' },
+        { name: 'Premium', desc: 'For funded startups, enterprises & complex platforms.', price: '\u20B979,999+', priceSuffix: 'starting', timeline: '30\u201345 Days', features: ['Everything in Growth, plus:', 'Unlimited pages / custom functionality', '100% custom UI/UX from scratch (Figma \u2192 Code)', 'Custom stack: Next.js / MERN / Headless Shopify', 'Advanced animations & micro-interactions', 'CRM / ERP / booking system integrations', 'Multi-lingual & multi-currency support', 'Advanced security + daily backups', 'Unlimited design revisions', '6 months priority support + dedicated account manager'], cta: 'Choose Premium' }
+      ];
+      var addons = [['Logo Design', '\u20B93,000\u2013\u20B95,000'], ['Extra Pages', '\u20B91,500 / page'], ['Content Writing', '\u20B91,000 / page'], ['Monthly SEO / Social', '\u20B915,000 / mo'], ['Annual Maintenance (AMC)', '\u20B910,000\u2013\u20B925,000 / yr']];
+      var terms = [['50% advance to start', ''], ['25% after first design approval', ''], ['25% before final handover & launch', ''], ['All prices exclusive of 18% GST', '']];
+      return (<section id="pricing" className="relative bg-black py-24 px-6 md:px-16 lg:px-20"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-white/[0.02] blur-3xl rounded-full pointer-events-none pulse-glow" /><div className="relative"><div className="text-center mb-16"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">Pricing</span><BlurText as="h2" text="Honest pricing. Premium output." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" /><p className="mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto">Tailored for the Indian market \u2014 fair for SMEs, serious for brands that mean business. GST extra.</p></div><div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">{plans.map(function (p, i) { return (<Reveal key={i} delay={i * 0.08}><PricingCard plan={p} featured={p.featured} /></Reveal>); })}</div><div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto mt-12"><Reveal delay={0.1}><div className="liquid-glass rounded-[1.25rem] p-6"><h4 className="font-heading italic text-white text-2xl mb-4">Add-ons</h4>{addons.map(function (row, i) { return (<div key={i} className="flex items-center justify-between text-sm text-white/85 font-body py-2 border-b border-white/5 last:border-0"><span>{row[0]}</span><span className="text-white/70">{row[1]}</span></div>); })}</div></Reveal><Reveal delay={0.2}><div className="liquid-glass rounded-[1.25rem] p-6"><h4 className="font-heading italic text-white text-2xl mb-4">Payment Terms</h4>{terms.map(function (row, i) { return (<div key={i} className="flex items-center justify-between text-sm text-white/85 font-body py-2 border-b border-white/5 last:border-0"><span>{row[0]}</span><span className="text-white/70">{row[1]}</span></div>); })}</div></Reveal></div></div></section>);
+    }
+
+    function Process() {
+      var steps = [{ n: '01', t: 'Discover', d: 'A free 30-min call. We listen, you talk.' }, { n: '02', t: 'Design', d: 'Figma mockups within 72 hours.' }, { n: '03', t: 'Develop', d: 'Clean, fast, scalable code.' }, { n: '04', t: 'Deploy', d: 'Launch, train you, then support.' }];
+      return (<section id="process" className="relative bg-black min-h-screen overflow-hidden"><div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" /><div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[2px] bg-white/10 blur-md" /><div className="relative z-10 px-8 md:px-16 lg:px-20 py-24 text-center"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white inline-block pulse-glow">How It Works</span><div className="mt-6"><BlurText as="h2" text="You dream it. We ship it." className="font-heading italic text-white text-6xl md:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-3px]" /></div><p className="mt-6 text-white/80 text-base md:text-lg font-body font-light max-w-xl mx-auto">Share your vision. We handle the rest \u2014 strategy, design, code, launch. In days, not quarters.</p><div className="mt-10"><a href="#pricing" data-magnetic="0.18" className="liquid-glass-strong rounded-full px-6 py-3 text-sm font-medium text-white inline-flex items-center gap-2">Get Started <IconArrowUpRight size={18} /></a></div><div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">{steps.map(function (s, i) { return (<Reveal key={i} delay={i * 0.1}><div data-spotlight className="liquid-glass rounded-[1.25rem] p-5 text-left"><div className="font-heading italic text-white/50 text-sm">{s.n}</div><div className="font-heading italic text-white text-2xl mt-2 tracking-[-1px]">{s.t}</div><p className="text-xs text-white/70 font-body font-light mt-2 leading-snug">{s.d}</p></div></Reveal>); })}</div></div></section>);
+    }
+
+    function Testimonials() {
+      var items = [
+        { quote: "LinkLabs shipped our SaaS dashboard in 11 days. The motion design feels like a product three times our size. We get compliments on the site every week.", name: "Rohan M.", role: "Founder, Zentr", initial: "R" },
+        { quote: "We had a Shopify store that looked like every other store. Avlune gave it the kind of polish you'd expect from a ₹5L agency — at a price an SME can actually afford.", name: "Priya S.", role: "Owner, Avlune", initial: "P" },
+        { quote: "What I appreciated most was the speed of communication. Slack replies in minutes, Figma mockups the same day, and zero hand-holding needed at launch.", name: "Karthik R.", role: "Co-founder, Roamie", initial: "K" }
+      ];
+      return (
+        <section id="testimonials" className="relative bg-black py-24 px-6 md:px-16 lg:px-20 overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-white/[0.02] blur-3xl rounded-full pointer-events-none" />
+          <div className="relative max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">Kind Words</span>
+              <BlurText as="h2" text="What our clients say." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {items.map(function (t, i) { return (
+                <Reveal key={i} delay={i * 0.08}>
+                  <div data-spotlight data-contain className="liquid-glass rounded-[1.25rem] p-7 flex flex-col h-full min-h-[280px]">
+                    <div className="text-white/40 text-3xl font-heading italic leading-none mb-4">"</div>
+                    <p className="text-white/90 text-sm md:text-[15px] font-body font-light leading-relaxed flex-1">{t.quote}</p>
+                    <div className="mt-6 flex items-center gap-3 pt-5 border-t border-white/5">
+                      <div className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center shrink-0">
+                        <span className="font-heading italic text-white text-base">{t.initial}</span>
+                      </div>
+                      <div>
+                        <div className="text-sm text-white font-medium font-body">{t.name}</div>
+                        <div className="text-xs text-white/50 font-body">{t.role}</div>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ); })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function FAQ() {
+      var openIdxState = useState(null);
+      var openIdx = openIdxState[0]; var setOpenIdx = openIdxState[1];
+      var items = [
+        { q: "How long does a typical project take?", a: "Most projects launch in 7–20 days depending on the plan. Starter sites go live in about a week; Growth sites in 2–3 weeks; Custom builds follow a shared timeline we agree upfront." },
+        { q: "Do you work with clients outside India?", a: "Yes. We work with founders and SMEs globally. All communication happens over Zoom, Slack, and email — timezone-friendly for clients in the US, UK, EU, Middle East, and APAC." },
+        { q: "What's included in the price?", a: "Every plan includes strategy, custom design, development, content setup, basic SEO, responsive testing, and launch. Growth and Custom plans add CMS, e-commerce, blog, advanced SEO, and priority support. GST is extra as per Indian tax law." },
+        { q: "Will I be able to edit the site myself?", a: "Absolutely. Growth and Custom plans include a CMS (WordPress or Shopify) and a 1-hour Zoom training so you can update content, products, and blog posts on your own — no code required." },
+        { q: "What if I don't like the design?", a: "Each plan includes a defined number of revision rounds. We work closely with you at every stage to make sure the result fits your brand. If something isn't right, we iterate until it is." },
+        { q: "Do you offer ongoing support?", a: "Yes. Every plan includes post-launch support (1–3 months depending on plan). We also offer monthly care retainers for hosting, updates, content edits, and growth work." }
+      ];
+      function toggle(i) { setOpenIdx(openIdx === i ? null : i); }
+      return (
+        <section id="faq" className="relative bg-black py-24 px-6 md:px-16 lg:px-20">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-14">
+              <span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">FAQ</span>
+              <BlurText as="h2" text="Questions, answered." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[4.5rem] tracking-[-2px] leading-[0.95]" />
+            </div>
+            <div className="flex flex-col gap-3">
+              {items.map(function (it, i) {
+                var isOpen = openIdx === i;
+                return (
+                  <div key={i} data-contain className="liquid-glass rounded-[1.25rem] overflow-hidden">
+                    <button
+                      onClick={function () { toggle(i); }}
+                      aria-expanded={isOpen}
+                      className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 group"
+                    >
+                      <span className="text-white text-base md:text-lg font-body font-medium">{it.q}</span>
+                      <span className="liquid-glass rounded-full w-8 h-8 flex items-center justify-center text-white shrink-0 transition-transform duration-300" style={{ transform: 'rotate(' + (isOpen ? 45 : 0) + 'deg)' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 5v14" /><path d="M5 12h14" /></svg>
+                      </span>
+                    </button>
+                    <div className="overflow-hidden transition-all duration-400 ease-out" style={{ maxHeight: isOpen ? '320px' : '0px', opacity: isOpen ? 1 : 0 }}>
+                      <p className="px-6 pb-5 text-white/75 text-sm md:text-[15px] font-body font-light leading-relaxed">{it.a}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="text-center mt-10 text-white/60 text-sm font-body">
+              Still have questions? <a href="#contact" className="text-white underline underline-offset-4 hover:opacity-80 transition">Get in touch</a>.
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Newsletter() {
+      var emailState = useState('');
+      var email = emailState[0]; var setEmail = emailState[1];
+      var statusState = useState('idle');
+      var status = statusState[0]; var setStatus = statusState[1];
+      function submit(e) {
+        e.preventDefault();
+        if (!email || email.indexOf('@') < 1) { setStatus('err'); return; }
+        setStatus('loading');
+        setTimeout(function () { setStatus('done'); setEmail(''); }, 700);
+      }
+      return (
+        <form onSubmit={submit} className="w-full max-w-md">
+          <div className="flex items-center gap-2 liquid-glass rounded-full p-1.5 pl-5">
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={function (e) { setEmail(e.target.value); }}
+              placeholder="your@email.com"
+              aria-label="Email address"
+              className="flex-1 bg-transparent outline-none text-white text-sm font-body placeholder:text-white/40 min-w-0"
+            />
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              className="bg-white text-black text-sm font-medium font-body rounded-full px-4 py-2 hover:scale-[1.03] active:scale-95 transition-transform duration-200 disabled:opacity-60"
+            >
+              {status === 'loading' ? 'Joining…' : status === 'done' ? 'Joined ✓' : 'Subscribe'}
+            </button>
+          </div>
+          {status === 'err' ? <div className="text-xs text-red-400 mt-2 px-2 font-body">Please enter a valid email.</div> : null}
+          {status === 'done' ? <div className="text-xs text-emerald-400 mt-2 px-2 font-body">Thanks! We'll be in touch.</div> : null}
+        </form>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer id="contact" className="relative bg-black border-t border-white/10 pt-16 pb-8 px-8 md:px-16 lg:px-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pb-12 border-b border-white/10">
+              <div>
+                <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-4">Stay in the loop</div>
+                <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-[1.05] mb-5">Notes from the studio.<br/><span className="text-white/50">No spam. Ever.</span></h3>
+                <Newsletter />
+              </div>
+              <div className="md:text-right">
+                <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-4">Start a project</div>
+                <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-[1.05] mb-5">Have a vision?<br/><span className="text-white/50">Let's build it.</span></h3>
+                <a href="mailto:hello@linklabs.studio" data-magnetic="0.18" className="inline-flex items-center gap-2 bg-white text-black rounded-full px-5 py-2.5 text-sm font-medium font-body">hello@linklabs.studio <IconArrowUpRight size={16} /></a>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8">
+              <div className="flex items-center gap-3">
+                <Logo size={30} withWordmark={true} animate={false} />
+                <div className="text-xs text-white/50 font-body ml-1">A web studio from India. Built by four.</div>
+              </div>
+              <nav className="flex items-center gap-6 text-sm text-white/70 font-body flex-wrap justify-center">
+                <a href="#home" className="hover:text-white transition">Home</a>
+                <a href="#services" className="hover:text-white transition">Services</a>
+                <a href="#work" className="hover:text-white transition">Work</a>
+                <a href="#pricing" className="hover:text-white transition">Pricing</a>
+                <a href="#faq" className="hover:text-white transition">FAQ</a>
+              </nav>
+              <div className="flex gap-2">
+                <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white hover:scale-110 transition"><IconInstagram /></a>
+                <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X / Twitter" className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white hover:scale-110 transition"><IconTwitter /></a>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white hover:scale-110 transition"><IconLinkedIn /></a>
+              </div>
+            </div>
+            <div className="mt-8 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-white/40 font-body">
+              <div>&copy; 2025 LinkLabs Studio. Crafted in India.</div>
+              <div className="flex items-center gap-4">
+                <a href="#" className="hover:text-white/70 transition">Privacy</a>
+                <a href="#" className="hover:text-white/70 transition">Terms</a>
+                <span>Made with care · v1.0</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
+    }
+
+    var ErrorBoundary = (function (R) {
+      var C = R.Component;
+      function EB(p) { C.call(this, p); this.state = { hasError: false, err: null }; }
+      EB.prototype = Object.create(C.prototype);
+      EB.prototype.constructor = EB;
+      EB.prototype.componentDidCatch = function (e) { this.setState({ hasError: true, err: e }); };
+      EB.prototype.render = function () {
+        if (this.state.hasError) return R.createElement('div', { style: { padding: 40, color: '#fff', fontFamily: 'monospace' } }, R.createElement('h1', { style: { fontFamily: 'serif', fontStyle: 'italic', fontSize: 32 } }, 'Something went wrong.'), R.createElement('pre', { style: { whiteSpace: 'pre-wrap', color: '#f88', marginTop: 16 } }, String(this.state.err && (this.state.err.stack || this.state.err))));
+        return this.props.children;
+      };
+      return EB;
+    })(React);
+
+    function App() {
+      useEffect(function () {
+        var t1 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 30);
+        var t2 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 250);
+        return function () { clearTimeout(t1); clearTimeout(t2); };
+      }, []);
+      return (<React.Fragment><Navbar /><main id="main"><Hero /><Capabilities /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /></main><Footer /></React.Fragment>);
+    }
+
+    window.addEventListener('error', function (e) {
+      var root = document.getElementById('root');
+      if (!root) return;
+      root.innerHTML = '<div style="padding:40px;color:#fff;font-family:monospace;"><h1 style="font-family:serif;font-style:italic;font-size:32px;">Startup error</h1><pre style="white-space:pre-wrap;color:#f88;margin-top:16px;">' + String((e && (e.error && (e.error.stack || e.error)) || e.message || e)).replace(/</g, '&lt;') + '</pre></div>';
+    });
+
+    function mount() {
+      try { ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(ErrorBoundary, null, React.createElement(App))); }
+      catch (err) { document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:monospace;"><h1 style="font-family:serif;font-style:italic;font-size:32px;">Render error</h1><pre style="white-space:pre-wrap;color:#f88;margin-top:16px;">' + String((err && (err.stack || err)) || '').replace(/</g, '&lt;') + '</pre></div>'; }
+    }
+
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', mount); } else { mount(); }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "LinkLabs",
+    "alternateName": "LinkLabs Studio",
+    "url": "https://linklabs.studio/",
+    "logo": "https://linklabs.studio/logo.png",
+    "description": "Premium web design & development studio from India. Cinematic websites, hand-crafted in days.",
+    "foundingDate": "2024",
+    "founders": [
+      { "@type": "Person", "name": "Ashis" },
+      { "@type": "Person", "name": "Aryan" }
+    ],
+    "address": { "@type": "PostalAddress", "addressCountry": "IN" },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "email": "hello@linklabs.studio",
+      "availableLanguage": ["English", "Hindi"]
+    },
+    "sameAs": [
+      "https://instagram.com/linklabs",
+      "https://x.com/linklabs",
+      "https://linkedin.com/company/linklabs"
+    ],
+    "knowsAbout": ["Web Design", "Web Development", "UI/UX Design", "Branding", "E-commerce", "SaaS"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "LinkLabs",
+    "url": "https://linklabs.studio/"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How long does a typical project take?", "acceptedAnswer": { "@type": "Answer", "text": "Most projects launch in 7–20 days depending on the plan. Starter sites go live in about a week; Growth sites in 2–3 weeks; Custom builds follow a shared timeline we agree upfront." } },
+      { "@type": "Question", "name": "Do you work with clients outside India?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We work with founders and SMEs globally. All communication happens over Zoom, Slack, and email — timezone-friendly for clients in the US, UK, EU, Middle East, and APAC." } },
+      { "@type": "Question", "name": "What's included in the price?", "acceptedAnswer": { "@type": "Answer", "text": "Every plan includes strategy, custom design, development, content setup, basic SEO, responsive testing, and launch. Growth and Custom plans add CMS, e-commerce, blog, advanced SEO, and priority support. GST is extra as per Indian tax law." } },
+      { "@type": "Question", "name": "Will I be able to edit the site myself?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Growth and Custom plans include a CMS (WordPress or Shopify) and a 1-hour Zoom training so you can update content, products, and blog posts on your own — no code required." } },
+      { "@type": "Question", "name": "What if I don't like the design?", "acceptedAnswer": { "@type": "Answer", "text": "Each plan includes a defined number of revision rounds. We work closely with you at every stage to make sure the result fits your brand. If something isn't right, we iterate until it is." } },
+      { "@type": "Question", "name": "Do you offer ongoing support?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every plan includes post-launch support (1–3 months depending on plan). We also offer monthly care retainers for hosting, updates, content edits, and growth work." } }
+    ]
+  }
+  </script>
+</body>
+</html>
