@@ -349,6 +349,170 @@
 
     a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
+    /* === Premium form styles === */
+    .form-field {
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+    .form-field .form-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.35);
+      pointer-events: none;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .form-field.textarea .form-icon { top: 22px; transform: none; }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      color: #fff;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      padding: 16px 18px 16px 48px;
+      outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-field.no-icon input,
+    .form-field.no-icon select { padding-left: 18px; }
+    .form-field textarea { padding-left: 48px; min-height: 130px; resize: vertical; line-height: 1.55; }
+    .form-field select {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 18px 18px;
+      padding-right: 44px;
+    }
+    .form-field select option { background: #0a0a0a; color: #fff; }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .form-field input:hover,
+    .form-field select:hover,
+    .form-field textarea:hover { border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.055); }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
+    }
+    .form-field:focus-within .form-icon { color: rgba(255,255,255,0.85); transform: translateY(-50%) scale(1.08); }
+    .form-field.textarea:focus-within .form-icon { transform: scale(1.08); }
+    .form-field input[aria-invalid="true"],
+    .form-field select[aria-invalid="true"],
+    .form-field textarea[aria-invalid="true"] {
+      border-color: rgba(248,113,113,0.55);
+      box-shadow: 0 0 0 4px rgba(248,113,113,0.08);
+    }
+    @keyframes fieldShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+    .form-field.shake input,
+    .form-field.shake select,
+    .form-field.shake textarea { animation: fieldShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 8px;
+      font-family: 'Barlow', system-ui, sans-serif;
+    }
+
+    .submit-btn {
+      position: relative;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #fff;
+      color: #000;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      padding: 16px 24px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .submit-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 12px 30px -10px rgba(255,255,255,0.35); }
+    .submit-btn:active:not(:disabled) { transform: translateY(0) scale(0.99); }
+    .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+    .submit-btn .spinner {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.15);
+      border-top-color: #000;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .submit-btn.success { background: #34d399; color: #052e1a; }
+
+    .form-success {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 36px 20px; text-align: center;
+      animation: blurReveal 0.5s cubic-bezier(0.19, 1, 0.22, 1) both;
+    }
+    .form-success .check-ring {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(52,211,153,0.12);
+      border: 1.5px solid rgba(52,211,153,0.5);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px;
+      animation: checkPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .form-success .check-ring svg { width: 28px; height: 28px; color: #34d399; }
+    .form-success .check-ring svg path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: drawCheck 0.45s 0.2s ease forwards; }
+    @keyframes checkPop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+    /* Honeypot */
+    .form-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    /* Service pills */
+    .service-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      font-size: 12px; font-weight: 400;
+      color: rgba(255,255,255,0.85);
+      font-family: 'Barlow', system-ui, sans-serif;
+      letter-spacing: 0.02em;
+      transition: all 0.25s ease;
+    }
+    .service-pill:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.22); transform: translateY(-1px); }
+    .service-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px rgba(52,211,153,0.7); }
+
+    @media (max-width: 640px) {
+      .form-field input, .form-field select, .form-field textarea { font-size: 16px; padding: 14px 16px 14px 44px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .form-success .check-ring, .form-success .check-ring svg path { animation: none; }
+      .form-success .check-ring svg path { stroke-dashoffset: 0; }
+      .submit-btn .spinner { animation: none; }
+      .form-field.shake input, .form-field.shake select, .form-field.shake textarea { animation: none; }
+    }
+
     :focus-visible {
       outline: 2px solid rgba(255,255,255,0.6);
       outline-offset: 3px;
@@ -1116,34 +1280,212 @@
       var email = emailState[0]; var setEmail = emailState[1];
       var statusState = useState('idle');
       var status = statusState[0]; var setStatus = statusState[1];
+      var shakeState = useState(false);
+      var shake = shakeState[0]; var setShake = shakeState[1];
       function submit(e) {
         e.preventDefault();
-        if (!email || email.indexOf('@') < 1) { setStatus('err'); return; }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          setShake(true); setTimeout(function () { setShake(false); }, 500);
+          setStatus('err'); return;
+        }
         setStatus('loading');
-        setTimeout(function () { setStatus('done'); setEmail(''); }, 700);
+        try {
+          var fd = new FormData();
+          fd.append('email', email);
+          fd.append('_subject', 'New newsletter subscriber — LinkLabs');
+          fd.append('_template', 'table');
+          fd.append('_captcha', 'true');
+          fd.append('source', 'Newsletter — Stay in the loop');
+          fetch('https://formsubmit.co/ajax/linklabs.studio@gmail.com', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(function () { setStatus('done'); setEmail(''); })
+            .catch(function () { setStatus('err'); });
+        } catch (_) { setStatus('err'); }
       }
       return (
-        <form onSubmit={submit} className="w-full max-w-md">
-          <div className="flex items-center gap-2 liquid-glass rounded-full p-1.5 pl-5">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={function (e) { setEmail(e.target.value); }}
-              placeholder="your@email.com"
-              aria-label="Email address"
-              className="flex-1 bg-transparent outline-none text-white text-sm font-body placeholder:text-white/40 min-w-0"
-            />
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className="bg-white text-black text-sm font-medium font-body rounded-full px-4 py-2 hover:scale-[1.03] active:scale-95 transition-transform duration-200 disabled:opacity-60"
-            >
-              {status === 'loading' ? 'Joining…' : status === 'done' ? 'Joined ✓' : 'Subscribe'}
+        <form onSubmit={submit} noValidate className="w-full max-w-md">
+          {status === 'done' ? (
+            <div className="form-success">
+              <div className="check-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg></div>
+              <div className="text-white text-lg font-heading italic tracking-tight">You're on the list.</div>
+              <div className="text-white/55 text-sm font-body mt-1.5">We'll send studio notes once a month. No spam, ever.</div>
+              <button type="button" onClick={function () { setStatus('idle'); }} className="mt-5 text-white/60 hover:text-white text-xs font-body underline underline-offset-4 transition">Subscribe another email</button>
+            </div>
+          ) : (
+            <>
+              <div className={'flex items-center gap-2 liquid-glass rounded-full p-1.5 pl-5 transition-all ' + (shake ? 'shake' : '')}>
+                <svg className="w-4 h-4 text-white/40 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={function (e) { setEmail(e.target.value); if (status === 'err') setStatus('idle'); }}
+                  placeholder="your@email.com"
+                  aria-label="Email address"
+                  aria-invalid={status === 'err'}
+                  className="flex-1 bg-transparent outline-none text-white text-sm font-body placeholder:text-white/40 min-w-0"
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="bg-white text-black text-sm font-medium font-body rounded-full px-5 py-2.5 hover:scale-[1.03] active:scale-95 transition-transform duration-200 disabled:opacity-60 inline-flex items-center gap-2"
+                >
+                  {status === 'loading' ? (<><span className="w-3 h-3 rounded-full border-2 border-black/20 border-t-black animate-spin" />Joining</>) : 'Subscribe'}
+                </button>
+              </div>
+              {status === 'err' ? <div className="text-xs text-red-400 mt-2.5 px-2 font-body">Please enter a valid email address.</div> : null}
+              <div className="text-[11px] text-white/35 font-body mt-3 px-2 tracking-wide">Monthly studio notes · Unsubscribe anytime</div>
+            </>
+          )}
+        </form>
+      );
+    }
+
+    function ContactForm() {
+      var formRef = useRef(null);
+      var dataState = useState({ name: '', email: '', service: '', budget: '', message: '' });
+      var data = dataState[0]; var setData = dataState[1];
+      var statusState = useState('idle');
+      var status = statusState[0]; var setStatus = statusState[1];
+      var shakeState = useState({});
+      var shake = shakeState[0]; var setShake = shakeState[1];
+
+      function set(field) {
+        return function (e) {
+          var val = e.target.value;
+          setData(function (d) { var n = Object.assign({}, d); n[field] = val; return n; });
+          if (shake[field]) setShake(function (s) { var n = Object.assign({}, s); n[field] = false; return n; });
+          if (status === 'err') setStatus('idle');
+        };
+      }
+
+      function validate() {
+        var errs = {};
+        if (!data.name.trim()) errs.name = true;
+        if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errs.email = true;
+        if (!data.service) errs.service = true;
+        if (!data.budget) errs.budget = true;
+        if (!data.message.trim() || data.message.trim().length < 10) errs.message = true;
+        return errs;
+      }
+
+      function submit(e) {
+        e.preventDefault();
+        var errs = validate();
+        if (Object.keys(errs).length) {
+          setShake(errs);
+          setStatus('err');
+          setTimeout(function () { setShake({}); }, 600);
+          return;
+        }
+        setStatus('loading');
+        try {
+          var fd = new FormData();
+          fd.append('Name', data.name);
+          fd.append('Email', data.email);
+          fd.append('Service', data.service);
+          fd.append('Budget', data.budget);
+          fd.append('Message', data.message);
+          fd.append('_subject', 'New project inquiry from ' + data.name + ' — ' + data.service);
+          fd.append('_template', 'table');
+          fd.append('_captcha', 'true');
+          fd.append('source', 'Contact form — Start a project');
+          fetch('https://formsubmit.co/ajax/linklabs.studio@gmail.com', { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } })
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(function () { setStatus('success'); })
+            .catch(function () { setStatus('err'); });
+        } catch (_) { setStatus('err'); }
+      }
+
+      function reset() {
+        setData({ name: '', email: '', service: '', budget: '', message: '' });
+        setStatus('idle');
+      }
+
+      var services = ['Custom Design', 'Fast Development', 'Smart Strategy', 'Full Package (Design + Dev + Strategy)', 'Not sure yet'];
+      var budgets = ['Under ₹50,000', '₹50,000 – ₹2,00,000', '₹2,00,000 – ₹5,00,000', '₹5,00,000+'];
+
+      if (status === 'success') {
+        return (
+          <div className="form-success">
+            <div className="check-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg></div>
+            <div className="text-white text-2xl md:text-3xl font-heading italic tracking-tight">Got it. We'll be in touch.</div>
+            <div className="text-white/60 text-sm md:text-[15px] font-body mt-2 max-w-sm leading-relaxed">Your inquiry landed directly in our inbox. Expect a reply within <span className="text-white">24 hours</span> — usually faster.</div>
+            <button type="button" onClick={reset} className="mt-7 liquid-glass rounded-full px-5 py-2.5 text-white/85 hover:text-white text-sm font-body transition inline-flex items-center gap-2">
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+              Send another inquiry
             </button>
           </div>
-          {status === 'err' ? <div className="text-xs text-red-400 mt-2 px-2 font-body">Please enter a valid email.</div> : null}
-          {status === 'done' ? <div className="text-xs text-emerald-400 mt-2 px-2 font-body">Thanks! We'll be in touch.</div> : null}
+        );
+      }
+
+      var IconUser = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+      var IconMail = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg>;
+      var IconSparkle = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg>;
+      var IconWallet = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 12V8a2 2 0 0 0-2-2H5a1 1 0 0 1 0-2h13"/><path d="M3 6v12a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-3"/><circle cx="17" cy="13" r="1.2" fill="currentColor"/></svg>;
+      var IconMsg = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4l-5 1 1-4.5A8.4 8.4 0 1 1 21 11.5z"/></svg>;
+      var IconArrow = <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>;
+
+      return (
+        <form onSubmit={submit} ref={formRef} noValidate className="w-full space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="form-label" htmlFor="cf-name">Your name</label>
+              <div className={'form-field ' + (shake.name ? 'shake' : '')}>
+                <span className="form-icon">{IconUser}</span>
+                <input id="cf-name" name="name" type="text" value={data.name} onChange={set('name')} placeholder="Ashis Kumar" autoComplete="name" aria-invalid={!!shake.name} required />
+              </div>
+            </div>
+            <div>
+              <label className="form-label" htmlFor="cf-email">Email</label>
+              <div className={'form-field ' + (shake.email ? 'shake' : '')}>
+                <span className="form-icon">{IconMail}</span>
+                <input id="cf-email" name="email" type="email" value={data.email} onChange={set('email')} placeholder="you@company.com" autoComplete="email" aria-invalid={!!shake.email} required />
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="form-label" htmlFor="cf-service">What do you need</label>
+              <div className={'form-field ' + (shake.service ? 'shake' : '')}>
+                <span className="form-icon">{IconSparkle}</span>
+                <select id="cf-service" name="service" value={data.service} onChange={set('service')} aria-invalid={!!shake.service} required>
+                  <option value="" disabled>Choose a service…</option>
+                  {services.map(function (s) { return <option key={s} value={s}>{s}</option>; })}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="form-label" htmlFor="cf-budget">Budget</label>
+              <div className={'form-field ' + (shake.budget ? 'shake' : '')}>
+                <span className="form-icon">{IconWallet}</span>
+                <select id="cf-budget" name="budget" value={data.budget} onChange={set('budget')} aria-invalid={!!shake.budget} required>
+                  <option value="" disabled>Estimated budget…</option>
+                  {budgets.map(function (b) { return <option key={b} value={b}>{b}</option>; })}
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label className="form-label" htmlFor="cf-message">Tell us about your project</label>
+            <div className={'form-field textarea ' + (shake.message ? 'shake' : '')}>
+              <span className="form-icon">{IconMsg}</span>
+              <textarea id="cf-message" name="message" value={data.message} onChange={set('message')} placeholder="A few lines about your goals, timeline, or anything you'd like us to know…" aria-invalid={!!shake.message} required />
+            </div>
+          </div>
+          <div className="form-honeypot" aria-hidden="true">
+            <label>Don't fill this out<input type="text" name="_honey" tabIndex={-1} autoComplete="off" /></label>
+          </div>
+          <button type="submit" disabled={status === 'loading'} className="submit-btn group">
+            {status === 'loading' ? (<><span className="spinner" />Sending…</>) : status === 'err' ? (<>Try again</>) : (<>Send inquiry{IconArrow}</>)}
+          </button>
+          <div className="flex items-center justify-between flex-wrap gap-3 pt-1">
+            <div className="text-[11px] text-white/40 font-body tracking-wide inline-flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+              Avg. reply within 4 hours
+            </div>
+            <a href="mailto:linklabs.studio@gmail.com?subject=Project%20inquiry%20—%20LinkLabs" className="text-[11px] text-white/45 hover:text-white font-body tracking-wide underline underline-offset-4 transition">Or email us directly → linklabs.studio@gmail.com</a>
+          </div>
         </form>
       );
     }
@@ -1158,10 +1500,15 @@
                 <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-[1.05] mb-5">Notes from the studio.<br/><span className="text-white/50">No spam. Ever.</span></h3>
                 <Newsletter />
               </div>
-              <div className="md:text-right">
+              <div>
                 <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-4">Start a project</div>
                 <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-[1.05] mb-5">Have a vision?<br/><span className="text-white/50">Let's build it.</span></h3>
-                <a href="mailto:hello@linklabs.studio" data-magnetic="0.18" className="inline-flex items-center gap-2 bg-white text-black rounded-full px-5 py-2.5 text-sm font-medium font-body">hello@linklabs.studio <IconArrowUpRight size={16} /></a>
+                <div className="flex flex-wrap gap-2 mb-7">
+                  <span className="service-pill"><span className="dot" />Custom Design</span>
+                  <span className="service-pill"><span className="dot" />Fast Development</span>
+                  <span className="service-pill"><span className="dot" />Smart Strategy</span>
+                </div>
+                <ContactForm />
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8">
@@ -1249,7 +1596,7 @@
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "Customer Support",
-      "email": "hello@linklabs.studio",
+      "email": "linklabs.studio@gmail.com",
       "availableLanguage": ["English", "Hindi"]
     },
     "sameAs": [
