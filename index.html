@@ -38,9 +38,17 @@
   <meta name="apple-mobile-web-app-title" content="LinkLabs" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
-
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23fff'%3E%3Cline x1='22' y1='18' x2='22' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Cline x1='22' y1='82' x2='78' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='18' r='10'/%3E%3Ccircle cx='22' cy='82' r='10'/%3E%3Ccircle cx='78' cy='82' r='10'/%3E%3Ccircle cx='22' cy='50' r='3.5' fill='%23fff' opacity='0.55'/%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23fff'%3E%3Cline x1='22' y1='18' x2='22' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Cline x1='22' y1='82' x2='78' y2='82' stroke='%23fff' stroke-width='8' stroke-linecap='round'/%3E%3Ccircle cx='22' cy='18' r='10'/%3E%3Ccircle cx='22' cy='82' r='10'/%3E%3Ccircle cx='78' cy='82' r='10'/%3E%3Ccircle cx='22' cy='50' r='3.5' fill='%23fff' opacity='0.55'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="LinkLabs" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1250,6 +1258,99 @@
   </script>
 
   <script>
+    /* === Service worker registration === */
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').catch(function () {});
+      });
+    }
+  </script>
+
+  <script>
+    /* === Confetti (used on contact-form success) === */
+    window.fireConfetti = function (opts) {
+      opts = opts || {};
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (window.__confettiRunning) return;
+      window.__confettiRunning = true;
+      var canvas = document.createElement('canvas');
+      canvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+      var ctx = canvas.getContext('2d');
+      var dpr = window.devicePixelRatio || 1;
+      canvas.width *= dpr; canvas.height *= dpr;
+      ctx.scale(dpr, dpr);
+      var W = window.innerWidth, H = window.innerHeight;
+      var colors = ['#ffffff', '#a7f3d0', '#fde68a', '#fca5a5', '#c4b5fd', '#7dd3fc', '#fbbf24'];
+      var shapes = ['square', 'circle', 'tri', 'line'];
+      var count = opts.count || 110;
+      var parts = [];
+      var startX = W / 2, startY = H * 0.35;
+      for (var i = 0; i < count; i++) {
+        var angle = Math.random() * Math.PI * 2;
+        var speed = 6 + Math.random() * 8;
+        var upBias = 0.55 + Math.random() * 0.35;
+        parts.push({
+          x: startX + (Math.random() - 0.5) * 80,
+          y: startY + (Math.random() - 0.5) * 40,
+          vx: Math.cos(angle) * speed * (0.4 + Math.random() * 0.6),
+          vy: -Math.abs(Math.sin(angle) * speed * upBias) - 3,
+          w: 6 + Math.random() * 8,
+          h: 3 + Math.random() * 6,
+          c: colors[Math.floor(Math.random() * colors.length)],
+          s: shapes[Math.floor(Math.random() * shapes.length)],
+          r: Math.random() * Math.PI * 2,
+          rs: (Math.random() - 0.5) * 0.3,
+          life: 0,
+          maxLife: 120 + Math.random() * 80
+        });
+      }
+      var start = performance.now();
+      function frame(now) {
+        var t = now - start;
+        ctx.clearRect(0, 0, W, H);
+        var alive = 0;
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i];
+          p.life++;
+          if (p.life > p.maxLife) continue;
+          alive++;
+          p.vy += 0.28;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.995;
+          p.r += p.rs;
+          var fade = 1 - (p.life / p.maxLife);
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, fade);
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.r);
+          ctx.fillStyle = p.c;
+          if (p.s === 'circle') {
+            ctx.beginPath(); ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2); ctx.fill();
+          } else if (p.s === 'tri') {
+            ctx.beginPath(); ctx.moveTo(0, -p.w / 2); ctx.lineTo(p.w / 2, p.w / 2); ctx.lineTo(-p.w / 2, p.w / 2); ctx.closePath(); ctx.fill();
+          } else if (p.s === 'line') {
+            ctx.fillRect(-p.w / 2, -0.8, p.w, 1.6);
+          } else {
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          }
+          ctx.restore();
+        }
+        if (alive > 0 && t < 5000) { requestAnimationFrame(frame); }
+        else { cleanup(); }
+      }
+      function cleanup() {
+        window.__confettiRunning = false;
+        if (canvas && canvas.parentNode) canvas.parentNode.removeChild(canvas);
+      }
+      requestAnimationFrame(frame);
+    };
+  </script>
+
+  <script>
     (function() {
       var progress = document.getElementById('scroll-progress');
       var navEl = null;
@@ -1745,17 +1846,17 @@
             <span className="liquid-glass rounded-full px-3.5 py-1 text-xs font-medium text-white">Trusted by founders, startups &amp; SMEs across India</span>
             <div className="marquee w-full max-w-5xl mt-2">
               <div className="marquee-track text-2xl md:text-3xl text-white tracking-tight font-heading italic">
-                <span className="inline-block">Zentr</span><span className="inline-block opacity-30">·</span>
-                <span className="inline-block">Avlune</span><span className="inline-block opacity-30">·</span>
-                <span className="inline-block">SenJr</span><span className="inline-block opacity-30">·</span>
-                <span className="inline-block">Roamie</span><span className="inline-block opacity-30">·</span>
+                <a href="https://zentr.onrender.com/" target="_blank" rel="noreferrer" className="inline-block hover:text-emerald-300 transition">Zentr</a><span className="inline-block opacity-30">·</span>
+                <a href="https://avlune-fashion-store.netlify.app/" target="_blank" rel="noreferrer" className="inline-block hover:text-white transition">Avlune</a><span className="inline-block opacity-30">·</span>
+                <a href="https://senjrai.vercel.app/" target="_blank" rel="noreferrer" className="inline-block hover:text-orange-300 transition">SenJr</a><span className="inline-block opacity-30">·</span>
+                <a href="https://roamie-three.vercel.app/" target="_blank" rel="noreferrer" className="inline-block hover:text-orange-300 transition">Roamie</a><span className="inline-block opacity-30">·</span>
                 <span className="inline-block">Lumen</span><span className="inline-block opacity-30">·</span>
                 <span className="inline-block">Halo</span><span className="inline-block opacity-30">·</span>
                 <span className="inline-block">Orbit</span><span className="inline-block opacity-30">·</span>
-                <span className="inline-block">Zentr</span><span className="inline-block opacity-30">·</span>
-                <span className="inline-block">Avlune</span><span className="inline-block opacity-30">·</span>
-                <span className="inline-block">SenJr</span><span className="inline-block opacity-30">·</span>
-                <span className="inline-block">Roamie</span><span className="inline-block opacity-30">·</span>
+                <a href="https://zentr.onrender.com/" target="_blank" rel="noreferrer" className="inline-block hover:text-emerald-300 transition">Zentr</a><span className="inline-block opacity-30">·</span>
+                <a href="https://avlune-fashion-store.netlify.app/" target="_blank" rel="noreferrer" className="inline-block hover:text-white transition">Avlune</a><span className="inline-block opacity-30">·</span>
+                <a href="https://senjrai.vercel.app/" target="_blank" rel="noreferrer" className="inline-block hover:text-orange-300 transition">SenJr</a><span className="inline-block opacity-30">·</span>
+                <a href="https://roamie-three.vercel.app/" target="_blank" rel="noreferrer" className="inline-block hover:text-orange-300 transition">Roamie</a><span className="inline-block opacity-30">·</span>
                 <span className="inline-block">Lumen</span><span className="inline-block opacity-30">·</span>
                 <span className="inline-block">Halo</span><span className="inline-block opacity-30">·</span>
                 <span className="inline-block">Orbit</span><span className="inline-block opacity-30">·</span>
@@ -2147,6 +2248,7 @@
       var copied = copiedState[0]; var setCopied = copiedState[1];
       var backendState = useState({ web3forms: 'pending', mailto: 'pending' });
       var backend = backendState[0]; var setBackend = backendState[1];
+      useEffect(function () { if (status === 'sent' && window.fireConfetti) { setTimeout(function () { try { window.fireConfetti(); } catch (e) {} }, 220); } }, [status]);
       var TO_EMAIL = 'linklabs.studio@gmail.com';
       // Replace the next constant with your Web3Forms access key (https://web3forms.com) to enable a true backend alongside mailto:.
       // Sign up free with linklabs.studio@gmail.com → paste the key here → every submission is also POSTed to Web3Forms in the background.
@@ -2605,9 +2707,9 @@
             <div className="mt-8 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-white/40 font-body">
               <div>&copy; 2025 LinkLabs Studio. Crafted in India.</div>
               <div className="flex items-center gap-4">
-                <a href="#" className="hover:text-white/70 transition">Privacy</a>
+                <a href="/privacy.html" className="hover:text-white/70 transition">Privacy</a>
                 <a href="#" className="hover:text-white/70 transition">Terms</a>
-                <span>Made with care · v1.1</span>
+                <span>Made with care · v1.2</span>
               </div>
             </div>
           </div>
@@ -2833,7 +2935,7 @@
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c.4 0 .8 0 1.2.1a3 3 0 0 0 4 4 3 3 0 0 0 3.7 3.7A9 9 0 0 1 21 12z"/><circle cx="9" cy="13" r="0.5" fill="currentColor"/><circle cx="14" cy="16" r="0.5" fill="currentColor"/><circle cx="15" cy="11" r="0.5" fill="currentColor"/></svg>
           </div>
           <div className="cookie-title">A quick note on cookies</div>
-          <div className="cookie-text">We use a couple of cookies to remember your preferences and (anonymously) see which sections you love. No tracking across sites.</div>
+          <div className="cookie-text">We use <em>one</em> cookie to remember this banner is dismissed. No analytics, no trackers, no ads. <a href="/privacy.html" target="_blank" rel="noreferrer" className="underline underline-offset-2 hover:text-white/80">Privacy policy</a></div>
           <div className="cookie-actions">
             <button type="button" onClick={function () { respond('accepted'); }} className="cookie-btn cookie-accept">Sounds good</button>
             <button type="button" onClick={function () { respond('declined'); }} className="cookie-btn cookie-decline">No thanks</button>
