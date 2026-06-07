@@ -1838,9 +1838,54 @@
       );
     }
 
-    function TeamCard(props) { return (<div data-spotlight className="liquid-glass rounded-[1.25rem] p-6 flex flex-col items-center text-center min-h-[280px]"><div className="liquid-glass rounded-full w-20 h-20 flex items-center justify-center"><span className="font-heading italic text-white text-4xl">{props.initial}</span></div><div className="mt-5 font-heading italic text-white text-2xl tracking-[-1px]">{props.name}</div><div className="mt-1 text-xs text-white/70 font-body uppercase tracking-[0.15em]">{props.role}</div><p className="mt-3 text-sm text-white/80 font-body font-light leading-snug">{props.tagline}</p></div>); }
+    function TeamCard(props) {
+      var photo = props.photo;
+      return (
+        <div data-spotlight className="team-card liquid-glass rounded-[1.25rem] p-6 flex flex-col items-center text-center min-h-[300px] group">
+          <div className="relative">
+            <div className="w-28 h-28 rounded-full p-[2px] liquid-glass-strong transition-transform duration-300 group-hover:scale-[1.04]">
+              <div className="w-full h-full rounded-full overflow-hidden bg-white/[0.04] flex items-center justify-center">
+                {photo ? (
+                  <img
+                    src={photo}
+                    alt={props.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover"
+                    style={props.photoPos || {}}
+                    onerror={"this.style.display='none'; var f=this.parentNode.querySelector('[data-fallback]'); if(f) f.style.display='flex';"}
+                  />
+                ) : null}
+                <span
+                  data-fallback
+                  className="font-heading italic text-white text-4xl"
+                  style={photo ? { display: 'none' } : { display: 'flex' }}
+                >{props.initial}</span>
+              </div>
+            </div>
+            <span
+              className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-400 ring-[3px] ring-black/80"
+              title="Verified team member"
+              aria-label="Verified"
+            />
+          </div>
+          <div className="mt-5 font-heading italic text-white text-2xl tracking-[-1px]">{props.name}</div>
+          <div className="mt-1.5 inline-flex items-center gap-1.5 liquid-glass rounded-full px-2.5 py-0.5">
+            <span className="w-1 h-1 rounded-full bg-white/70" />
+            <span className="text-[10px] text-white/85 font-body uppercase tracking-[0.18em]">{props.role}</span>
+          </div>
+          <p className="mt-4 text-sm text-white/80 font-body font-light leading-snug">{props.tagline}</p>
+        </div>
+      );
+    }
 
-    function Team() { var members = [{ name: 'Ashis Bhakta', role: 'Designer', initial: 'A', tagline: 'Turns blank canvases into brand worlds.' }, { name: 'Hitesh Agrawal', role: 'Developer & Strategist', initial: 'H', tagline: 'Writes code the way poets write verse.' }, { name: 'Monish Bhakta', role: 'Manager', initial: 'M', tagline: 'Keeps the ship steady, the deadlines real.' }, { name: 'Rohan Mondal', role: 'Marketing Officer', initial: 'R', tagline: 'Makes sure the right people see your work.' }];
+    function Team() {
+      var members = [
+        { name: 'Ashis Bhakta', role: 'Designer', initial: 'A', photo: 'assets/team/ashis.png', photoPos: { objectPosition: 'center 30%' }, tagline: 'Turns blank canvases into brand worlds.' },
+        { name: 'Hitesh Agrawal', role: 'Developer & Strategist', initial: 'H', photo: 'assets/team/hitesh.png', photoPos: { objectPosition: 'center 40%' }, tagline: 'Writes code the way poets write verse.' },
+        { name: 'Manish Bhakta', role: 'Manager', initial: 'M', photo: 'assets/team/manish.png', photoPos: { objectPosition: 'center 28%' }, tagline: 'Keeps the ship steady, the deadlines real.' },
+        { name: 'Rohan Mondal', role: 'Marketing Officer', initial: 'R', photo: 'assets/team/rohan.png', photoPos: { objectPosition: 'center 35%' }, tagline: 'Makes sure the right people see your work.' }
+      ];
       return (<section id="team" className="relative bg-black py-24 px-6 md:px-16 lg:px-20"><div className="text-center mb-16"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">The Team</span><BlurText as="h2" text="Four people. One obsession." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" /><p className="mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto">We're a small, senior team of teenage founders from India — close-knit, hands-on, and personally invested in every project.</p></div><div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-6xl mx-auto">{members.map(function (m, i) { return (<Reveal key={i} delay={i * 0.08}><TeamCard {...m} /></Reveal>); })}</div></section>); }
 
     function PricingCard(props) {
