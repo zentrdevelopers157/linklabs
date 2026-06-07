@@ -1733,12 +1733,110 @@
       var p = props.project;
       var live = props.live;
       var href = p.url && p.url !== '#' ? p.url : null;
-      var urlLabel = href ? href.replace('https://','').replace('http://','') : 'Coming soon';
-      return (<div data-spotlight data-contain className="liquid-glass rounded-[1.5rem] p-4 flex flex-col group cursor-pointer"><div className="liquid-glass rounded-[1rem] overflow-hidden aspect-[16/10] relative"><div className="absolute top-0 inset-x-0 h-7 flex items-center gap-1.5 px-3 z-10 bg-black/30 backdrop-blur-sm"><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><div className="mx-auto text-[10px] text-white/60 font-body truncate max-w-[60%]">{urlLabel}</div></div>{live ? (<div className="absolute top-9 right-3 z-10 liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white font-semibold tracking-wide flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />LIVE</div>) : (<div className="absolute top-9 right-3 z-10 liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/70 font-semibold tracking-wide flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-white/40" />SOON</div>)}<div className="absolute inset-0 pt-7 flex items-center justify-center bg-gradient-to-br from-white/5 to-transparent"><span className="font-heading italic text-white/20 text-5xl">{p.title}</span></div></div><div className="flex items-end justify-between mt-4 px-2 pb-2"><div><div className="font-heading italic text-white text-2xl tracking-[-1px]">{p.title}</div><div className="text-xs text-white/60 font-body mt-1">{p.category}</div></div>{href ? (<a href={href} target="_blank" rel="noreferrer" aria-label={"Open " + p.title} className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition"><IconExternalLink className="h-4 w-4" /></a>) : (<div aria-label="Coming soon" className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white/60 cursor-not-allowed"><IconExternalLink className="h-4 w-4" /></div>)}</div></div>);
+      var urlLabel = href ? href.replace('https://','').replace('http://','').replace(/\/$/, '') : 'Coming soon';
+      return (<div data-spotlight data-contain className="liquid-glass rounded-[1.5rem] p-4 flex flex-col group cursor-pointer"><a href={href || '#'} target="_blank" rel="noreferrer" className="block" aria-label={"Visit " + p.title + " live"}><div className="rounded-[1rem] overflow-hidden aspect-[16/10] relative" style={p.bg}><div className="absolute top-0 inset-x-0 h-7 flex items-center gap-1.5 px-3 z-20 bg-black/30 backdrop-blur-sm"><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><span className="w-2.5 h-2.5 rounded-full bg-white/30" /><div className="mx-auto text-[10px] text-white/70 font-body truncate max-w-[60%]">{urlLabel}</div></div>{live ? (<div className="absolute top-10 right-3 z-20 liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white font-semibold tracking-wide flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />LIVE</div>) : null}<div className="absolute inset-0 pt-7 flex flex-col items-center justify-center p-5 text-center">{p.preview}</div></div></a><div className="flex items-end justify-between mt-4 px-2 pb-2"><div className="min-w-0 flex-1"><div className="font-heading italic text-white text-2xl tracking-[-1px]">{p.title}</div><div className="text-xs text-white/60 font-body mt-1 truncate">{p.tagline}</div><div className="flex flex-wrap gap-1.5 mt-2">{p.tags.map(function (t, j) { return <span key={j} className="liquid-glass rounded-full px-2 py-0.5 text-[10px] text-white/75 font-body tracking-wide">{t}</span>; })}</div></div>{href ? (<a href={href} target="_blank" rel="noreferrer" aria-label={"Open " + p.title} className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition shrink-0 ml-3"><svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>) : null}</div></div>);
     }
 
-    function Portfolio() { var projects = [{ title: "Zentr", category: "SaaS / Dashboard", url: "https://zentr.onrender.com/" }, { title: "Avlune", category: "Fashion E-commerce", url: "https://avlune-fashion-store.netlify.app/" }, { title: "SenJr", category: "Community Platform", url: "#" }, { title: "Roamie", category: "Travel & Lifestyle", url: "#" }];
-      return (<section id="work" className="relative bg-black py-24 px-6 md:px-16 lg:px-20"><div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-white/[0.02] blur-3xl rounded-full pointer-events-none pulse-glow" /><div className="relative"><div className="text-center mb-16"><span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">Selected Work</span><BlurText as="h2" text="Built with care. Launched with pride." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" /><p className="mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto">A few of the brands we've helped go from idea to internet.</p></div><div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">{projects.map(function (p, i) { return (<Reveal key={i} delay={i * 0.08}><PortfolioCard project={p} live={!!p.url && p.url !== '#'} /></Reveal>); })}</div><div className="text-center mt-12"><a href="#contact" className="liquid-glass rounded-full px-5 py-2.5 text-sm text-white inline-flex items-center gap-2 hover:scale-105 transition">View All Work <IconArrowRight size={16} /></a></div></div></section>); }
+    function Portfolio() {
+      var projects = [
+        {
+          title: 'Zentr', tagline: 'Orders. Not DMs.', category: 'D2C Ordering', url: 'https://zentr.onrender.com/',
+          tags: ['D2C', 'SaaS', 'Live'],
+          bg: { background: 'linear-gradient(135deg, #0a1f1c 0%, #0d3a35 40%, #0a2823 100%)' },
+          preview: (
+            <React.Fragment>
+              <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 20% 20%, rgba(16,185,129,0.4) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(20,184,166,0.3) 0%, transparent 50%)' }} />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-400/30 text-emerald-300 text-[10px] font-body tracking-widest uppercase mb-3"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />Now Live</div>
+                <div className="font-heading italic text-white text-5xl md:text-6xl tracking-[-2px] leading-none mb-2">Orders.</div>
+                <div className="font-heading italic text-emerald-300 text-5xl md:text-6xl tracking-[-2px] leading-none">Not DMs.</div>
+                <div className="text-white/60 text-[11px] font-body mt-3 max-w-[28ch] mx-auto">Structured catalog · Instant checkout · Real-time tracking</div>
+              </div>
+            </React.Fragment>
+          )
+        },
+        {
+          title: 'Avlune', tagline: 'Style Your Glow.', category: 'D2C Fashion', url: 'https://avlune-fashion-store.netlify.app/',
+          tags: ['D2C', 'Fashion', 'Live'],
+          bg: { background: 'linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%)' },
+          preview: (
+            <React.Fragment>
+              <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 30%, rgba(255,255,255,0.3) 0%, transparent 40%)' }} />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/25 text-white/90 text-[10px] font-body tracking-widest uppercase mb-3">Lunar Collection 2026</div>
+                <div className="font-heading italic text-white text-5xl md:text-6xl tracking-[-2px] leading-[0.95] mb-1">Style</div>
+                <div className="font-heading italic text-white/60 text-5xl md:text-6xl tracking-[-2px] leading-[0.95]">Your Glow.</div>
+                <div className="text-white/55 text-[11px] font-body mt-3 max-w-[28ch] mx-auto">Hand-picked D2C fashion — slow, intentional, premium.</div>
+              </div>
+            </React.Fragment>
+          )
+        },
+        {
+          title: 'Roamie', tagline: 'Your World. Your Journey.', category: 'AI Travel', url: 'https://roamie-three.vercel.app/',
+          tags: ['Travel', 'AI', 'Live'],
+          bg: { background: 'linear-gradient(135deg, #2a1505 0%, #6b2810 35%, #c2410c 75%, #fb923c 100%)' },
+          preview: (
+            <React.Fragment>
+              <div className="absolute inset-0 opacity-40" style={{ backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(251,146,60,0.5) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(239,68,68,0.3) 0%, transparent 50%)' }} />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 border border-white/30 text-white text-[10px] font-body tracking-widest uppercase mb-3">
+                  <span className="w-3 h-3 rounded-full bg-white inline-block" />
+                  AI Travel
+                </div>
+                <div className="font-heading italic text-white text-4xl md:text-5xl tracking-[-1.5px] leading-[0.95] mb-1">Your World,</div>
+                <div className="font-heading italic text-white/80 text-4xl md:text-5xl tracking-[-1.5px] leading-[0.95]">Your Journey.</div>
+                <div className="text-white/80 text-[11px] font-body mt-3 max-w-[32ch] mx-auto">AI plans complete trips — flights, trains, cruises — at the lowest prices.</div>
+              </div>
+            </React.Fragment>
+          )
+        },
+        {
+          title: 'Senjr', tagline: 'Learn from Seniors.', category: 'EdTech', url: 'https://senjrai.vercel.app/',
+          tags: ['EdTech', 'Mentorship', 'Live'],
+          bg: { background: 'linear-gradient(135deg, #1a1a1a 0%, #2d1810 40%, #4a2511 100%)' },
+          preview: (
+            <React.Fragment>
+              <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(251,146,60,0.4) 0%, transparent 50%)' }} />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-400/30 text-orange-300 text-[10px] font-body tracking-widest uppercase mb-3">
+                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 1.5 6 1.5 9 0v-5"/></svg>
+                  EdTech
+                </div>
+                <div className="font-heading italic text-white text-4xl md:text-5xl tracking-[-1.5px] leading-[0.95] mb-1">Learn from</div>
+                <div className="font-heading italic text-orange-300 text-4xl md:text-5xl tracking-[-1.5px] leading-[0.95]">Seniors,</div>
+                <div className="font-heading italic text-white/60 text-4xl md:text-5xl tracking-[-1.5px] leading-[0.95]">Not Teachers.</div>
+              </div>
+            </React.Fragment>
+          )
+        }
+      ];
+      return (
+        <section id="work" className="relative bg-black py-24 px-6 md:px-16 lg:px-20">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-white/[0.02] blur-3xl rounded-full pointer-events-none pulse-glow" />
+          <div className="relative">
+            <div className="text-center mb-16">
+              <span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">Selected Work</span>
+              <BlurText as="h2" text="Built with care. Launched with pride." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" />
+              <p className="mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto">A few of the brands we've helped go from idea to internet.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              {projects.map(function (p, i) {
+                return (
+                  <Reveal key={i} delay={i * 0.08}>
+                    <PortfolioCard project={p} live={true} />
+                  </Reveal>
+                );
+              })}
+            </div>
+            <div className="text-center mt-12">
+              <a href="#contact-section" className="liquid-glass rounded-full px-5 py-2.5 text-sm text-white inline-flex items-center gap-2 hover:scale-105 transition">
+                Start your project <IconArrowRight size={16} />
+              </a>
+            </div>
+          </div>
+        </section>
+      );
+    }
 
     function TeamCard(props) { return (<div data-spotlight className="liquid-glass rounded-[1.25rem] p-6 flex flex-col items-center text-center min-h-[280px]"><div className="liquid-glass rounded-full w-20 h-20 flex items-center justify-center"><span className="font-heading italic text-white text-4xl">{props.initial}</span></div><div className="mt-5 font-heading italic text-white text-2xl tracking-[-1px]">{props.name}</div><div className="mt-1 text-xs text-white/70 font-body uppercase tracking-[0.15em]">{props.role}</div><p className="mt-3 text-sm text-white/80 font-body font-light leading-snug">{props.tagline}</p></div>); }
 
@@ -1779,7 +1877,8 @@
       var items = [
         { quote: "LinkLabs shipped our SaaS dashboard in 11 days. The motion design feels like a product three times our size. We get compliments on the site every week.", name: "Rohan M.", role: "Founder, Zentr", initial: "R" },
         { quote: "We had a Shopify store that looked like every other store. Avlune gave it the kind of polish you'd expect from a ₹5L agency — at a price an SME can actually afford.", name: "Priya S.", role: "Owner, Avlune", initial: "P" },
-        { quote: "What I appreciated most was the speed of communication. Slack replies in minutes, Figma mockups the same day, and zero hand-holding needed at launch.", name: "Karthik R.", role: "Co-founder, Roamie", initial: "K" }
+        { quote: "What I appreciated most was the speed of communication. Slack replies in minutes, Figma mockups the same day, and zero hand-holding needed at launch.", name: "Karthik R.", role: "Co-founder, Roamie", initial: "K" },
+        { quote: "Senjr needed a brand and a community platform that students would actually open. LinkLabs nailed the energy — clean, calm, and unmistakably ours. Onboarding flows are buttery.", name: "Aditi N.", role: "Founder, Senjr", initial: "A" }
       ];
       return (
         <section id="testimonials" className="relative bg-black py-24 px-6 md:px-16 lg:px-20 overflow-hidden">
@@ -1789,7 +1888,7 @@
               <span className="liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5">Kind Words</span>
               <BlurText as="h2" text="What our clients say." className="font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
               {items.map(function (t, i) { return (
                 <Reveal key={i} delay={i * 0.08}>
                   <div data-spotlight data-contain className="liquid-glass rounded-[1.25rem] p-7 flex flex-col h-full min-h-[280px]">
