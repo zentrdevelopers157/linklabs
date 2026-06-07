@@ -510,7 +510,228 @@
       .form-success .check-ring, .form-success .check-ring svg path { animation: none; }
       .form-success .check-ring svg path { stroke-dashoffset: 0; }
       .submit-btn .spinner { animation: none; }
-      .form-field.shake input, .form-field.shake select, .form-field.shake textarea { animation: none; }
+      .form-field.shake input, .form-field.shake select, .form-field textarea { animation: none; }
+    }
+
+    /* === Multi-step form === */
+    .step-progress {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-bottom: 24px;
+    }
+    .step-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .step-dot.active { background: #fff; width: 28px; border-radius: 4px; }
+    .step-dot.done { background: rgba(52,211,153,0.7); width: 8px; }
+    .step-connector {
+      width: 18px; height: 1px;
+      background: rgba(255,255,255,0.15);
+      transition: background 0.35s ease;
+    }
+    .step-connector.active { background: rgba(52,211,153,0.5); }
+
+    .step-label {
+      text-align: center;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+      min-height: 14px;
+    }
+
+    .step-panel {
+      animation: stepIn 0.45s cubic-bezier(0.19, 1, 0.22, 1) both;
+    }
+    .step-panel.exiting { animation: stepOut 0.3s cubic-bezier(0.4, 0, 1, 1) both; }
+    @keyframes stepIn {
+      0% { opacity: 0; transform: translateX(20px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes stepOut {
+      0% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 0; transform: translateX(-20px); }
+    }
+
+    .step-actions {
+      display: flex; gap: 10px; align-items: center;
+    }
+    .step-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 14px 18px; border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.85);
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .step-back:hover { background: rgba(255,255,255,0.09); color: #fff; }
+    .step-back svg { transition: transform 0.2s ease; }
+    .step-back:hover svg { transform: translateX(-2px); }
+
+    .submit-btn.continue { flex: 1; }
+    .step-actions .submit-btn { flex: 1; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .step-panel, .step-panel.exiting { animation: none; }
+    }
+
+    /* === Contact method chooser (Email / WhatsApp / Call) === */
+    .method-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    }
+    @media (max-width: 480px) { .method-grid { grid-template-columns: 1fr; } }
+    .method-card {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 6px;
+      padding: 14px 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Barlow', system-ui, sans-serif;
+      color: rgba(255,255,255,0.75);
+    }
+    .method-card:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.20); color: #fff; }
+    .method-card.selected {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.45);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.04);
+    }
+    .method-card svg { transition: transform 0.2s ease; }
+    .method-card:hover svg { transform: scale(1.1); }
+    .method-card .method-name { font-size: 13px; font-weight: 500; }
+    .method-card .method-sub { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; }
+    .method-card .check-mark {
+      position: absolute; top: 6px; right: 6px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: #34d399; color: #052e1a;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: scale(0.5);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .method-card.selected .check-mark { opacity: 1; transform: scale(1); }
+
+    /* === Live status pill === */
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 16px 8px 12px;
+      background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.25);
+      border-radius: 999px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 12px; font-weight: 500;
+      color: rgba(220,252,231,0.95);
+      letter-spacing: 0.02em;
+    }
+    .status-pill .pulse {
+      position: relative; width: 8px; height: 8px;
+    }
+    .status-pill .pulse::before {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 0 0 rgba(52,211,153,0.7);
+      animation: pulseRing 2s ease-out infinite;
+    }
+    .status-pill .pulse::after {
+      content: ''; position: absolute; inset: 1.5px; border-radius: 50%;
+      background: #34d399;
+    }
+    @keyframes pulseRing {
+      0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+      80%, 100% { box-shadow: 0 0 0 10px rgba(52,211,153,0); }
+    }
+    .status-pill .slots { color: rgba(255,255,255,0.95); font-weight: 600; }
+
+    /* === "What happens next" timeline === */
+    .next-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 40px;
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      position: relative;
+    }
+    @media (max-width: 720px) { .next-steps { grid-template-columns: 1fr 1fr; gap: 20px 0; } }
+    @media (max-width: 420px) { .next-steps { grid-template-columns: 1fr; } }
+    .next-step {
+      position: relative; padding: 0 18px; text-align: center;
+    }
+    .next-step:not(:last-child)::after {
+      content: ''; position: absolute; top: 22px; right: -8px; width: 16px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+    }
+    @media (max-width: 720px) { .next-step:not(:last-child)::after { display: none; } }
+    .next-step .ns-icon {
+      width: 44px; height: 44px; margin: 0 auto 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+    }
+    .next-step .ns-step {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+    }
+    .next-step .ns-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic; font-size: 18px;
+      color: #fff; line-height: 1.1; margin-bottom: 4px;
+    }
+    .next-step .ns-desc {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 12px; color: rgba(255,255,255,0.55);
+      line-height: 1.45;
+    }
+
+    /* === Floating sticky contact pill === */
+    .floating-cta {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 50;
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 22px 14px 18px;
+      background: #fff; color: #000;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 999px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 14px; font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 10px 30px -8px rgba(0,0,0,0.4), 0 0 0 0 rgba(255,255,255,0);
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .floating-cta.visible { transform: translateY(0); opacity: 1; }
+    .floating-cta:hover {
+      box-shadow: 0 14px 36px -8px rgba(0,0,0,0.5), 0 0 0 4px rgba(255,255,255,0.1);
+    }
+    .floating-cta .fc-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #34d399;
+      box-shadow: 0 0 0 0 rgba(52,211,153,0.6);
+      animation: pulseRing 2.4s ease-out infinite;
+    }
+    .floating-cta .fc-arrow { transition: transform 0.25s ease; }
+    .floating-cta:hover .fc-arrow { transform: translate(2px, -2px); }
+    @media (max-width: 640px) {
+      .floating-cta { bottom: 16px; right: 16px; padding: 12px 18px 12px 14px; font-size: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .floating-cta { transform: none; opacity: 1; transition: opacity 0.2s ease; }
     }
 
     :focus-visible {
@@ -971,7 +1192,7 @@
       var overlayRef = useRef(null);
       var navRef = useRef(null);
       var linkRefs = useRef([]);
-      var links = [{ label: 'Home', href: '#home' }, { label: 'Services', href: '#services' }, { label: 'Work', href: '#work' }, { label: 'Process', href: '#process' }, { label: 'Pricing', href: '#pricing' }, { label: 'FAQ', href: '#faq' }];
+      var links = [{ label: 'Home', href: '#home' }, { label: 'Services', href: '#services' }, { label: 'Work', href: '#work' }, { label: 'Process', href: '#process' }, { label: 'Pricing', href: '#pricing' }, { label: 'FAQ', href: '#faq' }, { label: 'Contact', href: '#contact-section' }];
       var activeIdxState = useState(0);
       var activeIdx = activeIdxState[0]; var setActiveIdx = activeIdxState[1];
       var pillStyle = useState({ x: 0, w: 0, opacity: 0 });
@@ -1168,7 +1389,7 @@
         <span className="liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 inline-block mt-3 w-fit">{plan.timeline}</span>
         <div className="h-px bg-white/10 my-6" />
         <ul className="flex flex-col gap-3 flex-1">{plan.features.map(function (f, i) { return (<li key={i} className="flex items-start gap-3 text-sm text-white/90 font-body font-light leading-snug"><span className="mt-0.5 w-5 h-5 rounded-full liquid-glass flex items-center justify-center shrink-0"><IconCheck size={12} strokeWidth={3} /></span><span>{f}</span></li>); })}</ul>
-        <a href="#contact" className={'mt-8 rounded-full py-3 text-sm font-medium text-center flex items-center justify-center gap-2 ' + (featured ? 'bg-white text-black' : 'liquid-glass text-white')}>{plan.cta} {featured ? <IconArrowUpRight size={16} /> : null}</a>
+        <a href="#contact-section" className={'mt-8 rounded-full py-3 text-sm font-medium text-center flex items-center justify-center gap-2 ' + (featured ? 'bg-white text-black' : 'liquid-glass text-white')}>{plan.cta} {featured ? <IconArrowUpRight size={16} /> : null}</a>
       </div>);
     }
 
@@ -1268,7 +1489,7 @@
               })}
             </div>
             <div className="text-center mt-10 text-white/60 text-sm font-body">
-              Still have questions? <a href="#contact" className="text-white underline underline-offset-4 hover:opacity-80 transition">Get in touch</a>.
+              Still have questions? <a href="#contact-section" className="text-white underline underline-offset-4 hover:opacity-80 transition">Get in touch</a>.
             </div>
           </div>
         </section>
@@ -1341,8 +1562,10 @@
     }
 
     function ContactForm() {
-      var dataState = useState({ name: '', email: '', service: '', budget: '', message: '' });
+      var dataState = useState({ name: '', email: '', service: '', budget: '', message: '', contactMethod: 'email', phone: '' });
       var data = dataState[0]; var setData = dataState[1];
+      var stepState = useState(0);
+      var step = stepState[0]; var setStep = stepState[1];
       var statusState = useState('idle');
       var status = statusState[0]; var setStatus = statusState[1];
       var shakeState = useState({});
@@ -1351,7 +1574,12 @@
       var payload = payloadState[0]; var setPayload = payloadState[1];
       var copiedState = useState(false);
       var copied = copiedState[0]; var setCopied = copiedState[1];
+      var backendState = useState({ web3forms: 'pending', mailto: 'pending' });
+      var backend = backendState[0]; var setBackend = backendState[1];
       var TO_EMAIL = 'linklabs.studio@gmail.com';
+      // Replace the next constant with your Web3Forms access key (https://web3forms.com) to enable a true backend alongside mailto:.
+      // Sign up free with linklabs.studio@gmail.com → paste the key here → every submission is also POSTed to Web3Forms in the background.
+      var WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
 
       function set(field) {
         return function (e) {
@@ -1361,19 +1589,34 @@
           if (status === 'err') setStatus('idle');
         };
       }
-
-      function validate() {
+      function setMethod(m) { setData(function (d) { var n = Object.assign({}, d); n.contactMethod = m; return n; }); }
+      function validateStep1() {
         var errs = {};
         if (!data.name.trim()) errs.name = true;
         if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errs.email = true;
+        return errs;
+      }
+      function validateStep2() {
+        var errs = {};
         if (!data.service) errs.service = true;
         if (!data.budget) errs.budget = true;
         if (!data.message.trim() || data.message.trim().length < 10) errs.message = true;
+        if ((data.contactMethod === 'whatsapp' || data.contactMethod === 'call') && !/^[+\d][\d\s\-()]{6,}$/.test(data.phone.trim())) errs.phone = true;
         return errs;
       }
+      function nextStep() {
+        var errs = validateStep1();
+        if (Object.keys(errs).length) {
+          setShake(errs);
+          setStatus('err');
+          setTimeout(function () { setShake({}); }, 600);
+          return;
+        }
+        setShake({}); setStatus('idle'); setStep(1);
+      }
+      function prevStep() { setStep(0); setStatus('idle'); setShake({}); }
 
-      function buildPayload() {
-        var subject = 'New project inquiry from ' + data.name + ' — ' + data.service;
+      function buildEmailBody() {
         var lines = [
           'Hi LinkLabs team,',
           '',
@@ -1384,47 +1627,93 @@
           'Email:   ' + data.email,
           'Service: ' + data.service,
           'Budget:  ' + data.budget,
-          '— — — — — — — — — — — — — — — — — — — —',
-          '',
-          'Message:',
-          data.message,
-          '',
-          '— — —',
-          'Sent from linklabs-three.vercel.app'
         ];
-        return { to: TO_EMAIL, subject: subject, body: lines.join('\n') };
+        if (data.contactMethod !== 'email') lines.push('Prefers ' + (data.contactMethod === 'whatsapp' ? 'WhatsApp' : 'a phone call') + (data.phone ? ': ' + data.phone : ''));
+        lines.push('— — — — — — — — — — — — — — — — — — — —');
+        lines.push('');
+        lines.push('Message:');
+        lines.push(data.message);
+        lines.push('');
+        lines.push('— — —');
+        lines.push('Sent from linklabs-three.vercel.app');
+        return lines.join('\n');
+      }
+      function buildSubject() { return 'New project inquiry from ' + data.name + ' — ' + data.service; }
+
+      function tryWeb3Forms(p) {
+        if (!WEB3FORMS_KEY || WEB3FORMS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+          setBackend(function (b) { var n = Object.assign({}, b); n.web3forms = 'skipped'; return n; });
+          return;
+        }
+        try {
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_KEY,
+              subject: p.subject,
+              from_name: data.name,
+              replyto: data.email,
+              name: data.name,
+              email: data.email,
+              service: data.service,
+              budget: data.budget,
+              contact_method: data.contactMethod,
+              phone: data.phone || '',
+              message: p.body
+            })
+          })
+            .then(function (r) { return r.json().then(function (j) { return { ok: r.ok && j.success, j: j }; }); })
+            .then(function (res) {
+              setBackend(function (b) { var n = Object.assign({}, b); n.web3forms = res.ok ? 'sent' : 'failed'; return n; });
+            })
+            .catch(function () {
+              setBackend(function (b) { var n = Object.assign({}, b); n.web3forms = 'failed'; return n; });
+            });
+        } catch (_) {
+          setBackend(function (b) { var n = Object.assign({}, b); n.web3forms = 'failed'; return n; });
+        }
       }
 
-      function mailtoHref(p) {
-        return 'mailto:' + p.to + '?subject=' + encodeURIComponent(p.subject) + '&body=' + encodeURIComponent(p.body);
-      }
+      function mailtoHref(p) { return 'mailto:' + p.to + '?subject=' + encodeURIComponent(p.subject) + '&body=' + encodeURIComponent(p.body); }
+      function whatsappHref(p) { return 'https://wa.me/' + (data.phone.replace(/[^\d]/g, '') || '') + '?text=' + encodeURIComponent('Hi LinkLabs, ' + data.name + ' here. I just submitted a project inquiry on your site. Can we talk?\n\n' + p.body); }
 
       function openMailClient(p) {
         var a = document.createElement('a');
-        a.href = mailtoHref(p);
-        a.rel = 'noopener';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
+        a.href = mailtoHref(p); a.rel = 'noopener'; a.style.display = 'none';
+        document.body.appendChild(a); a.click();
         setTimeout(function () { if (a.parentNode) a.parentNode.removeChild(a); }, 0);
+      }
+      function openWhatsApp(p) {
+        var win = window.open(whatsappHref(p), '_blank', 'noopener,noreferrer');
+        if (!win) { window.location.href = whatsappHref(p); }
       }
 
       function submit(e) {
         e.preventDefault();
-        var errs = validate();
+        var errs = Object.assign({}, validateStep1(), validateStep2());
         if (Object.keys(errs).length) {
           setShake(errs);
           setStatus('err');
           setTimeout(function () { setShake({}); }, 600);
           return;
         }
-        var p = buildPayload();
-        setPayload(p);
+        var p = { to: TO_EMAIL, subject: buildSubject(), body: buildEmailBody() };
+        setPayload(p); setCopied(false);
+        setBackend({ web3forms: 'pending', mailto: 'pending' });
         setStatus('sending');
-        setCopied(false);
-        // Open the user's email client with a pre-filled message to linklabs.studio@gmail.com
-        openMailClient(p);
-        setTimeout(function () { setStatus('sent'); }, 350);
+        // Fire-and-forget Web3Forms (true server delivery, optional)
+        tryWeb3Forms(p);
+        // Always open the appropriate app as the primary UX
+        if (data.contactMethod === 'whatsapp') {
+          openWhatsApp(p);
+        } else {
+          openMailClient(p);
+        }
+        setTimeout(function () {
+          setBackend(function (b) { var n = Object.assign({}, b); n.mailto = 'sent'; return n; });
+          setStatus('sent');
+        }, 400);
       }
 
       function copyMessage() {
@@ -1433,9 +1722,7 @@
         var done = function () { setCopied(true); setTimeout(function () { setCopied(false); }, 2200); };
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(done).catch(function () {
-              fallbackCopy(text); done();
-            });
+            navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text); done(); });
           } else { fallbackCopy(text); done(); }
         } catch (_) { fallbackCopy(text); done(); }
       }
@@ -1448,30 +1735,37 @@
       }
 
       function reset() {
-        setData({ name: '', email: '', service: '', budget: '', message: '' });
-        setStatus('idle');
-        setPayload(null);
-        setCopied(false);
+        setData({ name: '', email: '', service: '', budget: '', message: '', contactMethod: 'email', phone: '' });
+        setStatus('idle'); setPayload(null); setCopied(false); setStep(0); setShake({});
+        setBackend({ web3forms: 'pending', mailto: 'pending' });
       }
 
       var services = ['Custom Design', 'Fast Development', 'Smart Strategy', 'Full Package (Design + Dev + Strategy)', 'Not sure yet'];
       var budgets = ['Under ₹50,000', '₹50,000 – ₹2,00,000', '₹2,00,000 – ₹5,00,000', '₹5,00,000+'];
+      var methods = [
+        { id: 'email', name: 'Email', sub: 'Open mail app', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg> },
+        { id: 'whatsapp', name: 'WhatsApp', sub: 'Send via WA', icon: <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M17.6 6.3A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.78 12.05L4 20l4.07-1.2A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.7zM12 18.55a6.5 6.5 0 0 1-3.32-.91l-.24-.14-2.42.71.73-2.36-.16-.25A6.55 6.55 0 1 1 18.55 12 6.55 6.55 0 0 1 12 18.55zm3.6-4.9c-.2-.1-1.16-.57-1.34-.63s-.31-.1-.45.1-.5.63-.62.76-.23.14-.43 0a5.3 5.3 0 0 1-1.57-.97 5.86 5.86 0 0 1-1.08-1.35c-.11-.2 0-.3.09-.4s.2-.23.3-.35a1.5 1.5 0 0 0 .2-.34.4.4 0 0 0 0-.37c0-.1-.45-1.08-.62-1.48s-.33-.34-.45-.34h-.38a.74.74 0 0 0-.53.25 2.22 2.22 0 0 0-.7 1.66 3.86 3.86 0 0 0 .8 2.05 8.84 8.84 0 0 0 3.4 3 11.34 11.34 0 0 0 1.13.42 2.72 2.72 0 0 0 1.25.08 2.05 2.05 0 0 0 1.34-.95 1.66 1.66 0 0 0 .12-.95c-.05-.08-.18-.13-.38-.23z"/></svg> },
+        { id: 'call', name: 'Call', sub: 'We call you', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> }
+      ];
 
       if ((status === 'sent' || status === 'sending') && payload) {
         var IconCheck = <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg>;
         var IconMailSmall = <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg>;
         var IconCopy = <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>;
         var IconRefresh = <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>;
+        var openedApp = data.contactMethod === 'whatsapp' ? 'WhatsApp' : (data.contactMethod === 'call' ? 'your dialer' : 'your email app');
+        var backendNote = backend.web3forms === 'sent' ? '✓ Also delivered automatically to our inbox via Web3Forms.' : (backend.web3forms === 'failed' ? 'Background delivery failed — we rely on the ' + openedApp + ' send below.' : null);
         return (
           <div className="form-success">
             <div className="check-ring">{IconCheck}</div>
             <div className="text-white text-2xl md:text-3xl font-heading italic tracking-tight">Almost there — just hit send.</div>
             <div className="text-white/65 text-sm md:text-[15px] font-body mt-2 max-w-md leading-relaxed">
-              Your email app should have opened with a pre-filled message to <span className="text-white">{TO_EMAIL}</span>. Click <span className="text-white">Send</span> in your mail app to deliver it.
+              {openedApp} should have opened with your message pre-filled to <span className="text-white">{TO_EMAIL}</span>. Tap <span className="text-white">Send</span> to deliver.
             </div>
+            {backendNote ? <div className="text-[11px] text-white/45 font-body mt-3 italic">{backendNote}</div> : null}
             <div className="mt-6 flex flex-col sm:flex-row gap-2.5 w-full max-w-md">
-              <button type="button" onClick={function () { openMailClient(payload); }} className="submit-btn group" style={{ flex: 1 }}>
-                {IconMailSmall}<span>Open mail app again</span>
+              <button type="button" onClick={function () { if (data.contactMethod === 'whatsapp') openWhatsApp(payload); else openMailClient(payload); }} className="submit-btn group" style={{ flex: 1 }}>
+                {IconMailSmall}<span>Open {openedApp} again</span>
               </button>
               <button type="button" onClick={copyMessage} className="submit-btn" style={{ flex: 1, background: 'rgba(255,255,255,0.08)', color: '#fff', border: '1px solid rgba(255,255,255,0.15)' }}>
                 {copied ? (<><svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7"/></svg>Copied!</>) : (<>{IconCopy}<span>Copy message</span></>)}
@@ -1496,10 +1790,21 @@
       var IconSparkle = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg>;
       var IconWallet = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 12V8a2 2 0 0 0-2-2H5a1 1 0 0 1 0-2h13"/><path d="M3 6v12a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-3"/><circle cx="17" cy="13" r="1.2" fill="currentColor"/></svg>;
       var IconMsg = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4l-5 1 1-4.5A8.4 8.4 0 1 1 21 11.5z"/></svg>;
+      var IconPhone = <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>;
       var IconArrow = <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>;
+      var IconArrowLeft = <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>;
 
-      return (
-        <form onSubmit={submit} noValidate className="w-full space-y-4">
+      var dots = (
+        <div className="step-progress" aria-label={'Step ' + (step + 1) + ' of 2'}>
+          <span className={'step-dot ' + (step >= 0 ? 'active' : '')}></span>
+          <span className={'step-connector ' + (step >= 1 ? 'active' : '')}></span>
+          <span className={'step-dot ' + (step >= 1 ? 'active' : 'done')}></span>
+        </div>
+      );
+      var stepLabel = step === 0 ? 'Step 1 of 2 · Quick intro' : 'Step 2 of 2 · Project details';
+
+      var step1 = (
+        <div className="step-panel" key="s1">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="form-label" htmlFor="cf-name">Your name</label>
@@ -1516,6 +1821,20 @@
               </div>
             </div>
           </div>
+          <div className="mt-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="text-[11px] text-white/40 font-body tracking-wide inline-flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+              Avg. reply within 4 hours
+            </div>
+            <button type="button" onClick={nextStep} className="submit-btn continue group" style={{ minWidth: 180 }}>
+              Continue{IconArrow}
+            </button>
+          </div>
+        </div>
+      );
+
+      var step2 = (
+        <div className="step-panel" key="s2">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="form-label" htmlFor="cf-service">What do you need</label>
@@ -1538,24 +1857,137 @@
               </div>
             </div>
           </div>
-          <div>
+          <div className="mt-4">
             <label className="form-label" htmlFor="cf-message">Tell us about your project</label>
             <div className={'form-field textarea ' + (shake.message ? 'shake' : '')}>
               <span className="form-icon">{IconMsg}</span>
               <textarea id="cf-message" name="message" value={data.message} onChange={set('message')} placeholder="A few lines about your goals, timeline, or anything you'd like us to know…" aria-invalid={!!shake.message} required />
             </div>
           </div>
-          <button type="submit" disabled={status === 'sending'} className="submit-btn group">
-            {status === 'sending' ? (<><span className="spinner" />Opening your mail app…</>) : status === 'err' ? (<>Try again</>) : (<>Send inquiry{IconArrow}</>)}
-          </button>
-          <div className="flex items-center justify-between flex-wrap gap-3 pt-1">
-            <div className="text-[11px] text-white/40 font-body tracking-wide inline-flex items-center gap-1.5">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-              Avg. reply within 4 hours
+          <div className="mt-5">
+            <label className="form-label">How should we reach you back?</label>
+            <div className="method-grid">
+              {methods.map(function (m) { return (
+                <button type="button" key={m.id} onClick={function () { setMethod(m.id); }} className={'method-card ' + (data.contactMethod === m.id ? 'selected' : '')} aria-pressed={data.contactMethod === m.id}>
+                  <span className="check-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-2.5 h-2.5"><path d="M5 13l4 4L19 7"/></svg></span>
+                  <span style={{ display: 'flex' }}>{m.icon}</span>
+                  <span className="method-name">{m.name}</span>
+                  <span className="method-sub">{m.sub}</span>
+                </button>
+              ); })}
             </div>
-            <a href="mailto:linklabs.studio@gmail.com?subject=Project%20inquiry%20—%20LinkLabs" className="text-[11px] text-white/45 hover:text-white font-body tracking-wide underline underline-offset-4 transition">Or email us directly → linklabs.studio@gmail.com</a>
+            {data.contactMethod !== 'email' ? (
+              <div className="mt-3">
+                <div className={'form-field no-icon ' + (shake.phone ? 'shake' : '')}>
+                  <span className="form-icon">{IconPhone}</span>
+                  <input type="tel" value={data.phone} onChange={set('phone')} placeholder={data.contactMethod === 'whatsapp' ? '+91 98765 43210 (WhatsApp number)' : '+91 98765 43210 (best time to call)'} aria-invalid={!!shake.phone} autoComplete="tel" />
+                </div>
+              </div>
+            ) : null}
           </div>
+          <div className="mt-5 flex items-center justify-between gap-3 flex-wrap">
+            <button type="button" onClick={prevStep} className="step-back">{IconArrowLeft}Back</button>
+            <button type="button" onClick={submit} disabled={status === 'sending'} className="submit-btn group" style={{ flex: 1, minWidth: 200 }}>
+              {status === 'sending' ? (<><span className="spinner" />Opening your app…</>) : status === 'err' ? (<>Try again</>) : (<>Send inquiry{IconArrow}</>)}
+            </button>
+          </div>
+        </div>
+      );
+
+      return (
+        <form onSubmit={function (e) { e.preventDefault(); if (step === 0) nextStep(); else submit(e); }} noValidate className="w-full">
+          {dots}
+          <div className="step-label">{stepLabel}</div>
+          {step === 0 ? step1 : step2}
         </form>
+      );
+    }
+
+    function StatusBadge() {
+      var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var now = new Date();
+      var month = monthNames[now.getMonth()];
+      var year = now.getFullYear();
+      var slots = 3;
+      return (
+        <div className="status-pill">
+          <span className="pulse" aria-hidden="true" />
+          <span><span className="slots">{slots} slots</span> open for {month} {year}</span>
+        </div>
+      );
+    }
+
+    function NextSteps() {
+      var steps = [
+        { step: 'Step 1', title: 'You send', desc: 'Fill the form or message us. Takes 60 seconds.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg> },
+        { step: 'Step 2', title: 'We review', desc: 'Ashis or Hitesh reads your brief within 4 hours.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> },
+        { step: 'Step 3', title: 'You get a reply', desc: 'A clear quote, timeline & first ideas — by email.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 6 9-6"/></svg> },
+        { step: 'Step 4', title: 'We kick off', desc: 'You pick a start date. We handle the rest.', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg> }
+      ];
+      return (
+        <div className="next-steps">
+          {steps.map(function (s, i) { return (
+            <div className="next-step" key={i}>
+              <div className="ns-icon">{s.icon}</div>
+              <div className="ns-step">{s.step}</div>
+              <div className="ns-title">{s.title}</div>
+              <div className="ns-desc">{s.desc}</div>
+            </div>
+          ); })}
+        </div>
+      );
+    }
+
+    function FloatingCTA() {
+      var visState = useState(false);
+      var visible = visState[0]; var setVisible = visState[1];
+      useEffect(function () {
+        function onScroll() { setVisible(window.scrollY > 600); }
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return function () { window.removeEventListener('scroll', onScroll); };
+      }, []);
+      function go(e) {
+        e.preventDefault();
+        var el = document.getElementById('contact-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      return (
+        <a href="#contact-section" onClick={go} className={'floating-cta ' + (visible ? 'visible' : '')} aria-label="Jump to start a project form">
+          <span className="fc-dot" aria-hidden="true" />
+          <span>Start a project</span>
+          <svg className="fc-arrow w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+      );
+    }
+
+    function ContactSection() {
+      return (
+        <section id="contact-section" className="relative bg-black pt-24 pb-12 px-6 md:px-16 lg:px-20">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="mb-6"><StatusBadge /></div>
+              <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-4">Start a project</div>
+              <h2 className="font-heading italic text-white text-5xl md:text-6xl lg:text-7xl tracking-[-2px] leading-[0.95] mb-5">Have a vision?<br/><span className="text-white/50">Let's build it.</span></h2>
+              <p className="text-white/65 text-base md:text-lg font-body max-w-xl mx-auto leading-relaxed">Tell us about your project. We reply within 4 hours, usually faster — with a clear quote, timeline, and first ideas.</p>
+              <div className="flex flex-wrap gap-2 justify-center mt-7">
+                <span className="service-pill"><span className="dot" />Custom Design</span>
+                <span className="service-pill"><span className="dot" />Fast Development</span>
+                <span className="service-pill"><span className="dot" />Smart Strategy</span>
+                <span className="service-pill"><span className="dot" />Full Package</span>
+              </div>
+            </div>
+            <div className="liquid-glass-strong rounded-[1.5rem] p-6 md:p-10 max-w-3xl mx-auto">
+              <ContactForm />
+            </div>
+            <div className="max-w-4xl mx-auto">
+              <NextSteps />
+            </div>
+            <div className="mt-10 text-center text-white/45 text-xs font-body tracking-wide">
+              Prefer email? Reach us at <a href="mailto:linklabs.studio@gmail.com" className="text-white/75 hover:text-white underline underline-offset-4 transition">linklabs.studio@gmail.com</a>
+            </div>
+          </div>
+        </section>
       );
     }
 
@@ -1569,15 +2001,14 @@
                 <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-[1.05] mb-5">Notes from the studio.<br/><span className="text-white/50">No spam. Ever.</span></h3>
                 <Newsletter />
               </div>
-              <div>
-                <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-4">Start a project</div>
-                <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-[1.05] mb-5">Have a vision?<br/><span className="text-white/50">Let's build it.</span></h3>
-                <div className="flex flex-wrap gap-2 mb-7">
-                  <span className="service-pill"><span className="dot" />Custom Design</span>
-                  <span className="service-pill"><span className="dot" />Fast Development</span>
-                  <span className="service-pill"><span className="dot" />Smart Strategy</span>
-                </div>
-                <ContactForm />
+              <div className="md:text-right">
+                <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-4">Reach us directly</div>
+                <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px] leading-[1.05] mb-5">One inbox.<br/><span className="text-white/50">Four humans.</span></h3>
+                <a href="mailto:linklabs.studio@gmail.com?subject=Project%20inquiry%20—%20LinkLabs" className="inline-flex items-center gap-2 bg-white text-black rounded-full px-5 py-2.5 text-sm font-medium font-body hover:scale-[1.03] active:scale-95 transition-transform">
+                  linklabs.studio@gmail.com
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <div className="mt-3 text-[11px] text-white/40 font-body tracking-wide">Replies within 4 hours · Mon–Sat, IST</div>
               </div>
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8">
@@ -1591,6 +2022,7 @@
                 <a href="#work" className="hover:text-white transition">Work</a>
                 <a href="#pricing" className="hover:text-white transition">Pricing</a>
                 <a href="#faq" className="hover:text-white transition">FAQ</a>
+                <a href="#contact-section" className="hover:text-white transition">Contact</a>
               </nav>
               <div className="flex gap-2">
                 <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" className="liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white hover:scale-110 transition"><IconInstagram /></a>
@@ -1603,7 +2035,7 @@
               <div className="flex items-center gap-4">
                 <a href="#" className="hover:text-white/70 transition">Privacy</a>
                 <a href="#" className="hover:text-white/70 transition">Terms</a>
-                <span>Made with care · v1.0</span>
+                <span>Made with care · v1.1</span>
               </div>
             </div>
           </div>
@@ -1630,7 +2062,7 @@
         var t2 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 250);
         return function () { clearTimeout(t1); clearTimeout(t2); };
       }, []);
-      return (<React.Fragment><Navbar /><main id="main"><Hero /><Capabilities /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /></main><Footer /></React.Fragment>);
+      return (<React.Fragment><Navbar /><main id="main"><Hero /><Capabilities /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /><ContactSection /></main><Footer /><FloatingCTA /></React.Fragment>);
     }
 
     window.addEventListener('error', function (e) {
