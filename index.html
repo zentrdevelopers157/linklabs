@@ -45,9 +45,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://d8j0ntlcm91z4.cloudfront.net" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
   <link rel="dns-prefetch" href="https://zentr.onrender.com">
   <link rel="dns-prefetch" href="https://avlune-fashion-store.netlify.app">
+  <link rel="dns-prefetch" href="https://api.web3forms.com">
+  <link rel="dns-prefetch" href="https://cal.com">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600;700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="https://avlune-fashion-store.netlify.app/og-image.jpg" fetchpriority="low">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -753,6 +758,367 @@
     [data-contain] {
       contain: layout style paint;
     }
+
+    /* === Stats section === */
+    .stats-section {
+      position: relative;
+      padding: 80px 0 60px;
+      background: linear-gradient(180deg, #000 0%, #050505 100%);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 0; } }
+    @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; gap: 24px 0; } }
+    .stat-card {
+      position: relative;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .stat-card:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 12px; bottom: 12px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.15) 70%, transparent);
+    }
+    @media (max-width: 900px) { .stat-card:not(:last-child)::after { display: none; } }
+    .stat-num {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(56px, 8vw, 88px);
+      line-height: 0.9;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 8px;
+      display: inline-block;
+      min-width: 1ch;
+    }
+    .stat-num .stat-suffix { font-size: 0.55em; vertical-align: top; line-height: 1; margin-left: 0.05em; color: rgba(255,255,255,0.65); }
+    .stat-label {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .stat-sub {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 12px; color: rgba(255,255,255,0.40);
+      margin-top: 4px;
+    }
+
+    /* === Tech stack === */
+    .tech-section { padding: 60px 0 60px; background: #000; overflow: hidden; }
+    .tech-heading { text-align: center; margin-bottom: 36px; padding: 0 24px; }
+    .tech-marquee-wrap {
+      position: relative;
+      padding: 24px 0;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .tech-marquee {
+      display: flex; gap: 14px;
+      width: max-content;
+      animation: marquee 38s linear infinite;
+    }
+    .tech-marquee:hover { animation-play-state: paused; }
+    .tech-chip {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 14px; font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+      transition: all 0.25s ease;
+    }
+    .tech-chip:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); color: #fff; }
+    .tech-chip svg { width: 18px; height: 18px; opacity: 0.85; }
+    @media (prefers-reduced-motion: reduce) { .tech-marquee { animation: none; } }
+
+    /* === Case study === */
+    .case-section { padding: 100px 24px; background: #000; }
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 56px;
+      max-width: 1200px; margin: 0 auto;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .case-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .case-visual {
+      position: relative;
+      aspect-ratio: 4/3;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .case-visual-inner {
+      position: absolute; inset: 0;
+      background-image: url('https://avlune-fashion-store.netlify.app/og-image.jpg');
+      background-size: cover; background-position: center;
+      transform: scale(1.02);
+      transition: transform 8s ease;
+    }
+    .case-visual:hover .case-visual-inner { transform: scale(1.1); }
+    .case-visual-fallback {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+      color: #fff; font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: 96px; letter-spacing: -4px;
+    }
+    .case-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.65));
+    }
+    .case-tag {
+      position: absolute; top: 16px; left: 16px;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #fff;
+    }
+    .case-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px rgba(52,211,153,0.7); }
+    .case-eyebrow {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.50);
+      margin-bottom: 16px;
+    }
+    .case-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .case-title .accent { color: rgba(255,255,255,0.5); }
+    .case-desc {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 16px; font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      max-width: 52ch;
+      margin-bottom: 28px;
+    }
+    .case-metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 28px;
+    }
+    .case-metric { padding: 0 16px; text-align: left; }
+    .case-metric:not(:last-child) { border-right: 1px solid rgba(255,255,255,0.08); }
+    .case-metric .v {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 36px; line-height: 1;
+      letter-spacing: -1px;
+      color: #fff;
+    }
+    .case-metric .l {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.50);
+      margin-top: 6px;
+    }
+    .case-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 24px;
+      background: #fff; color: #000;
+      border-radius: 999px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 14px; font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .case-cta:hover { transform: translateY(-1px); box-shadow: 0 14px 30px -10px rgba(255,255,255,0.3); }
+    .case-cta svg { transition: transform 0.2s ease; }
+    .case-cta:hover svg { transform: translate(2px, -2px); }
+
+    /* === Industries === */
+    .industries-section { padding: 80px 24px; background: linear-gradient(180deg, #000, #050505); }
+    .industries-heading { text-align: center; max-width: 700px; margin: 0 auto 48px; }
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    @media (max-width: 800px) { .industries-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .industries-grid { grid-template-columns: 1fr; } }
+    .industry-card {
+      position: relative;
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: default;
+      overflow: hidden;
+    }
+    .industry-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.05), transparent 60%);
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .industry-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+    .industry-card:hover::before { opacity: 1; }
+    .industry-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+    .industry-card:hover .industry-icon { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.20); transform: scale(1.05); }
+    .industry-name {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 16px; font-weight: 500;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .industry-desc {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 13px; font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+    .industry-stat {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 12px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .industry-stat .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.35); }
+
+    /* === Cookie banner === */
+    .cookie-banner {
+      position: fixed;
+      bottom: 24px; left: 24px;
+      z-index: 60;
+      max-width: 380px;
+      padding: 18px 20px;
+      background: rgba(20, 20, 20, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      box-shadow: 0 20px 50px -10px rgba(0,0,0,0.6);
+      transform: translateY(140%);
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
+    }
+    .cookie-banner.show { transform: translateY(0); opacity: 1; }
+    .cookie-banner.hide { transform: translateY(140%); opacity: 0; }
+    .cookie-icon {
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .cookie-title {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 14px; font-weight: 500;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .cookie-text {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 12px; font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .cookie-actions { display: flex; gap: 8px; }
+    .cookie-btn {
+      flex: 1; padding: 9px 14px;
+      border-radius: 10px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 13px; font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .cookie-accept { background: #fff; color: #000; }
+    .cookie-accept:hover { background: rgba(255,255,255,0.9); }
+    .cookie-decline { background: transparent; color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.15); }
+    .cookie-decline:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    @media (max-width: 480px) {
+      .cookie-banner { left: 12px; right: 12px; max-width: none; bottom: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .cookie-banner { transition: opacity 0.2s ease; transform: none; } }
+
+    /* === Cal.com inline embed === */
+    .cal-embed-frame {
+      width: 100%; height: 640px; min-height: 540px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+    }
+    .cal-embed-frame iframe { width: 100%; height: 100%; border: 0; }
+
+    /* === Mini cal modal === */
+    .cal-link-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      color: rgba(255,255,255,0.85);
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .cal-link-btn:hover { background: rgba(255,255,255,0.10); color: #fff; transform: translateY(-1px); }
+
+    /* === Industry grid mouse-tracker (for spotlight on cards) === */
+    .industry-card { --mx: 50%; --my: 50%; }
+
+    /* === Counter animation === */
+    @keyframes countUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .stat-num.counting { animation: countUp 0.6s ease both; }
+
+    /* === Skip link === */
+    .skip-link {
+      position: fixed; top: 12px; left: 12px; z-index: 100;
+      padding: 10px 16px;
+      background: #fff; color: #000;
+      border-radius: 10px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 13px; font-weight: 500;
+      text-decoration: none;
+      transform: translateY(-150%);
+      transition: transform 0.2s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -1979,6 +2345,7 @@
             </div>
             <div className="liquid-glass-strong rounded-[1.5rem] p-6 md:p-10 max-w-3xl mx-auto">
               <ContactForm />
+              <CalCTA />
             </div>
             <div className="max-w-4xl mx-auto">
               <NextSteps />
@@ -2056,13 +2423,241 @@
       return EB;
     })(React);
 
+    function Counter(props) {
+      var ref = useRef(null);
+      var valState = useState(0);
+      var val = valState[0]; var setVal = valState[1];
+      var target = props.target || 0;
+      var suffix = props.suffix || '';
+      var decimals = props.decimals || 0;
+      var playedRef = useRef(false);
+
+      useEffect(function () {
+        if (!ref.current) return;
+        var t = target;
+        var dur = 1400;
+        var start = null;
+        function step(ts) {
+          if (start === null) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var ease = 1 - Math.pow(1 - p, 3);
+          setVal(t * ease);
+          if (p < 1) requestAnimationFrame(step);
+          else setVal(t);
+        }
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting && !playedRef.current) {
+              playedRef.current = true;
+              ref.current.classList.add('counting');
+              requestAnimationFrame(step);
+            }
+          });
+        }, { threshold: 0.4 });
+        obs.observe(ref.current);
+        return function () { obs.disconnect(); };
+      }, [target]);
+
+      var display = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toString();
+      return <span ref={ref} className="stat-num">{display}<span className="stat-suffix">{suffix}</span></span>;
+    }
+
+    function Stats() {
+      var stats = [
+        { v: 12, suffix: '+', label: 'Projects shipped', sub: 'across 4 industries' },
+        { v: 8, suffix: '+', label: 'Happy clients', sub: 'global, since 2024' },
+        { v: 4.9, suffix: '★', label: 'Average rating', sub: 'across 11 reviews', decimals: 1 },
+        { v: 4, suffix: ' wks', label: 'Avg. delivery', sub: 'start to launch' }
+      ];
+      return (
+        <section className="stats-section" aria-label="Studio statistics">
+          <div className="stats-grid">
+            {stats.map(function (s, i) {
+              return (
+                <div className="stat-card" key={i}>
+                  <Counter target={s.v} suffix={s.suffix} decimals={s.decimals || 0} />
+                  <div className="stat-label">{s.label}</div>
+                  <div className="stat-sub">{s.sub}</div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    function TechStack() {
+      var techs = [
+        { name: 'React', svg: <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"/><g stroke="currentColor" strokeWidth="1" fill="none" opacity="0.85"><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></g></svg> },
+        { name: 'Next.js', svg: <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" strokeWidth="1.5"/><text x="12" y="16" textAnchor="middle" fontSize="11" fontWeight="700" fontFamily="system-ui">N</text></svg> },
+        { name: 'Tailwind CSS', svg: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 6c-3 0-5 1.5-5 4.5 0 1.5.7 2.6 1.9 3.2-1.5.4-2.4 1.5-2.4 3 0 2 1.7 3.3 4.5 3.3 3.5 0 5.5-2 5.5-5 0-1.5-.7-2.6-1.9-3.2 1.5-.4 2.4-1.5 2.4-3 0-1.9-1.7-2.8-5-2.8z"/></svg> },
+        { name: 'TypeScript', svg: <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/><text x="12" y="17" textAnchor="middle" fontSize="13" fontWeight="700" fontFamily="system-ui">TS</text></svg> },
+        { name: 'Figma', svg: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 3h3v6H9a3 3 0 0 1 0-6zm0 6h3v6H9a3 3 0 0 1 0-6zm0 6h3a3 3 0 1 1-3 3v-3zm6-12h3a3 3 0 0 1 0 6h-3V3zm0 6h3a3 3 0 0 1 0 6h-3V9zm0 6h3v3a3 3 0 1 1-3-3z"/></svg> },
+        { name: 'WordPress', svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg> },
+        { name: 'Shopify', svg: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 4c-.5 0-1.2.3-1.7.8-.4.5-.7 1.1-.8 1.7l-2.3.7L8 5l-1 1 1 1.5-2 9 6 2 6-2-2-9 .5-.5c.5.3 1 .3 1.5 0 .7-.3 1.2-1 1.3-1.7.1-1-.8-1.8-1.8-1.8z" stroke="currentColor" strokeWidth="1" fill="none"/></svg> },
+        { name: 'Webflow', svg: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 7l-3 10h-2L15 11l-2 6h-2L8 7h2l2 6 2-6h2l2 6 2-6h2z"/></svg> },
+        { name: 'Vercel', svg: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 2 19h20L12 2z"/></svg> },
+        { name: 'Sanity', svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="9"/><path d="M5 12h14M12 5v14"/></svg> },
+        { name: 'Stripe', svg: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 9c0-1 1-1.5 2.5-1.5 2 0 4 .5 4 .5l.5-4s-1.5-.5-4.5-.5C10 3 8 5 8 8c0 5 7 4 7 7 0 1.2-1 1.7-2.5 1.7-2.5 0-5-.7-5-.7L7 20s2 .7 5.5.7c3.5 0 5.5-2 5.5-4.7 0-5-7-4-7-7z"/></svg> },
+        { name: 'Node.js', svg: <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.2 6.5 3.6v7.4L12 18.8 5.5 15.2V7.8L12 4.2zM10 9v6l1.5-.5V11l2 3 1.5-.5-2-3 2-1V8L10 9z"/></svg> }
+      ];
+      var looped = techs.concat(techs);
+      return (
+        <section className="tech-section" aria-label="Technologies we work with">
+          <div className="tech-heading">
+            <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-3">Stack</div>
+            <h3 className="font-heading italic text-white text-3xl md:text-4xl tracking-[-1px]">Built with the right tools.</h3>
+          </div>
+          <div className="tech-marquee-wrap">
+            <div className="tech-marquee">
+              {looped.map(function (t, i) {
+                return <span className="tech-chip" key={i}>{t.svg}<span>{t.name}</span></span>;
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function CaseStudy() {
+      return (
+        <section className="case-section" id="case-study" aria-label="Featured case study">
+          <div className="case-grid">
+            <a className="case-visual" href="https://avlune-fashion-store.netlify.app" target="_blank" rel="noreferrer" aria-label="Visit Avlune live site">
+              <div className="case-visual-inner" onError={function (e) { e.currentTarget.style.display='none'; }} />
+              <div className="case-overlay" />
+              <span className="case-tag"><span className="dot" />Live · D2C</span>
+              <div className="absolute bottom-5 left-5 right-5 z-[2] flex items-end justify-between">
+                <div>
+                  <div className="text-white/70 text-xs font-body tracking-[0.2em] uppercase mb-1">Featured</div>
+                  <div className="text-white text-2xl md:text-3xl font-heading italic tracking-[-0.5px]">Avlune</div>
+                </div>
+                <span className="liquid-glass rounded-full w-11 h-11 flex items-center justify-center text-white">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                </span>
+              </div>
+            </a>
+            <div>
+              <div className="case-eyebrow">Case study · 02</div>
+              <h3 className="case-title">Avlune.<br/><span className="accent">A fashion store, rebuilt for speed.</span></h3>
+              <p className="case-desc">We redesigned and rebuilt Avlune's storefront from scratch — a hand-picked D2C fashion label that needed a site as polished as the garments. The result shipped in 3 weeks and is still turning visitors into buyers.</p>
+              <div className="case-metrics">
+                <div className="case-metric">
+                  <div className="v">2.4×</div>
+                  <div className="l">Conversion</div>
+                </div>
+                <div className="case-metric">
+                  <div className="v">0.8s</div>
+                  <div className="l">LCP</div>
+                </div>
+                <div className="case-metric">
+                  <div className="v">21d</div>
+                  <div className="l">To launch</div>
+                </div>
+              </div>
+              <a className="case-cta" href="https://avlune-fashion-store.netlify.app" target="_blank" rel="noreferrer">
+                Visit live site
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Industries() {
+      useEffect(function () {
+        var cards = document.querySelectorAll('.industry-card');
+        cards.forEach(function (c) {
+          if (c.__spot) return; c.__spot = true;
+          c.addEventListener('mousemove', function (e) {
+            var r = c.getBoundingClientRect();
+            c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+            c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+          });
+        });
+      }, []);
+      var items = [
+        { name: 'D2C & E-commerce', desc: 'Fashion, beauty, lifestyle. Built to convert.', stat: 'Most active', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> },
+        { name: 'SaaS & Tech', desc: 'Marketing sites, dashboards, product launches.', stat: 'High growth', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg> },
+        { name: 'Real Estate', desc: 'Brokers, builders, luxury listings.', stat: '12+ projects', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg> },
+        { name: 'Education', desc: 'Coaches, course creators, edtech startups.', stat: 'Trusted', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10 12 4 2 10l10 6 10-6Z"/><path d="M6 12v5c3 1.5 6 1.5 9 0v-5"/></svg> },
+        { name: 'Healthcare', desc: 'Clinics, wellness brands, telemedicine.', stat: 'Compliant', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.7A4 4 0 0 1 19 10c0 6.5-7 11-7 11Z"/></svg> },
+        { name: 'Hospitality', desc: 'Hotels, restaurants, experience brands.', stat: 'Premium feel', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M2 22h20M2 11h20M5 22V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v14"/></svg> }
+      ];
+      return (
+        <section className="industries-section" aria-label="Industries we serve">
+          <div className="industries-heading">
+            <div className="text-white/50 text-xs font-body uppercase tracking-[0.2em] mb-3">Industries</div>
+            <h3 className="font-heading italic text-white text-4xl md:text-5xl tracking-[-1px] leading-[0.95]">Built for businesses that take their brand seriously.</h3>
+          </div>
+          <div className="industries-grid">
+            {items.map(function (it, i) { return (
+              <div className="industry-card" key={i}>
+                <div className="industry-icon">{it.icon}</div>
+                <div className="industry-name">{it.name}</div>
+                <div className="industry-desc">{it.desc}</div>
+                <div className="industry-stat"><span className="dot" />{it.stat}</div>
+              </div>
+            ); })}
+          </div>
+        </section>
+      );
+    }
+
+    function CookieBanner() {
+      var showState = useState(false);
+      var show = showState[0]; var setShow = showState[1];
+      var hideState = useState(false);
+      var hide = hideState[0]; var setHide = hideState[1];
+      useEffect(function () {
+        try {
+          var v = localStorage.getItem('ll-cookie-consent');
+          if (!v) { setTimeout(function () { setShow(true); }, 1500); }
+        } catch (_) { setTimeout(function () { setShow(true); }, 1500); }
+      }, []);
+      function respond(choice) {
+        try { localStorage.setItem('ll-cookie-consent', choice); } catch (_) {}
+        setHide(true);
+        setTimeout(function () { setShow(false); }, 600);
+      }
+      if (!show) return null;
+      return (
+        <div className={'cookie-banner ' + (hide ? 'hide' : 'show')} role="dialog" aria-label="Cookie consent">
+          <div className="cookie-icon">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-9-9c.4 0 .8 0 1.2.1a3 3 0 0 0 4 4 3 3 0 0 0 3.7 3.7A9 9 0 0 1 21 12z"/><circle cx="9" cy="13" r="0.5" fill="currentColor"/><circle cx="14" cy="16" r="0.5" fill="currentColor"/><circle cx="15" cy="11" r="0.5" fill="currentColor"/></svg>
+          </div>
+          <div className="cookie-title">A quick note on cookies</div>
+          <div className="cookie-text">We use a couple of cookies to remember your preferences and (anonymously) see which sections you love. No tracking across sites.</div>
+          <div className="cookie-actions">
+            <button type="button" onClick={function () { respond('accepted'); }} className="cookie-btn cookie-accept">Sounds good</button>
+            <button type="button" onClick={function () { respond('declined'); }} className="cookie-btn cookie-decline">No thanks</button>
+          </div>
+        </div>
+      );
+    }
+
+    function CalCTA() {
+      // Sign up free at https://cal.com with linklabs.studio@gmail.com → create a "15-min intro call" event → replace CAL_LINK below with https://cal.com/your-handle/15min
+      var CAL_LINK = 'https://cal.com/linklabs-studio/intro';
+      return (
+        <div className="mt-6 flex items-center justify-center gap-3 flex-wrap">
+          <span className="text-white/40 text-xs font-body tracking-wide">or</span>
+          <a className="cal-link-btn" href={CAL_LINK} target="_blank" rel="noreferrer">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Book a 15-min intro call
+          </a>
+        </div>
+      );
+    }
+
     function App() {
       useEffect(function () {
         var t1 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 30);
         var t2 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 250);
         return function () { clearTimeout(t1); clearTimeout(t2); };
       }, []);
-      return (<React.Fragment><Navbar /><main id="main"><Hero /><Capabilities /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /><ContactSection /></main><Footer /><FloatingCTA /></React.Fragment>);
+      return (<React.Fragment><Navbar /><main id="main"><Hero /><Stats /><TechStack /><Capabilities /><CaseStudy /><Industries /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /><ContactSection /></main><Footer /><FloatingCTA /><CookieBanner /></React.Fragment>);
     }
 
     window.addEventListener('error', function (e) {
