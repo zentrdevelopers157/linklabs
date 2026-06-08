@@ -1930,7 +1930,6 @@
       var lang = langState[0]; var setLang = langState[1];
       useEffect(function () { try { localStorage.setItem('ll-lang', lang); document.documentElement.setAttribute('lang', lang); } catch (_) {} }, [lang]);
       function toggleLang() { setLang(function (l) { return l === 'en' ? 'hi' : 'en'; }); }
-      var open = useState(false), menuOpen = open[0], setMenuOpen = open[1];
       var overlayRef = useRef(null);
       var navRef = useRef(null);
       var linkRefs = useRef([]);
@@ -3239,8 +3238,7 @@
           tagColor: 'text-orange-400'
         }
       ];
-      var currentIndex = useState(0)[0];
-      var setCurrentIndex = useState(0)[1];
+      var indexPair = useState(0); var currentIndex = indexPair[0]; var setCurrentIndex = indexPair[1];
       var goTo = function(i) { setCurrentIndex(i); };
       var current = studies[currentIndex];
       return (
