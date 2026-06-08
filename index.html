@@ -3539,12 +3539,7 @@
     };
 
     function App() {
-      useEffect(function () {
-        var t1 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 30);
-        var t2 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 250);
-        return function () { clearTimeout(t1); clearTimeout(t2); };
-      }, []);
-      return (<React.Fragment><Navbar /><main id="main"><Hero /></main><Footer /></React.Fragment>);
+      return (<React.Fragment><main id="main"><Hero /></main><Footer /></React.Fragment>);
     }
 
     window.addEventListener('error', function (e) {
