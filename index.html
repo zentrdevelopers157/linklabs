@@ -3555,7 +3555,8 @@
       catch (err) { document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:monospace;"><h1 style="font-family:serif;font-style:italic;font-size:32px;">Render error</h1><pre style="white-space:pre-wrap;color:#f88;margin-top:16px;">' + String((err && (err.stack || err)) || '').replace(/</g, '&lt;') + '</pre></div>'; }
     }
 
-    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', mount); } else { mount(); }
+    if (document.readyState === 'complete') { mount(); }
+    else { window.addEventListener('load', mount); }
   </script>
 
   <script type="application/ld+json">
