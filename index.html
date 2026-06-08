@@ -1678,7 +1678,7 @@
     function IconTwitter(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M18.244 2H21l-6.55 7.49L22 22h-6.81l-4.78-6.27L4.8 22H2l7.02-8.03L2 2h6.91l4.3 5.7L18.24 2zm-1.19 18h1.65L7.04 4H5.3l11.75 16z" /></svg>); }
     function IconLinkedIn(p) { var s=p.size||18, c=p.className||''; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.04 0 4.78 2.66 4.78 6.12V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4V9z" /></svg>); }
 
-    function ThemeIcon(p) { var t = p.theme || 'dark', s = p.size || 20; return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={p.className}><g style={{display: t === 'light' ? 'block' : 'none'}}><circle cx="12" cy="12" r="5" /><path d="M12 3v1 M12 20v1 M3 12H2 M21 12h1 M4.22 4.22l.71.71 M19.07 19.07l.71.71 M2 12h1 M20 12h1" /></g><g style={{display: t === 'dark' ? 'block' : 'none'}}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></g></svg>); }
+    function ThemeIcon(p) { var t = p.theme || 'dark', s = p.size || 20; if (t === 'light') { return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={p.className}><circle cx="12" cy="12" r="5" /><path d="M12 3v1 M12 20v1 M3 12H2 M21 12h1 M4.22 4.22l.71.71 M19.07 19.07l.71.71 M2 12h1 M20 12h1" /></svg>); } return (<svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={p.className}><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>); }
 
     function LogoMark(p) {
       var size = p.size || 32;
@@ -2023,10 +2023,10 @@
             <a href="#pricing" data-magnetic="0.2" className="relative z-10 ml-1 bg-white text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1 whitespace-nowrap hover:scale-[1.03] active:scale-95 transition-transform duration-200">Get Started <IconArrowUpRight size={16} strokeWidth={2} /></a>
           </div>
           <button onClick={toggleLang} className="hidden md:flex liquid-glass w-11 h-11 rounded-full flex items-center justify-center text-white" aria-label="Toggle language">
-            <span className="text-[11px] font-medium font-body">{lang === 'en' ? 'EN' : 'हि'}</span>
+            <span className="text-[11px] font-medium font-body">EN</span>
           </button>
           <button onClick={toggleLang} className="md:hidden liquid-glass w-11 h-11 rounded-full flex items-center justify-center text-white" aria-label="Toggle language">
-            <span className="text-[11px] font-medium font-body">{lang === 'en' ? 'EN' : 'हि'}</span>
+            <span className="text-[11px] font-medium font-body">EN</span>
           </button>
           <button onClick={toggleTheme} className="hidden md:flex liquid-glass w-11 h-11 rounded-full flex items-center justify-center text-white" aria-label="Toggle theme"><ThemeIcon theme={theme} /></button>
           <button onClick={toggleTheme} className="md:hidden liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white" aria-label="Toggle theme"><ThemeIcon theme={theme} /></button>
