@@ -3539,7 +3539,12 @@
     };
 
     function App() {
-      return (<main id="main"><div style={{padding: '40px', color: '#fff', fontFamily: 'monospace'}}>TEST: App renders</div></main>);
+      useEffect(function () {
+        var t1 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 30);
+        var t2 = setTimeout(function () { if (window.__initCardEffects) window.__initCardEffects(); }, 250);
+        return function () { clearTimeout(t1); clearTimeout(t2); };
+      }, []);
+      return (<React.Fragment><Navbar /><main id="main"><Hero /><Stats /><TechStack /><Capabilities /><CaseStudy /><Industries /><Portfolio /><Testimonials /><Team /><Pricing /><Process /><FAQ /><ContactSection /></main><Footer /><FloatingCTA /><CookieBanner /><Lightbox /></React.Fragment>);
     }
     window.ErrorBoundary = ErrorBoundary;
     window.App = App;
