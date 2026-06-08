@@ -45,6 +45,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="stylesheet" media="print" href="/print.css" />
+  <script defer data-domain="linklabs-three.vercel.app" src="https://plausible.io/js/script.js"></script>
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -1057,6 +1058,38 @@
     .case-cta svg { transition: transform 0.2s ease; }
     .case-cta:hover svg { transform: translate(2px, -2px); }
 
+    /* === Case Study Carousel === */
+    .case-carousel { position: relative; width: 100%; overflow: hidden; }
+    .case-track { display: flex; width: 400%; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .case-slide { flex: 0 0 25%; padding-right: 28px; }
+    .case-slide .case-visual { border-radius: 24px; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); color: #fff;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .carousel-btn.prev { left: -24px; }
+    .carousel-btn.next { right: -24px; }
+    .carousel-btn:hover { background: rgba(255,255,255,0.1); transform: translateY(-50%) scale(1.05); }
+    @media (max-width: 900px) { .carousel-btn.prev { left: 8px; } .carousel-btn.next { right: 8px; } }
+    .case-dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+    .case-dot { width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); border: 2px solid transparent;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .case-dot:hover { background: rgba(255,255,255,0.4); }
+    .case-dot.active { background: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+    .case-content { max-width: 600px; }
+    @media (max-width: 900px) {
+      .case-slide { flex: 0 0 100%; padding-right: 0; }
+      .case-track { width: 100%; }
+      .carousel-btn { width: 40px; height: 40px; }
+      .carousel-btn.prev { left: 4px; }
+      .carousel-btn.next { right: 4px; }
+    }
+
     /* === Industries === */
     .industries-section { padding: 80px 24px; background: linear-gradient(180deg, #000, #050505); }
     .industries-heading { text-align: center; max-width: 700px; margin: 0 auto 48px; }
@@ -1893,6 +1926,10 @@
       var theme = themeState[0]; var setTheme = themeState[1];
       useEffect(function () { try { localStorage.setItem('ll-theme', theme); document.documentElement.setAttribute('data-theme', theme); } catch (_) {} }, [theme]);
       function toggleTheme() { setTheme(function (t) { return t === 'dark' ? 'light' : 'dark'; }); }
+      var langState = useState(function () { try { return localStorage.getItem('ll-lang') || 'en'; } catch (_) { return 'en'; } });
+      var lang = langState[0]; var setLang = langState[1];
+      useEffect(function () { try { localStorage.setItem('ll-lang', lang); document.documentElement.setAttribute('lang', lang); } catch (_) {} }, [lang]);
+      function toggleLang() { setLang(function (l) { return l === 'en' ? 'hi' : 'en'; }); }
       var open = useState(false), menuOpen = open[0], setMenuOpen = open[1];
       var overlayRef = useRef(null);
       var navRef = useRef(null);
@@ -1985,6 +2022,12 @@
             })}
             <a href="#pricing" data-magnetic="0.2" className="relative z-10 ml-1 bg-white text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1 whitespace-nowrap hover:scale-[1.03] active:scale-95 transition-transform duration-200">Get Started <IconArrowUpRight size={16} strokeWidth={2} /></a>
           </div>
+          <button onClick={toggleLang} className="hidden md:flex liquid-glass w-11 h-11 rounded-full flex items-center justify-center text-white" aria-label="Toggle language">
+            <span className="text-[11px] font-medium font-body">{lang === 'en' ? 'EN' : 'हि'}</span>
+          </button>
+          <button onClick={toggleLang} className="md:hidden liquid-glass w-11 h-11 rounded-full flex items-center justify-center text-white" aria-label="Toggle language">
+            <span className="text-[11px] font-medium font-body">{lang === 'en' ? 'EN' : 'हि'}</span>
+          </button>
           <button onClick={toggleTheme} className="hidden md:flex liquid-glass w-11 h-11 rounded-full flex items-center justify-center text-white" aria-label="Toggle theme"><ThemeIcon theme={theme} /></button>
           <button onClick={toggleTheme} className="md:hidden liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white" aria-label="Toggle theme"><ThemeIcon theme={theme} /></button>
           <button onClick={function () { setMenuOpen(true); }} className="md:hidden liquid-glass w-12 h-12 rounded-full flex items-center justify-center text-white"><IconMenu /></button>
@@ -3122,59 +3165,163 @@
     }
 
     function CaseStudy() {
+      var studies = [
+        {
+          id: 'avlune',
+          num: '02',
+          title: 'Avlune.',
+          subtitle: 'A fashion store, rebuilt for speed.',
+          desc: 'We redesigned and rebuilt Avlune\'s storefront from scratch — a hand-picked D2C fashion label that needed a site as polished as the garments. The result shipped in 3 weeks and is still turning visitors into buyers.',
+          metrics: [
+            { v: '2.4×', l: 'Conversion' },
+            { v: '0.8s', l: 'LCP' },
+            { v: '21d', l: 'To launch' }
+          ],
+          url: 'https://avlune-fashion-store.netlify.app/',
+          img: 'assets/work/avlune.png',
+          imgAlt: 'Avlune — Lunar Collection 2026 hero',
+          fallbackUrl: 'https://avlune-fashion-store.netlify.app/og-image.jpg',
+          tag: 'Live · D2C',
+          tagColor: 'text-white'
+        },
+        {
+          id: 'zentr',
+          num: '01',
+          title: 'Zentr.',
+          subtitle: 'Orders. Not DMs.',
+          desc: 'Zentr needed a SaaS dashboard that turns chaotic Instagram DMs into structured orders. We built a complete order management system with real-time tracking, inventory sync, and a checkout flow that converts 2.4× better than their old process.',
+          metrics: [
+            { v: '2.4×', l: 'Conversion' },
+            { v: '11d', l: 'To launch' },
+            { v: '99.9%', l: 'Uptime' }
+          ],
+          url: 'https://zentr.onrender.com/',
+          img: 'assets/work/zentr.png',
+          imgAlt: 'Zentr — Orders dashboard',
+          fallbackUrl: 'https://zentr.onrender.com/og-image.jpg',
+          tag: 'Live · SaaS',
+          tagColor: 'text-emerald-300'
+        },
+        {
+          id: 'roamie',
+          num: '03',
+          title: 'Roamie.',
+          subtitle: 'Your world, your journey.',
+          desc: 'Roamie is an AI-powered travel planner that finds flights, trains, and cruises at the lowest prices. We built a conversational interface that plans complete multi-modal trips in seconds — from itinerary to booking — with real-time price tracking.',
+          metrics: [
+            { v: '3×', l: 'Search speed' },
+            { v: '47%', l: 'Cheaper fares' },
+            { v: '98%', l: 'User satisfaction' }
+          ],
+          url: 'https://roamie-three.vercel.app/',
+          img: 'assets/work/roamie.png',
+          imgAlt: 'Roamie — AI travel planner',
+          fallbackUrl: 'https://roamie-three.vercel.app/og-image.jpg',
+          tag: 'Live · AI Travel',
+          tagColor: 'text-orange-300'
+        },
+        {
+          id: 'senjr',
+          num: '04',
+          title: 'Senjr.',
+          subtitle: 'Learn from seniors, not teachers.',
+          desc: 'Senjr connects students with senior mentors for career guidance. We built a community platform with video calls, structured learning paths, and a matching algorithm that pairs students with the right mentors based on goals and background.',
+          metrics: [
+            { v: '4.9★', l: 'Rating' },
+            { v: '12k+', l: 'Sessions' },
+            { v: '87%', l: 'Match success' }
+          ],
+          url: 'https://senjrai.vercel.app/',
+          img: 'assets/work/senjr.png',
+          imgAlt: 'Senjr — Senior mentorship platform',
+          fallbackUrl: 'https://senjrai.vercel.app/og-image.jpg',
+          tag: 'Live · EdTech',
+          tagColor: 'text-orange-400'
+        }
+      ];
+      var currentIndex = useState(0)[0];
+      var setCurrentIndex = useState(0)[1];
+      var goTo = function(i) { setCurrentIndex(i); };
+      var current = studies[currentIndex];
       return (
-        <section className="case-section" id="case-study" aria-label="Featured case study">
+        <section className="case-section" id="case-study" aria-label="Case studies">
           <div className="case-grid">
-            <a className="case-visual" href="https://avlune-fashion-store.netlify.app" target="_blank" rel="noreferrer" aria-label="Visit Avlune live site">
-              <div className="absolute top-0 inset-x-0 h-7 z-[3] flex items-center gap-1.5 px-3 bg-black/30 backdrop-blur-sm">
-                <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
-                <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
-                <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
-                <div className="mx-auto text-[10px] text-white/70 font-body truncate max-w-[60%]">avlune-fashion-store.netlify.app</div>
+            <div className="case-carousel">
+              <button className="carousel-btn prev" onClick={function () { setCurrentIndex((currentIndex - 1 + studies.length) % studies.length); }} aria-label="Previous case study">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <div className="case-track" style={{ transform: 'translateX(' + (-currentIndex * 100) + '%)' }}>
+                {studies.map(function (s, i) {
+                  return (
+                    <div key={s.id} className="case-slide">
+                      <a className="case-visual" href={s.url} target="_blank" rel="noreferrer" aria-label={"Visit " + s.title + " live site"}>
+                        <div className="absolute top-0 inset-x-0 h-7 z-[3] flex items-center gap-1.5 px-3 bg-black/30 backdrop-blur-sm">
+                          <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                          <div className="mx-auto text-[10px] text-white/70 font-body truncate max-w-[60%]">{s.url.replace('https://','').replace('http://','').replace(/\/$/, '')}</div>
+                        </div>
+                        <img
+                          src={s.img}
+                          alt={s.imgAlt}
+                          loading="lazy"
+                          decoding="async"
+                          className="case-img"
+                          onerror={"this.onerror=null;this.src='" + s.fallbackUrl + "';"}
+                        />
+                        <div className="case-overlay" />
+                        <span className="case-tag" style={{ zIndex: 7 }}><span className="dot" />{s.tag}</span>
+                        <span className="case-click-hint">
+                          View live
+                          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
+                        <div className="absolute bottom-5 left-5 right-5 z-[7] flex items-end justify-between">
+                          <div>
+                            <div className="text-white/80 text-xs font-body tracking-[0.2em] uppercase mb-1 drop-shadow">Featured</div>
+                            <div className="text-white text-2xl md:text-3xl font-heading italic tracking-[-0.5px] drop-shadow-lg">{s.title}</div>
+                          </div>
+                          <span className="liquid-glass rounded-full w-11 h-11 flex items-center justify-center text-white">
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                          </span>
+                        </div>
+                      </a>
+                    </div>
+                  );
+                })}
               </div>
-              <img
-                src="assets/work/avlune.png"
-                alt="Avlune — Lunar Collection 2026 hero"
-                loading="lazy"
-                decoding="async"
-                className="case-img"
-                onerror="this.onerror=null;this.src='https://avlune-fashion-store.netlify.app/og-image.jpg';"
-              />
-              <div className="case-overlay" />
-              <span className="case-tag" style={{ zIndex: 7 }}><span className="dot" />Live · D2C</span>
-              <span className="case-click-hint">
-                View live
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-              </span>
-              <div className="absolute bottom-5 left-5 right-5 z-[7] flex items-end justify-between">
-                <div>
-                  <div className="text-white/80 text-xs font-body tracking-[0.2em] uppercase mb-1 drop-shadow">Featured</div>
-                  <div className="text-white text-2xl md:text-3xl font-heading italic tracking-[-0.5px] drop-shadow-lg">Avlune</div>
-                </div>
-                <span className="liquid-glass rounded-full w-11 h-11 flex items-center justify-center text-white">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-                </span>
-              </div>
-            </a>
-            <div>
-              <div className="case-eyebrow">Case study · 02</div>
-              <h3 className="case-title">Avlune.<br/><span className="accent">A fashion store, rebuilt for speed.</span></h3>
-              <p className="case-desc">We redesigned and rebuilt Avlune's storefront from scratch — a hand-picked D2C fashion label that needed a site as polished as the garments. The result shipped in 3 weeks and is still turning visitors into buyers.</p>
+              <button className="carousel-btn next" onClick={function () { setCurrentIndex((currentIndex + 1) % studies.length); }} aria-label="Next case study">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+            <div className="case-dots" role="tablist" aria-label="Case study navigation">
+              {studies.map(function (s, i) {
+                return (
+                  <button
+                    key={s.id}
+                    className={'case-dot ' + (i === currentIndex ? 'active' : '')}
+                    onClick={function () { setCurrentIndex(i); }}
+                    role="tab"
+                    aria-selected={i === currentIndex}
+                    aria-label={s.title + ' case study'}
+                  />
+                );
+              })}
+            </div>
+            <div className="case-content">
+              <div className="case-eyebrow">Case study · {current.num}</div>
+              <h3 className="case-title">{current.title}<br/><span className="accent">{current.subtitle}</span></h3>
+              <p className="case-desc">{current.desc}</p>
               <div className="case-metrics">
-                <div className="case-metric">
-                  <div className="v">2.4×</div>
-                  <div className="l">Conversion</div>
-                </div>
-                <div className="case-metric">
-                  <div className="v">0.8s</div>
-                  <div className="l">LCP</div>
-                </div>
-                <div className="case-metric">
-                  <div className="v">21d</div>
-                  <div className="l">To launch</div>
-                </div>
+                {current.metrics.map(function (m, i) {
+                  return (
+                    <div key={i} className="case-metric">
+                      <div className="v">{m.v}</div>
+                      <div className="l">{m.l}</div>
+                    </div>
+                  );
+                })}
               </div>
-              <a className="case-cta" href="https://avlune-fashion-store.netlify.app" target="_blank" rel="noreferrer">
+              <a className="case-cta" href={current.url} target="_blank" rel="noreferrer">
                 Visit live site
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
               </a>
@@ -3303,6 +3450,93 @@
         </div>
       );
     }
+
+    var TR = {
+      en: {
+        'Start Your Project': 'Start Your Project',
+        'Watch the Reel': 'Watch the Reel',
+        'Services': 'Services',
+        'Work': 'Work',
+        'Process': 'Process',
+        'Pricing': 'Pricing',
+        'FAQ': 'FAQ',
+        'Contact': 'Contact',
+        'Get Started': 'Get Started',
+        'View live site': 'Visit live site',
+        'View live': 'View live',
+        'Featured': 'Featured',
+        'Case study': 'Case study',
+        'Start a project': 'Start a project',
+        'Tell us about your project': 'Tell us about your project',
+        'We reply within 4 hours': 'We reply within 4 hours',
+        'Stay in the loop': 'Stay in the loop',
+        'Reach us directly': 'Reach us directly',
+        'Replies within 4 hours': 'Replies within 4 hours',
+        'Crafted in India': 'Crafted in India',
+        'The Website Your Brand Deserves': 'The Website Your Brand Deserves',
+        'Pro features. Zero complexity.': 'Pro features. Zero complexity.',
+        'Built with care. Launched with pride.': 'Built with care. Launched with pride.',
+        'Honest pricing. Premium output.': 'Honest pricing. Premium output.',
+        'You dream it. We ship it.': 'You dream it. We ship it.',
+        'What our clients say.': 'What our clients say.',
+        'Kind Words': 'Kind Words',
+        'Questions, answered.': 'Questions, answered.',
+        'Still have questions?': 'Still have questions?',
+        'Get in touch': 'Get in touch',
+        'The Team': 'The Team',
+        'Four people. One obsession.': 'Four people. One obsession.',
+        'Selected Work': 'Selected Work',
+        'Built with care. Launched with pride.': 'Built with care. Launched with pride.',
+        'Capabilities': 'Capabilities',
+        'Pro features. Zero complexity.': 'Pro features. Zero complexity.',
+        'How It Works': 'How It Works',
+        'You dream it. We ship it.': 'You dream it. We ship it.',
+        'Our clients': 'Our clients',
+        'Start your project': 'Start your project'
+      },
+      hi: {
+        'Start Your Project': 'अपना प्रोजेक्ट शुरू करें',
+        'Watch the Reel': 'रील देखें',
+        'Services': 'सेवाएं',
+        'Work': 'काम',
+        'Process': 'प्रक्रिया',
+        'Pricing': 'कीमतें',
+        'FAQ': 'सवाल-जवाब',
+        'Contact': 'संपर्क',
+        'Get Started': 'शुरू करें',
+        'View live site': 'लाइव साइट देखें',
+        'View live': 'लाइव देखें',
+        'Featured': 'फीचर्ड',
+        'Case study': 'केस स्टडी',
+        'Start a project': 'प्रोजेक्ट शुरू करें',
+        'Tell us about your project': 'अपने प्रोजेक्ट के बारे में बताएं',
+        'We reply within 4 hours': 'हम 4 घंटे में जवाब देते हैं',
+        'Stay in the loop': 'जुड़े रहें',
+        'Reach us directly': 'सीधे संपर्क करें',
+        'Replies within 4 hours': '4 घंटे में जवाब',
+        'Crafted in India': 'भारत में बना',
+        'The Website Your Brand Deserves': 'वह वेबसाइट जो आपका ब्रांड डिज़र्व करता है',
+        'Pro features. Zero complexity.': 'प्रो फीचर्स. जीरो कॉम्प्लेक्सिटी।',
+        'Built with care. Launched with pride.': 'केयर से बनाया। गर्व से लॉन्च किया।',
+        'Honest pricing. Premium output.': 'ईमानदार कीमत। प्रीमियम आउटपुट।',
+        'You dream it. We ship it.': 'आप सपना देखें। हम डिलीवर करें।',
+        'What our clients say.': 'हमारे क्लाइंट क्या कहते हैं।',
+        'Kind Words': 'प्यारे शब्द',
+        'Questions, answered.': 'सवाल, जवाब।',
+        'Still have questions?': 'अभी भी सवाल हैं?',
+        'Get in touch': 'संपर्क करें',
+        'The Team': 'टीम',
+        'Four people. One obsession.': 'चार लोग। एक जुनून।',
+        'Selected Work': 'चुना हुआ काम',
+        'Built with care. Launched with pride.': 'केयर से बनाया। गर्व से लॉन्च किया।',
+        'Capabilities': 'क्षमताएं',
+        'Pro features. Zero complexity.': 'प्रो फीचर्स। जीरो कॉम्प्लेक्सिटी।',
+        'How It Works': 'कैसे काम करता है',
+        'You dream it. We ship it.': 'आप सपना देखें। हम डिलीवर करें।',
+        'Our clients': 'हमारे क्लाइंट्स',
+        'Start your project': 'अपना प्रोजेक्ट शुरू करें'
+      }
+    };
 
     function App() {
       useEffect(function () {
