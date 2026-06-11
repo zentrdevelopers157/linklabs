@@ -3524,22 +3524,28 @@
     }
     window.ErrorBoundary = ErrorBoundary;
     window.App = App;
+    function mount() {
+      try {
+        ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.ErrorBoundary, null, React.createElement(window.App)));
+        document.getElementById('root').setAttribute('data-mounted', '');
+      }
+      catch (err) { document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:monospace;"><h1 style="font-family:serif;font-style:italic;font-size:32px;">Render error</h1><pre style="white-space:pre-wrap;color:#f88;margin-top:16px;">' + String((err && (err.stack || err)) || '').replace(/</g, '&lt;') + '</pre></div>'; }
+    }
+    function tryMount() {
+      if (window.ErrorBoundary && window.App) { mount(); }
+      else { setTimeout(tryMount, 100); }
+    }
+    if (document.readyState === 'complete') { tryMount(); }
+    else { window.addEventListener('load', tryMount); }
   </script>
 
   <script>
     window.addEventListener('error', function (e) {
       var root = document.getElementById('root');
       if (!root) return;
+      if (root.querySelector('[data-mounted]')) return;
       root.innerHTML = '<div style="padding:40px;color:#fff;font-family:monospace;"><h1 style="font-family:serif;font-style:italic;font-size:32px;">Startup error</h1><pre style="white-space:pre-wrap;color:#f88;margin-top:16px;">' + String((e && (e.error && (e.error.stack || e.error)) || e.message || e)).replace(/</g, '&lt;') + '</pre></div>';
     });
-
-    function mount() {
-      try { ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.ErrorBoundary, null, React.createElement(window.App))); }
-      catch (err) { document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:monospace;"><h1 style="font-family:serif;font-style:italic;font-size:32px;">Render error</h1><pre style="white-space:pre-wrap;color:#f88;margin-top:16px;">' + String((err && (err.stack || err)) || '').replace(/</g, '&lt;') + '</pre></div>'; }
-    }
-
-    if (document.readyState === 'complete') { mount(); }
-    else { window.addEventListener('load', mount); }
   </script>
 
   <script type="application/ld+json">
