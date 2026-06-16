@@ -899,13 +899,31 @@
     @media (prefers-reduced-motion: reduce) { .tech-marquee { animation: none; } }
 
     /* === Case study === */
-    .case-section { padding: 100px 24px; background: #000; }
+    .case-section { padding: 100px 24px; background: #000; position: relative; overflow: hidden; }
+    .case-section-header { text-align: center; margin-bottom: 64px; }
+    .case-section-header .eyebrow {
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.50); margin-bottom: 14px;
+    }
+    .case-section-header h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(40px, 6vw, 72px);
+      line-height: 0.95; letter-spacing: -2px; color: #fff;
+    }
+    .case-section-header p {
+      margin-top: 16px;
+      font-family: 'Barlow', system-ui, sans-serif;
+      font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.65);
+      max-width: 48ch; margin-left: auto; margin-right: auto;
+    }
     .case-grid {
       display: grid;
       grid-template-columns: 1.05fr 1fr;
       gap: 56px;
       max-width: 1200px; margin: 0 auto;
-      align-items: center;
+      align-items: start;
     }
     @media (max-width: 900px) { .case-grid { grid-template-columns: 1fr; gap: 40px; } }
     .case-visual {
@@ -3662,8 +3680,19 @@ function Testimonials() {
       "data-contain": true,
       className: "liquid-glass rounded-[1.25rem] p-7 flex flex-col h-full min-h-[280px]"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "text-white/40 text-3xl font-heading italic leading-none mb-4"
-    }, "\""), /*#__PURE__*/React.createElement("p", {
+      className: "flex items-center justify-between mb-4"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex gap-0.5"
+    }, [0,1,2,3,4].map(function(s) {
+      return /*#__PURE__*/React.createElement("svg", {
+        key: s, width: "14", height: "14", viewBox: "0 0 24 24",
+        fill: "#f59e0b", className: "opacity-90"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+      }));
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "text-white/20 text-4xl font-heading italic leading-none select-none"
+    }, "\u201C")), /*#__PURE__*/React.createElement("p", {
       className: "text-white/90 text-sm md:text-[15px] font-body font-light leading-relaxed flex-1"
     }, t.quote), /*#__PURE__*/React.createElement("div", {
       className: "mt-6 flex items-center gap-3 pt-5 border-t border-white/5"
@@ -4958,7 +4987,7 @@ function Footer() {
     className: "liquid-glass rounded-full w-10 h-10 flex items-center justify-center text-white hover:scale-110 transition"
   }, /*#__PURE__*/React.createElement(IconLinkedIn, null)))), /*#__PURE__*/React.createElement("div", {
     className: "mt-8 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-white/40 font-body"
-  }, /*#__PURE__*/React.createElement("div", null, "\xA9 2025 LinkLabs Studio. Crafted in India."), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", null, "\xA9 2026 LinkLabs Studio. Crafted in India."), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-4"
   }, /*#__PURE__*/React.createElement("a", {
     href: "/privacy.html",
@@ -4966,7 +4995,7 @@ function Footer() {
   }, "Privacy"), /*#__PURE__*/React.createElement("a", {
     href: "#",
     className: "hover:text-white/70 transition"
-  }, "Terms"), /*#__PURE__*/React.createElement("span", null, "Made with care \xB7 v1.2")))));
+  }, "Terms"), /*#__PURE__*/React.createElement("span", null, "Made with care \xB7 v1.3")))));
 }
 var ErrorBoundary = function (R) {
   var C = R.Component;
@@ -5374,15 +5403,32 @@ function CaseStudy() {
   var indexPair = useState(0);
   var currentIndex = indexPair[0];
   var setCurrentIndex = indexPair[1];
-  var goTo = function (i) {
-    setCurrentIndex(i);
-  };
+  var pausedRef = useRef(false);
   var current = studies[currentIndex];
+  useEffect(function () {
+    var timer = setInterval(function () {
+      if (!pausedRef.current) {
+        setCurrentIndex(function (idx) { return (idx + 1) % studies.length; });
+      }
+    }, 5000);
+    return function () { clearInterval(timer); };
+  }, []);
+  function goToWithPause(i) {
+    pausedRef.current = true;
+    setCurrentIndex(i);
+    setTimeout(function () { pausedRef.current = false; }, 8000);
+  }
   return /*#__PURE__*/React.createElement("section", {
     className: "case-section",
     id: "case-study",
     "aria-label": "Case studies"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-emerald-500/[0.025] blur-3xl rounded-full pointer-events-none"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "case-section-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "eyebrow"
+  }, "Selected Work"), /*#__PURE__*/React.createElement("h2", null, "Built with care.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", { style: { color: 'rgba(255,255,255,0.45)' } }, "Launched with pride.")), /*#__PURE__*/React.createElement("p", null, "Real products. Real clients. Real results — shipped in days, not months.")), /*#__PURE__*/React.createElement("div", {
     className: "case-grid"
   }, /*#__PURE__*/React.createElement("div", {
     className: "case-left-col"
@@ -5487,7 +5533,7 @@ function CaseStudy() {
       key: s.id,
       className: 'case-dot ' + (i === currentIndex ? 'active' : ''),
       onClick: function () {
-        setCurrentIndex(i);
+        goToWithPause(i);
       },
       role: "tab",
       "aria-selected": i === currentIndex,
@@ -5498,7 +5544,7 @@ function CaseStudy() {
   }, /*#__PURE__*/React.createElement("button", {
     className: "carousel-btn prev",
     onClick: function () {
-      setCurrentIndex((currentIndex - 1 + studies.length) % studies.length);
+      goToWithPause((currentIndex - 1 + studies.length) % studies.length);
     },
     "aria-label": "Previous case study"
   }, /*#__PURE__*/React.createElement("svg", {
@@ -5515,7 +5561,7 @@ function CaseStudy() {
   }))), /*#__PURE__*/React.createElement("button", {
     className: "carousel-btn next",
     onClick: function () {
-      setCurrentIndex((currentIndex + 1) % studies.length);
+      goToWithPause((currentIndex + 1) % studies.length);
     },
     "aria-label": "Next case study"
   }, /*#__PURE__*/React.createElement("svg", {
