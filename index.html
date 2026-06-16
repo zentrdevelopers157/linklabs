@@ -3302,7 +3302,8 @@ function TeamCard(props) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "w-28 h-28 rounded-full p-[2px] liquid-glass-strong transition-transform duration-300 group-hover:scale-[1.04]"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-full h-full rounded-full overflow-hidden bg-white/[0.04] flex items-center justify-center"
+    className: "w-full h-full rounded-full overflow-hidden flex items-center justify-center",
+    style: { background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01))' }
   }, photo ? /*#__PURE__*/React.createElement("img", {
     src: photo,
     alt: props.name,
@@ -3310,7 +3311,11 @@ function TeamCard(props) {
     decoding: "async",
     className: "w-full h-full object-cover",
     style: props.photoPos || {},
-    onerror: "this.style.display='none'; var f=this.parentNode.querySelector('[data-fallback]'); if(f) f.style.display='flex';"
+    onError: function (e) {
+      e.target.style.display = 'none';
+      var f = e.target.parentNode.querySelector('[data-fallback]');
+      if (f) f.style.display = 'flex';
+    }
   }) : null, /*#__PURE__*/React.createElement("span", {
     "data-fallback": true,
     className: "font-heading italic text-white text-4xl",
@@ -3465,7 +3470,7 @@ function Pricing() {
   }, {
     name: 'Premium',
     desc: 'For funded startups, enterprises & complex platforms.',
-    price: '\u20B919,999',
+    price: '\u20B91,49,999+',
     priceSuffix: 'starting',
     timeline: '30\u201345 Days',
     features: ['Everything in Growth, plus:', 'Unlimited pages / custom functionality', '100% custom UI/UX from scratch (Figma \u2192 Code)', 'Custom stack: Next.js / MERN / Headless Shopify', 'Advanced animations & micro-interactions', 'CRM / ERP / booking system integrations', 'Multi-lingual & multi-currency support', 'Advanced security + daily backups', 'Unlimited design revisions', '6 months priority support + dedicated account manager', 'Priority 24/7 support', 'Quarterly business reviews'],
