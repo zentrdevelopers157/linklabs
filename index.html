@@ -1031,37 +1031,53 @@
     .case-cta:hover svg { transform: translate(2px, -2px); }
 
     /* === Case Study Carousel === */
-    .case-carousel-wrapper { position: relative; width: 100%; overflow: hidden; }
-    .case-carousel { position: relative; width: 100%; overflow: hidden; }
-    .case-left-col { min-width: 0; overflow: hidden; }
+    .case-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      /* No overflow:hidden here — buttons must not be clipped */
+    }
+    .case-carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;   /* only the track is clipped, not the buttons */
+      border-radius: 24px;
+    }
+    .case-left-col { min-width: 0; }
     .case-track { display: flex; width: 400%; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
-    .case-slide { flex: 0 0 25%; padding-right: 28px; box-sizing: border-box; }
+    .case-slide { flex: 0 0 25%; box-sizing: border-box; }
     .case-slide .case-visual { border-radius: 24px; }
     .case-slide .case-visual .case-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 1; }
     .case-placeholder span { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 128px; color: rgba(255,255,255,0.06); line-height: 1; user-select: none; }
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+    /* Carousel nav buttons live OUTSIDE .case-carousel so they are never clipped */
+    .case-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 18px;
+    }
+    .case-nav-btns { display: flex; gap: 10px; }
+    .carousel-btn {
       width: 48px; height: 48px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.5); color: #fff;
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05); color: #fff;
+      border: 1px solid rgba(255,255,255,0.12);
       cursor: pointer; transition: all 0.2s ease;
+      flex-shrink: 0;
     }
-    .carousel-btn.prev { left: 16px; }
-    .carousel-btn.next { right: 16px; }
-    .carousel-btn:hover { background: rgba(255,255,255,0.1); transform: translateY(-50%) scale(1.05); }
-    .case-dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
-    .case-dot { width: 10px; height: 10px; border-radius: 50%;
+    .carousel-btn:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); }
+    .carousel-btn:active { transform: scale(0.96); }
+    .case-dots { display: flex; align-items: center; gap: 8px; }
+    .case-dot {
+      width: 10px; height: 10px; border-radius: 50%;
       background: rgba(255,255,255,0.2); border: 2px solid transparent;
-      cursor: pointer; transition: all 0.2s ease;
+      cursor: pointer; transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .case-dot:hover { background: rgba(255,255,255,0.4); }
-    .case-dot.active { background: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+    .case-dot.active { background: var(--accent); width: 28px; border-radius: 5px; box-shadow: 0 0 12px var(--accent-glow); }
     .case-content { max-width: 600px; }
     @media (max-width: 900px) {
-      .case-slide { flex: 0 0 100%; padding-right: 0; }
+      .case-slide { flex: 0 0 100%; }
       .carousel-btn { width: 40px; height: 40px; }
-      .carousel-btn.prev { left: 12px; }
-      .carousel-btn.next { right: 12px; }
     }
 
     /* === Industries === */
@@ -3495,7 +3511,7 @@ function Pricing() {
     className: "font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]"
   }), /*#__PURE__*/React.createElement("p", {
     className: "mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto"
-  }, "Tailored for the Indian market \\u2014 fair for SMEs, serious for brands that mean business. GST extra.")), /*#__PURE__*/React.createElement("div", {
+  }, "Tailored for the Indian market — fair for SMEs, serious for brands that mean business. GST extra.")), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch"
   }, plans.map(function (p, i) {
     return /*#__PURE__*/React.createElement(Reveal, {
@@ -3572,7 +3588,7 @@ function Process() {
     className: "font-heading italic text-white text-6xl md:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-3px]"
   })), /*#__PURE__*/React.createElement("p", {
     className: "mt-6 text-white/80 text-base md:text-lg font-body font-light max-w-xl mx-auto"
-  }, "Share your vision. We handle the rest \\u2014 strategy, design, code, launch. In days, not quarters."), /*#__PURE__*/React.createElement("div", {
+  }, "Share your vision. We handle the rest — strategy, design, code, launch. In days, not quarters."), /*#__PURE__*/React.createElement("div", {
     className: "mt-10"
   }, /*#__PURE__*/React.createElement("a", {
     href: "#pricing",
@@ -5372,24 +5388,7 @@ function CaseStudy() {
     className: "case-left-col"
   }, /*#__PURE__*/React.createElement("div", {
     className: "case-carousel-wrapper"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "carousel-btn prev",
-    onClick: function () {
-      setCurrentIndex((currentIndex - 1 + studies.length) % studies.length);
-    },
-    "aria-label": "Previous case study"
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M15 18l-6-6 6-6"
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "case-carousel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "case-track",
@@ -5477,24 +5476,9 @@ function CaseStudy() {
     }), /*#__PURE__*/React.createElement("path", {
       d: "M7 7h10v10"
     }))))));
-  }))), /*#__PURE__*/React.createElement("button", {
-    className: "carousel-btn next",
-    onClick: function () {
-      setCurrentIndex((currentIndex + 1) % studies.length);
-    },
-    "aria-label": "Next case study"
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M9 18l6-6-6-6"
-  })))), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "case-nav-row"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "case-dots",
     role: "tablist",
     "aria-label": "Case study navigation"
@@ -5509,7 +5493,43 @@ function CaseStudy() {
       "aria-selected": i === currentIndex,
       "aria-label": s.title + ' case study'
     });
-  }))), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "case-nav-btns"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "carousel-btn prev",
+    onClick: function () {
+      setCurrentIndex((currentIndex - 1 + studies.length) % studies.length);
+    },
+    "aria-label": "Previous case study"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "18",
+    height: "18",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M15 18l-6-6 6-6"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "carousel-btn next",
+    onClick: function () {
+      setCurrentIndex((currentIndex + 1) % studies.length);
+    },
+    "aria-label": "Next case study"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "18",
+    height: "18",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M9 18l6-6-6-6"
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "case-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "case-eyebrow"
@@ -6032,11 +6052,6 @@ if (document.readyState === 'complete') {
     "name": "LinkLabs",
     "alternateName": "LinkLabs Studio",
     "url": "https://linklabs-three.vercel.app/",
-    "logo": "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20fill='currentColor'%3E%3Cline%20x1='22'%20y1='18'%20x2='22'%20y2='82'%20stroke='currentColor'%20stroke-width='8'%20stroke-linecap='round'/%3E%3Cline%20x1='22'%20y1='82'%20x2='78'%20y2='82'%20stroke='currentColor'%20stroke-width='8'%20stroke-linecap='round'/%3E%3Ccircle%20cx='22'%20cy='18'%20r='10'/%3E%3Ccircle%20cx='22'%20cy='82'%20r='10'/%3E%3Ccircle%20cx='78'%20cy='82'%20r='10'/%3E%3Ccircle%20cx='22'%20cy='50'%20r='3.5'%20fill='currentColor'%20opacity='0.55'/%3E%3C/svg%3E"
-  }
-</script>
-
-
     "logo": "https://linklabs-three.vercel.app/og-image.png",
     "description": "Premium web design & development studio from India. Cinematic websites, hand-crafted in days.",
     "foundingDate": "2024",
