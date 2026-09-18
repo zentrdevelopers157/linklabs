@@ -4104,7 +4104,7 @@ function ContactForm() {
     }))
   }];
   if ((status === 'sent' || status === 'sending') && payload) {
-    var IconCheck = /*#__PURE__*/React.createElement("svg", {
+    var IconCheckSVG = /*#__PURE__*/React.createElement("svg", {
       viewBox: "0 0 24 24",
       fill: "none",
       stroke: "currentColor",
@@ -4167,7 +4167,7 @@ function ContactForm() {
       className: "form-success"
     }, /*#__PURE__*/React.createElement("div", {
       className: "check-ring"
-    }, IconCheck), /*#__PURE__*/React.createElement("div", {
+    }, IconCheckSVG), /*#__PURE__*/React.createElement("div", {
       className: "text-white text-2xl md:text-3xl font-heading italic tracking-tight"
     }, "Almost there \u2014 just hit send."), /*#__PURE__*/React.createElement("div", {
       className: "text-white/65 text-sm md:text-[15px] font-body mt-2 max-w-md leading-relaxed"
@@ -4862,6 +4862,9 @@ var ErrorBoundary = function (R) {
   }
   EB.prototype = Object.create(C.prototype);
   EB.prototype.constructor = EB;
+  EB.getDerivedStateFromError = function (e) {
+    return { hasError: true, err: e };
+  };
   EB.prototype.componentDidCatch = function (e) {
     this.setState({
       hasError: true,
@@ -5808,88 +5811,6 @@ function Lightbox() {
     d: "M7 7h10v10"
   }))))));
 }
-var TR = {
-  en: {
-    'Start Your Project': 'Start Your Project',
-    'Watch the Reel': 'Watch the Reel',
-    'Services': 'Services',
-    'Work': 'Work',
-    'Process': 'Process',
-    'FAQ': 'FAQ',
-    'Contact': 'Contact',
-    'Get Started': 'Get Started',
-    'View live site': 'Visit live site',
-    'View live': 'View live',
-    'Featured': 'Featured',
-    'Case study': 'Case study',
-    'Start a project': 'Start a project',
-    'Tell us about your project': 'Tell us about your project',
-    'We reply within 4 hours': 'We reply within 4 hours',
-    'Stay in the loop': 'Stay in the loop',
-    'Reach us directly': 'Reach us directly',
-    'Replies within 4 hours': 'Replies within 4 hours',
-    'Crafted in India': 'Crafted in India',
-    'The Website Your Brand Deserves': 'The Website Your Brand Deserves',
-    'Pro features. Zero complexity.': 'Pro features. Zero complexity.',
-    'Built with care. Launched with pride.': 'Built with care. Launched with pride.',
-    'You dream it. We ship it.': 'You dream it. We ship it.',
-    'What our clients say.': 'What our clients say.',
-    'Kind Words': 'Kind Words',
-    'Questions, answered.': 'Questions, answered.',
-    'Still have questions?': 'Still have questions?',
-    'Get in touch': 'Get in touch',
-    'The Team': 'The Team',
-    'Four people. One obsession.': 'Four people. One obsession.',
-    'Selected Work': 'Selected Work',
-    'Built with care. Launched with pride.': 'Built with care. Launched with pride.',
-    'Capabilities': 'Capabilities',
-    'Pro features. Zero complexity.': 'Pro features. Zero complexity.',
-    'How It Works': 'How It Works',
-    'You dream it. We ship it.': 'You dream it. We ship it.',
-    'Our clients': 'Our clients',
-    'Start your project': 'Start your project'
-  },
-  hi: {
-    'Start Your Project': 'अपना प्रोजेक्ट शुरू करें',
-    'Watch the Reel': 'रील देखें',
-    'Services': 'सेवाएं',
-    'Work': 'काम',
-    'Process': 'प्रक्रिया',
-    'FAQ': 'सवाल-जवाब',
-    'Contact': 'संपर्क',
-    'Get Started': 'शुरू करें',
-    'View live site': 'लाइव साइट देखें',
-    'View live': 'लाइव देखें',
-    'Featured': 'फीचर्ड',
-    'Case study': 'केस स्टडी',
-    'Start a project': 'प्रोजेक्ट शुरू करें',
-    'Tell us about your project': 'अपने प्रोजेक्ट के बारे में बताएं',
-    'We reply within 4 hours': 'हम 4 घंटे में जवाब देते हैं',
-    'Stay in the loop': 'जुड़े रहें',
-    'Reach us directly': 'सीधे संपर्क करें',
-    'Replies within 4 hours': '4 घंटे में जवाब',
-    'Crafted in India': 'भारत में बना',
-    'The Website Your Brand Deserves': 'वह वेबसाइट जो आपका ब्रांड डिज़र्व करता है',
-    'Pro features. Zero complexity.': 'प्रो फीचर्स. जीरो कॉम्प्लेक्सिटी।',
-    'Built with care. Launched with pride.': 'केयर से बनाया। गर्व से लॉन्च किया।',
-    'You dream it. We ship it.': 'आप सपना देखें। हम डिलीवर करें।',
-    'What our clients say.': 'हमारे क्लाइंट क्या कहते हैं।',
-    'Kind Words': 'प्यारे शब्द',
-    'Questions, answered.': 'सवाल, जवाब।',
-    'Still have questions?': 'अभी भी सवाल हैं?',
-    'Get in touch': 'संपर्क करें',
-    'The Team': 'टीम',
-    'Four people. One obsession.': 'चार लोग। एक जुनून।',
-    'Selected Work': 'चुना हुआ काम',
-    'Built with care. Launched with pride.': 'केयर से बनाया। गर्व से लॉन्च किया।',
-    'Capabilities': 'क्षमताएं',
-    'Pro features. Zero complexity.': 'प्रो फीचर्स। जीरो कॉम्प्लेक्सिटी।',
-    'How It Works': 'कैसे काम करता है',
-    'You dream it. We ship it.': 'आप सपना देखें। हम डिलीवर करें।',
-    'Our clients': 'हमारे क्लाइंट्स',
-    'Start your project': 'अपना प्रोजेक्ट शुरू करें'
-  }
-};
 function App() {
   useEffect(function () {
     var t1 = setTimeout(function () {
