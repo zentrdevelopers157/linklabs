@@ -1327,9 +1327,8 @@
   <nav id="scroll-dots" aria-label="Section navigation" class="hidden lg:block"></nav>
   <button id="back-to-top" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5" /><path d="M5 12l7-7 7 7" /></svg></button>
   <canvas id="particle-canvas"></canvas>
-  <div id="root">
-    <div id="boot-loader"><svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:#fff;"><line x1="22" y1="18" x2="22" y2="82" stroke="currentColor" stroke-width="8" stroke-linecap="round" /><line x1="22" y1="82" x2="78" y2="82" stroke="currentColor" stroke-width="8" stroke-linecap="round" /><circle cx="22" cy="18" r="10" fill="currentColor" /><circle cx="22" cy="82" r="10" fill="currentColor" /><circle cx="78" cy="82" r="10" fill="currentColor" /><circle cx="22" cy="50" r="3.5" fill="currentColor" style="opacity:0.55;" /></svg><span>LinkLabs — loading…</span></div>
-  </div>
+  <div id="boot-loader"><svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:#fff;"><line x1="22" y1="18" x2="22" y2="82" stroke="currentColor" stroke-width="8" stroke-linecap="round" /><line x1="22" y1="82" x2="78" y2="82" stroke="currentColor" stroke-width="8" stroke-linecap="round" /><circle cx="22" cy="18" r="10" fill="currentColor" /><circle cx="22" cy="82" r="10" fill="currentColor" /><circle cx="78" cy="82" r="10" fill="currentColor" /><circle cx="22" cy="50" r="3.5" fill="currentColor" style="opacity:0.55;" /></svg><span>LinkLabs — loading…</span></div>
+  <div id="root"></div>
 
   <script>
     (function() {
@@ -5914,7 +5913,14 @@ function mount() {
   try {
     ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.ErrorBoundary, null, React.createElement(window.App)));
     document.getElementById('root').setAttribute('data-mounted', '');
+    var loader = document.getElementById('boot-loader');
+    if (loader) {
+      loader.classList.add('fade-out');
+      setTimeout(function() { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 700);
+    }
   } catch (err) {
+    var loader = document.getElementById('boot-loader');
+    if (loader) loader.style.display = 'none';
     document.getElementById('root').innerHTML = '<div style="padding:40px;color:#fff;font-family:monospace;"><h1 style="font-family:serif;font-style:italic;font-size:32px;">Render error</h1><pre style="white-space:pre-wrap;color:#f88;margin-top:16px;">' + String(err && (err.stack || err) || '').replace(/</g, '&lt;') + '</pre></div>';
   }
 }
@@ -5930,6 +5936,11 @@ if (document.readyState === 'complete') {
 } else {
   window.addEventListener('load', tryMount);
 }
+// Hard fallback: force-hide loader after 8s regardless
+setTimeout(function() {
+  var loader = document.getElementById('boot-loader');
+  if (loader) { loader.classList.add('fade-out'); setTimeout(function() { if (loader.parentNode) loader.parentNode.removeChild(loader); }, 700); }
+}, 8000);
 
 </script>
 
