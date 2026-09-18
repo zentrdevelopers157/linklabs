@@ -1556,7 +1556,7 @@
         if (dotsNav) {
           var scrollMid = scrollTop + window.innerHeight / 2;
           var best = null, bestDist = Infinity;
-          var sections = ['home','services','work','process','pricing','faq','contact-section'];
+          var sections = ['home','services','work','process','faq','contact-section'];
           for (var i = 0; i < sections.length; i++) {
             var el = document.getElementById(sections[i]);
             if (!el) continue;
@@ -1593,7 +1593,6 @@
             { id: 'services', label: 'Services' },
             { id: 'work', label: 'Work' },
             { id: 'process', label: 'Process' },
-            { id: 'pricing', label: 'Pricing' },
             { id: 'faq', label: 'FAQ' },
             { id: 'contact-section', label: 'Contact' }
           ];
@@ -2389,9 +2388,6 @@ function Navbar() {
     label: 'Process',
     href: '#process'
   }, {
-    label: 'Pricing',
-    href: '#pricing'
-  }, {
     label: 'FAQ',
     href: '#faq'
   }, {
@@ -2557,7 +2553,7 @@ function Navbar() {
       className: 'relative z-10 px-4 py-2 text-sm font-medium font-body transition-colors duration-300 ' + (pillIdx === i ? 'text-black' : 'text-white/90')
     }, l.label);
   }), /*#__PURE__*/React.createElement("a", {
-    href: "#pricing",
+    href: "#contact-section",
     "data-magnetic": "0.2",
     className: "relative z-10 ml-1 bg-white text-black px-4 py-2 rounded-full text-sm font-medium flex items-center gap-1 whitespace-nowrap hover:scale-[1.03] active:scale-95 transition-transform duration-200"
   }, "Get Started ", /*#__PURE__*/React.createElement(IconArrowUpRight, {
@@ -2612,7 +2608,7 @@ function Navbar() {
       className: "font-heading italic text-white text-5xl hover:opacity-80 transition"
     }, l.label);
   }), /*#__PURE__*/React.createElement("a", {
-    href: "#pricing",
+    href: "#contact-section",
     onClick: close,
     className: "mt-8 bg-white text-black px-6 py-3 rounded-full text-base font-medium flex items-center gap-2"
   }, "Get Started ", /*#__PURE__*/React.createElement(IconArrowUpRight, {
@@ -2661,7 +2657,7 @@ function Hero() {
     delay: 1.1,
     className: "flex items-center gap-6 mt-8"
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#pricing",
+    href: "#contact-section",
     "data-magnetic": "0.18",
     className: "liquid-glass-strong rounded-full px-5 py-2.5 text-sm font-medium text-white flex items-center gap-2"
   }, "Start Your Project ", /*#__PURE__*/React.createElement(IconArrowUpRight, {
@@ -3434,141 +3430,6 @@ function Team() {
     }, /*#__PURE__*/React.createElement(TeamCard, m));
   })));
 }
-function PricingCard(props) {
-  var plan = props.plan,
-    featured = !!props.featured;
-  var glassClass = 'liquid-glass rounded-[1.5rem] p-8 flex flex-col' + (featured ? ' liquid-glass-strong md:scale-[1.03] md:-translate-y-2 z-10' : '');
-  return /*#__PURE__*/React.createElement("div", {
-    "data-spotlight": true,
-    className: glassClass
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-3"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "font-heading italic text-white text-3xl tracking-[-1px]"
-  }, plan.name), plan.badge ? /*#__PURE__*/React.createElement("span", {
-    className: "liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 flex items-center gap-1.5"
-  }, plan.badgeDot ? /*#__PURE__*/React.createElement("span", {
-    className: "w-1.5 h-1.5 rounded-full bg-white"
-  }) : null, plan.badge) : null), /*#__PURE__*/React.createElement("p", {
-    className: "mt-2 text-sm text-white/70 font-body font-light"
-  }, plan.desc), /*#__PURE__*/React.createElement("div", {
-    className: "mt-6 flex items-baseline gap-2"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "font-heading italic text-white text-5xl tracking-[-2px]"
-  }, plan.price), /*#__PURE__*/React.createElement("span", {
-    className: "text-sm text-white/60 font-body"
-  }, plan.priceSuffix)), /*#__PURE__*/React.createElement("span", {
-    className: "liquid-glass rounded-full px-3 py-1 text-[11px] text-white/90 inline-block mt-3 w-fit"
-  }, plan.timeline), /*#__PURE__*/React.createElement("div", {
-    className: "h-px bg-white/10 my-6"
-  }), /*#__PURE__*/React.createElement("ul", {
-    className: "flex flex-col gap-3 flex-1"
-  }, plan.features.map(function (f, i) {
-    return /*#__PURE__*/React.createElement("li", {
-      key: i,
-      className: "flex items-start gap-3 text-sm text-white/90 font-body font-light leading-snug"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "mt-0.5 w-5 h-5 rounded-full liquid-glass flex items-center justify-center shrink-0"
-    }, /*#__PURE__*/React.createElement(IconCheck, {
-      size: 12,
-      strokeWidth: 3
-    })), /*#__PURE__*/React.createElement("span", null, f));
-  })), /*#__PURE__*/React.createElement("a", {
-    href: "#contact-section",
-    className: 'mt-8 rounded-full py-3 text-sm font-medium text-center flex items-center justify-center gap-2 ' + (featured ? 'bg-white text-black' : 'liquid-glass text-white')
-  }, plan.cta, " ", featured ? /*#__PURE__*/React.createElement(IconArrowUpRight, {
-    size: 16
-  }) : null));
-}
-function Pricing() {
-  var plans = [{
-    name: 'Starter',
-    desc: 'For local businesses, portfolios & freshly-launched ideas.',
-    price: '\u20B919,999',
-    priceSuffix: 'starting',
-    timeline: '7\u201310 Days',
-    badge: null,
-    features: ['Up to 4\u20135 pages (Home, About, Services, Contact)', 'Premium customized template design', '100% mobile & tablet responsive', 'Basic on-page SEO (5 keywords)', 'Contact form + Google Maps + social links', 'Floating WhatsApp chat widget', '2 rounds of revisions', '1 professional email setup (info@yourbrand.com)', '1 month free bug-fix support', '3 months complimentary maintenance'],
-    cta: 'Choose Starter'
-  }, {
-    name: 'Growth',
-    featured: true,
-    badge: 'Most Popular',
-    badgeDot: true,
-    desc: 'For SMEs, coaches, consultants & small online stores.',
-    price: '\u20B959,999',
-    priceSuffix: 'starting',
-    timeline: '15\u201320 Days',
-    features: ['Everything in Starter, plus:', 'Up to 8\u201310 pages or small store (up to 25 products)', 'Fully custom UI/UX (no template feel)', 'CMS backend (WordPress / Shopify) \u2014 edit it yourself', 'Blog setup with categories', 'Advanced SEO (10 keywords + schema + speed)', 'Payment gateway (Razorpay / PhonePe / Cashfree)', 'Newsletter & lead-capture forms', '4 rounds of revisions', '3 months priority support + 1hr Zoom training', 'Annual maintenance included', 'Dedicated WhatsApp support'],
-    cta: 'Choose Growth'
-  }, {
-    name: 'Premium',
-    desc: 'For funded startups, enterprises & complex platforms.',
-    price: '\u20B91,49,999+',
-    priceSuffix: 'starting',
-    timeline: '30\u201345 Days',
-    features: ['Everything in Growth, plus:', 'Unlimited pages / custom functionality', '100% custom UI/UX from scratch (Figma \u2192 Code)', 'Custom stack: Next.js / MERN / Headless Shopify', 'Advanced animations & micro-interactions', 'CRM / ERP / booking system integrations', 'Multi-lingual & multi-currency support', 'Advanced security + daily backups', 'Unlimited design revisions', '6 months priority support + dedicated account manager', 'Priority 24/7 support', 'Quarterly business reviews'],
-    cta: 'Choose Premium'
-  }];
-  var addons = [['Logo Design', '\u20B93,000\u2013\u20B95,000'], ['Extra Pages', '\u20B91,500 / page'], ['Content Writing', '\u20B91,000 / page'], ['Monthly SEO / Social', '\u20B915,000 / mo'], ['Annual Maintenance (AMC)', '\u20B910,000\u2013\u20B925,000 / yr']];
-  var terms = [['50% advance to start', ''], ['25% after first design approval', ''], ['25% before final handover & launch', ''], ['All prices exclusive of 18% GST', '']];
-  return /*#__PURE__*/React.createElement("section", {
-    id: "pricing",
-    className: "relative bg-black py-24 px-6 md:px-16 lg:px-20"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-white/[0.02] blur-3xl rounded-full pointer-events-none pulse-glow"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "relative"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "text-center mb-16"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5"
-  }, "Pricing"), /*#__PURE__*/React.createElement(BlurText, {
-    as: "h2",
-    text: "Honest pricing. Premium output.",
-    className: "font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]"
-  }), /*#__PURE__*/React.createElement("p", {
-    className: "mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto"
-  }, "Tailored for the Indian market — fair for SMEs, serious for brands that mean business. GST extra.")), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch"
-  }, plans.map(function (p, i) {
-    return /*#__PURE__*/React.createElement(Reveal, {
-      key: i,
-      delay: i * 0.08
-    }, /*#__PURE__*/React.createElement(PricingCard, {
-      plan: p,
-      featured: p.featured
-    }));
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto mt-12"
-  }, /*#__PURE__*/React.createElement(Reveal, {
-    delay: 0.1
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "liquid-glass rounded-[1.25rem] p-6"
-  }, /*#__PURE__*/React.createElement("h4", {
-    className: "font-heading italic text-white text-2xl mb-4"
-  }, "Add-ons"), addons.map(function (row, i) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      className: "flex items-center justify-between text-sm text-white/85 font-body py-2 border-b border-white/5 last:border-0"
-    }, /*#__PURE__*/React.createElement("span", null, row[0]), /*#__PURE__*/React.createElement("span", {
-      className: "text-white/70"
-    }, row[1]));
-  }))), /*#__PURE__*/React.createElement(Reveal, {
-    delay: 0.2
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "liquid-glass rounded-[1.25rem] p-6"
-  }, /*#__PURE__*/React.createElement("h4", {
-    className: "font-heading italic text-white text-2xl mb-4"
-  }, "Payment Terms"), terms.map(function (row, i) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: i,
-      className: "flex items-center justify-between text-sm text-white/85 font-body py-2 border-b border-white/5 last:border-0"
-    }, /*#__PURE__*/React.createElement("span", null, row[0]), /*#__PURE__*/React.createElement("span", {
-      className: "text-white/70"
-    }, row[1]));
-  }))))));
-}
 function Process() {
   var steps = [{
     n: '01',
@@ -3609,7 +3470,7 @@ function Process() {
   }, "Share your vision. We handle the rest — strategy, design, code, launch. In days, not quarters."), /*#__PURE__*/React.createElement("div", {
     className: "mt-10"
   }, /*#__PURE__*/React.createElement("a", {
-    href: "#pricing",
+    href: "#contact-section",
     "data-magnetic": "0.18",
     className: "liquid-glass-strong rounded-full px-6 py-3 text-sm font-medium text-white inline-flex items-center gap-2"
   }, "Get Started ", /*#__PURE__*/React.createElement(IconArrowUpRight, {
@@ -3717,9 +3578,6 @@ function FAQ() {
   }, {
     q: "Do you work with clients outside India?",
     a: "Yes. We work with founders and SMEs globally. All communication happens over Zoom, Slack, and email — timezone-friendly for clients in the US, UK, EU, Middle East, and APAC."
-  }, {
-    q: "What's included in the price?",
-    a: "Every plan includes strategy, custom design, development, content setup, basic SEO, responsive testing, and launch. Growth and Custom plans add CMS, e-commerce, blog, advanced SEO, and priority support. GST is extra as per Indian tax law."
   }, {
     q: "Will I be able to edit the site myself?",
     a: "Absolutely. Growth and Custom plans include a CMS (WordPress or Shopify) and a 1-hour Zoom training so you can update content, products, and blog posts on your own — no code required."
@@ -4957,9 +4815,6 @@ function Footer() {
     href: "#work",
     className: "hover:text-white transition"
   }, "Work"), /*#__PURE__*/React.createElement("a", {
-    href: "#pricing",
-    className: "hover:text-white transition"
-  }, "Pricing"), /*#__PURE__*/React.createElement("a", {
     href: "#faq",
     className: "hover:text-white transition"
   }, "FAQ"), /*#__PURE__*/React.createElement("a", {
@@ -5961,7 +5816,6 @@ var TR = {
     'Services': 'Services',
     'Work': 'Work',
     'Process': 'Process',
-    'Pricing': 'Pricing',
     'FAQ': 'FAQ',
     'Contact': 'Contact',
     'Get Started': 'Get Started',
@@ -5979,7 +5833,6 @@ var TR = {
     'The Website Your Brand Deserves': 'The Website Your Brand Deserves',
     'Pro features. Zero complexity.': 'Pro features. Zero complexity.',
     'Built with care. Launched with pride.': 'Built with care. Launched with pride.',
-    'Honest pricing. Premium output.': 'Honest pricing. Premium output.',
     'You dream it. We ship it.': 'You dream it. We ship it.',
     'What our clients say.': 'What our clients say.',
     'Kind Words': 'Kind Words',
@@ -6003,7 +5856,6 @@ var TR = {
     'Services': 'सेवाएं',
     'Work': 'काम',
     'Process': 'प्रक्रिया',
-    'Pricing': 'कीमतें',
     'FAQ': 'सवाल-जवाब',
     'Contact': 'संपर्क',
     'Get Started': 'शुरू करें',
@@ -6021,7 +5873,6 @@ var TR = {
     'The Website Your Brand Deserves': 'वह वेबसाइट जो आपका ब्रांड डिज़र्व करता है',
     'Pro features. Zero complexity.': 'प्रो फीचर्स. जीरो कॉम्प्लेक्सिटी।',
     'Built with care. Launched with pride.': 'केयर से बनाया। गर्व से लॉन्च किया।',
-    'Honest pricing. Premium output.': 'ईमानदार कीमत। प्रीमियम आउटपुट।',
     'You dream it. We ship it.': 'आप सपना देखें। हम डिलीवर करें।',
     'What our clients say.': 'हमारे क्लाइंट क्या कहते हैं।',
     'Kind Words': 'प्यारे शब्द',
@@ -6055,7 +5906,7 @@ function App() {
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Navbar, null), /*#__PURE__*/React.createElement("main", {
     id: "main"
-  }, /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(Stats, null), /*#__PURE__*/React.createElement(TechStack, null), /*#__PURE__*/React.createElement(Capabilities, null), /*#__PURE__*/React.createElement(CaseStudy, null), /*#__PURE__*/React.createElement(Industries, null), /*#__PURE__*/React.createElement(Portfolio, null), /*#__PURE__*/React.createElement(Testimonials, null), /*#__PURE__*/React.createElement(Team, null), /*#__PURE__*/React.createElement(Pricing, null), /*#__PURE__*/React.createElement(Process, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(ContactSection, null)), /*#__PURE__*/React.createElement(Footer, null), /*#__PURE__*/React.createElement(FloatingCTA, null), /*#__PURE__*/React.createElement(CookieBanner, null), /*#__PURE__*/React.createElement(Lightbox, null));
+  }, /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(Stats, null), /*#__PURE__*/React.createElement(TechStack, null), /*#__PURE__*/React.createElement(Capabilities, null), /*#__PURE__*/React.createElement(CaseStudy, null), /*#__PURE__*/React.createElement(Industries, null), /*#__PURE__*/React.createElement(Portfolio, null), /*#__PURE__*/React.createElement(Testimonials, null), /*#__PURE__*/React.createElement(Team, null), /*#__PURE__*/React.createElement(Process, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(ContactSection, null)), /*#__PURE__*/React.createElement(Footer, null), /*#__PURE__*/React.createElement(FloatingCTA, null), /*#__PURE__*/React.createElement(CookieBanner, null), /*#__PURE__*/React.createElement(Lightbox, null));
 }
 window.ErrorBoundary = ErrorBoundary;
 window.App = App;
@@ -6135,7 +5986,6 @@ if (document.readyState === 'complete') {
     "mainEntity": [
       { "@type": "Question", "name": "How long does a typical project take?", "acceptedAnswer": { "@type": "Answer", "text": "Most projects launch in 7–20 days depending on the plan. Starter sites go live in about a week; Growth sites in 2–3 weeks; Custom builds follow a shared timeline we agree upfront." } },
       { "@type": "Question", "name": "Do you work with clients outside India?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We work with founders and SMEs globally. All communication happens over Zoom, Slack, and email — timezone-friendly for clients in the US, UK, EU, Middle East, and APAC." } },
-      { "@type": "Question", "name": "What's included in the price?", "acceptedAnswer": { "@type": "Answer", "text": "Every plan includes strategy, custom design, development, content setup, basic SEO, responsive testing, and launch. Growth and Custom plans add CMS, e-commerce, blog, advanced SEO, and priority support. GST is extra as per Indian tax law." } },
       { "@type": "Question", "name": "Will I be able to edit the site myself?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Growth and Custom plans include a CMS (WordPress or Shopify) and a 1-hour Zoom training so you can update content, products, and blog posts on your own — no code required." } },
       { "@type": "Question", "name": "What if I don't like the design?", "acceptedAnswer": { "@type": "Answer", "text": "Each plan includes a defined number of revision rounds. We work closely with you at every stage to make sure the result fits your brand. If something isn't right, we iterate until it is." } },
       { "@type": "Question", "name": "Do you offer ongoing support?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every plan includes post-launch support (1–3 months depending on plan). We also offer monthly care retainers for hosting, updates, content edits, and growth work." } }
