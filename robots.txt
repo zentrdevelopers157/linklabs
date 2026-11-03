@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://linklabs-three.vercel.app/sitemap.xml
+Sitemap: https://linklabweb.vercel.app/sitemap.xml
