@@ -1,8 +1,13 @@
 /* LinkLabs service worker — lightweight offline shell */
-const CACHE = 'linklabs-v1';
+const CACHE = 'linklabs-v3';
 const PRECACHE = [
   '/',
   '/index.html',
+  '/assets/tailwind.css',
+  '/assets/site.css',
+  '/assets/react.production.min.js',
+  '/assets/react-dom.production.min.js',
+  '/assets/app.js',
   '/og-image.png',
   '/icon-192.png',
   '/icon-512.png',
