@@ -1,5 +1,5 @@
 /* LinkLabs service worker — lightweight offline shell */
-const CACHE = 'linklabs-v3';
+const CACHE = 'linklabs-v4';
 const PRECACHE = [
   '/',
   '/index.html',
@@ -36,14 +36,17 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
 
-  // Network-first for HTML (always fresh)
-  if (req.mode === 'navigate' || req.headers.get('accept')?.includes('text/html')) {
+  // Keep documents and app code fresh after each deployment.
+  const isDocument = req.mode === 'navigate' || req.headers.get('accept')?.includes('text/html');
+  if (isDocument || /\.(?:js|css)$/.test(url.pathname)) {
     e.respondWith(
       fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(req, copy));
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(req, copy));
+        }
         return res;
-      }).catch(() => caches.match(req).then((r) => r || caches.match('/index.html')))
+      }).catch(() => caches.match(req).then((r) => r || (isDocument ? caches.match('/index.html') : Response.error())))
     );
     return;
   }
