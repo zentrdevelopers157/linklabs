@@ -1803,15 +1803,6 @@ function Team() {
       objectPosition: 'center 28%'
     },
     tagline: 'Keeps the ship steady, the deadlines real.'
-  }, {
-    name: 'Rohan Mondal',
-    role: 'Marketing Officer',
-    initial: 'R',
-    photo: 'assets/team/rohan.png',
-    photoPos: {
-      objectPosition: 'center 35%'
-    },
-    tagline: 'Makes sure the right people see your work.'
   }];
   return /*#__PURE__*/React.createElement("section", {
     id: "team",
@@ -1822,12 +1813,12 @@ function Team() {
     className: "liquid-glass rounded-full px-3.5 py-1 text-xs text-white inline-block mb-5"
   }, "The Team"), /*#__PURE__*/React.createElement(BlurText, {
     as: "h2",
-    text: "Four people. One obsession.",
+    text: "Three people. One obsession.",
     className: "font-heading italic text-white text-5xl md:text-6xl lg:text-[5rem] tracking-[-2px] leading-[0.95]"
   }), /*#__PURE__*/React.createElement("p", {
     className: "mt-5 text-white/70 text-base font-body font-light max-w-xl mx-auto"
   }, "We're a small, senior team of teenage founders from India \u2014 close-knit, hands-on, and personally invested in every project.")), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-2 md:grid-cols-4 gap-5 max-w-6xl mx-auto"
+    className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto"
   }, members.map(function (m, i) {
     return /*#__PURE__*/React.createElement(Reveal, {
       key: i,
