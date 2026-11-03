@@ -718,6 +718,9 @@ function Navbar() {
     label: 'Work',
     href: '#work'
   }, {
+    label: 'Demos',
+    href: '#demos'
+  }, {
     label: 'Process',
     href: '#process'
   }, {

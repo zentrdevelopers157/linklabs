@@ -45,7 +45,6 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="stylesheet" media="print" href="/print.css" />
-  <script defer data-domain="linklabweb.vercel.app" src="https://plausible.io/js/script.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -295,7 +294,7 @@
         if (dotsNav) {
           var scrollMid = scrollTop + window.innerHeight / 2;
           var best = null, bestDist = Infinity;
-          var sections = ['home','services','work','process','faq','contact-section'];
+          var sections = ['home','services','work','demos','process','faq','contact-section'];
           for (var i = 0; i < sections.length; i++) {
             var el = document.getElementById(sections[i]);
             if (!el) continue;
@@ -331,6 +330,7 @@
             { id: 'home', label: 'Home' },
             { id: 'services', label: 'Services' },
             { id: 'work', label: 'Work' },
+            { id: 'demos', label: 'Demos' },
             { id: 'process', label: 'Process' },
             { id: 'faq', label: 'FAQ' },
             { id: 'contact-section', label: 'Contact' }
